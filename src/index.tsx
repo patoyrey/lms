@@ -1,9 +1,14 @@
 import ReactDom from 'react-dom/client'
 import { AppRouter } from './AppRouter'
 import React from 'react'
+import './style.css'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './store'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
 
 const root = ReactDom.createRoot(document.getElementById('root') as HTMLElement)
 
