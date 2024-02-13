@@ -13,6 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+const logo = require("../../image/logo.png").default
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -39,8 +40,8 @@ const Nav: React.FC = (props: Props) => {
       url: "company",
     },
     {
-      menu: "Login",
-      url: "login",
+      menu: "Sign In",
+      url: "signin",
     },
   ];
   const { window } = props;
@@ -52,6 +53,7 @@ const Nav: React.FC = (props: Props) => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <img src={logo} alt="logo" className="nav-logo" />
       <Typography variant="h6" sx={{ my: 2 }}>
         LMS
       </Typography>
@@ -84,6 +86,7 @@ const Nav: React.FC = (props: Props) => {
           >
             <MenuIcon />
           </IconButton>
+          <img src={logo} alt="logo" className="nav-logo" />
           <Typography
             variant="h6"
             component="div"
