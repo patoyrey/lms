@@ -40,12 +40,24 @@ module.exports = (env) => ({
                     {
                         loader: 'sass-loader',
                         options: {
-                        sourceMap: true,
-                        // options...
+                            sourceMap: true,
+                            // options...
                         }
                     }
-                    ]
-            }
+                ]
+            },
+            {
+                test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+                use: [
+                    {
+                        loader: 'url-loader?limit=100000',
+                    },
+                ],
+            },
+            {
+                test: /\.eot(\?v=\d+\.\d+\.\d+)?$\.(png|jpe?g|gif|svg)$/i,
+                use: "file-loader"
+            },
         ]
     },
     plugins: [
@@ -58,10 +70,10 @@ module.exports = (env) => ({
     ],
     devServer: {
         static: {
-          directory: path.join(__dirname, "dist"),
+            directory: path.join(__dirname, "dist"),
         },
         historyApiFallback: true,
         port: 3000,
         hot: true,
-      },
+    },
 })
