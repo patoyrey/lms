@@ -1,7 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 * {
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
+
+body {
+  padding-left: 500px;
+  padding-right: 550px;
+  padding-top: 7%;
+}
+
 .bg {
   background-color: red;
   height: 100vh;
@@ -54,4 +63,46 @@ footer {
   .content > h1 {
     font-size: 5rem;
   }
+}
+
+.box {
+  background-color: #ffffff;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.poppins-font {
+  font-family: Poppins;
+  font-size: 12px;
+  color: gray;
+}
+
+.forgotPass {
+  font-family: Poppins;
+  font-size: 12px;
+  text-align: right;
+  text-decoration: none;
+  color: gray;
+  padding-right: 35px;
+}
+
+.forgotPassHyperLink {
+  text-decoration: none;
+  color: gray;
+}
+
+.imgLogo {
+  height: 90px;
+  width: 90px;
+}
+
+.doctor1_img {
+  height: 405px;
+  width: 720px;
+  position: absolute;
+  bottom: 5px;
+  right: 0px;
+  z-index: -1;
 }
