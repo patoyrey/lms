@@ -10,6 +10,7 @@ import Button from "@mui/material/Button";
 import LockIcon from '@mui/icons-material/Lock';
 const lockImage = require("../../images/lockimg.jpg").default;
 import { alignProperty } from "@mui/material/styles/cssUtils";
+import PasswordFormControl from "../components/passwordformcontrol";
 
 
 const ChangePassword: React.FC = () => {
@@ -38,66 +39,24 @@ const ChangePassword: React.FC = () => {
                     </center>
                     <h1>Reset Your Password</h1>
                     <div className="right-col-content">
-                        <FormControl sx={{ m: 1, width: '35ch' }} variant="filled">
-                            <InputLabel htmlFor="oldpassword">Old Password</InputLabel>
-                            <FilledInput
-                                id="oldpassword"
-                                type={showoldPassword ? 'text' : 'password'}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                        >
-                                            {showoldPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                            />
-                        </FormControl>
+                        <PasswordFormControl
+                            id="oldpassword"
+                            label="Old Password"
+                        />
                         <div className="newpassword">
-                            <FormControl sx={{ m: 1, width: '35ch' }} variant="filled">
-                                <InputLabel htmlFor="newpassword">New Password</InputLabel>
-                                <FilledInput
-                                    id="newpassword"
-                                    type={shownewPassword ? 'text' : 'password'}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword1}
-                                                onMouseDown={handleMouseDownPassword}
-                                                edge="end"
-                                            >
-                                                {shownewPassword ? <Visibility /> : <VisibilityOff />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
-                                />
-                            </FormControl>
+
+                            <PasswordFormControl
+                                id="newpassword"
+                                label="New Password"
+
+                            />
                         </div>
 
-                        <FormControl sx={{ m: 1, width: '35ch' }} variant="filled">
-                            <InputLabel htmlFor="filled-adornment-password">Confirm New Password</InputLabel>
-                            <FilledInput
-                                id="filled-adornment-password"
-                                type={showconfirmPassword ? 'text' : 'password'}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword2}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                        >
-                                            {showconfirmPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                            />
-                        </FormControl>
+                        <PasswordFormControl
+                            id="confirmnewpassword"
+                            label="Confirm New Password"
+
+                        />
                         <center>
                             <div className="button" >
                                 <Button sx={{ m: 1, width: '35ch' }} variant="contained" className="resetbtn">Reset Button</Button>
