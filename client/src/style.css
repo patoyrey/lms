@@ -1,17 +1,92 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-body{
-
-    padding-left: 500px;
-    padding-right: 550px;
-    padding-top: 7%;
+.signContainer {
+  padding-left: 500px;
+  padding-right: 550px;
+  padding-top: 7%;
 }
 
-.box{
-  background-color: #FFFFFF ;   
+.bg {
+  background-color: red;
+  height: 100vh;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 90vh;
+  display: flex;
+
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.container > img {
+  width: 30rem;
+  height: 30rem;
+  animation: paraLaxRight 0.6s ease-in;
+}
+.content {
+  width: 50%;
+  animation: paraLaxLeft 0.6s ease-in;
+  padding: 0rem 0rem 0rem 4rem;
+}
+.content > h2 {
+  font-size: 3rem;
+}
+.content > h1 {
+  font-size: 5rem;
+}
+.content > p {
+  width: auto;
+}
+footer {
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: #bbdefb;
+}
+
+@media screen and (max-width: 600px) {
+  .container > img {
+    display: none;
+  }
+  .content {
+    width: 100%;
+    padding: 0rem 0rem 0rem 4rem;
+  }
+  .content > h1 {
+    font-size: 5rem;
+  }
+}
+@keyframes paraLaxLeft {
+  from {
+    position: relative;
+    left: -2rem;
+  }
+  to {
+    position: relative;
+    left: 0rem;
+  }
+}
+@keyframes paraLaxRight {
+  from {
+    position: relative;
+    right: -2rem;
+  }
+  to {
+    position: relative;
+    right: 0rem;
+  }
+}
+.box {
+  background-color: #ffffff;
   padding-top: 10px;
   padding-bottom: 20px;
   border-radius: 15px;
@@ -19,9 +94,9 @@ body{
 }
 
 .poppins-font {
-    font-family: Poppins;
-    font-size: 12px;
-    color: gray;
+  font-family: Poppins;
+  font-size: 12px;
+  color: gray;
 }
 
 .forgotPass {
@@ -33,12 +108,12 @@ body{
   padding-right: 35px;
 }
 
-.forgotPassHyperLink{
+.forgotPassHyperLink {
   text-decoration: none;
   color: gray;
 }
 
-.imgLogo{
+.imgLogo {
   height: 90px;
   width: 90px;
 }
@@ -51,5 +126,3 @@ body{
   right: 0px;
   z-index: -1;
 }
-
-
