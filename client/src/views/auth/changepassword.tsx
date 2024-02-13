@@ -28,42 +28,39 @@ const ChangePassword: React.FC = () => {
         event.preventDefault();
     };
     return (
-        <div className="container">
-            <div className="content">
-                <div className="left-col">
-                    <img src={lockImage} alt="forgotimage"></img>
-                </div>
-                <div className="right-col" >
-                    <center>
-                        <LockIcon sx={{ fontSize: 40 }} />
-                    </center>
-                    <h1>Reset Your Password</h1>
-                    <div className="right-col-content">
-                        <PasswordFormControl
-                            id="oldpassword"
-                            label="Old Password"
-                        />
-                        <div className="newpassword">
+        <div className="changepass-container">
 
-                            <PasswordFormControl
-                                id="newpassword"
-                                label="New Password"
-
-                            />
-                        </div>
+            <div className="left-col">
+                <img src={lockImage} alt="forgotimage"></img>
+            </div>
+            <div className="right-col" >
+                <center>
+                    <LockIcon sx={{ fontSize: 40 }} />
+                </center>
+                <p>Reset Your Password</p>
+                <div className="right-col-content">
+                    <PasswordFormControl
+                        id="oldpassword"
+                        label="Old Password"
+                    />
+                    <div className="newpassword">
 
                         <PasswordFormControl
-                            id="confirmnewpassword"
-                            label="Confirm New Password"
+                            id="newpassword"
+                            label="New Password"
 
                         />
-                        <center>
-                            <div className="button" >
-                                <Button sx={{ m: 1, width: '35ch' }} variant="contained" className="resetbtn">Reset Button</Button>
-                            </div>
-                        </center>
                     </div>
+
+                    <PasswordFormControl
+                        id="confirmnewpassword"
+                        label="Confirm New Password"
+
+                    />
+                    <Button sx={{ width: '30ch' }} variant="contained" className="resetbtn">Reset Button</Button>
+
                 </div>
+
             </div>
         </div >
     )

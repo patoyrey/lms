@@ -23,7 +23,7 @@ const PasswordFormControl: React.FC<Props> = ({ id, label }) => {
         //     type={type}
         //     endAdornment={endAdornment}
         // />
-        <FormControl sx={{ m: 1, width: '35ch', backgroundColor: "white" }} variant="filled">
+        <FormControl sx={{ m: 1, backgroundColor: "white" }} variant="filled" >
             <InputLabel >{label}</InputLabel>
             <FilledInput
                 id={id}
