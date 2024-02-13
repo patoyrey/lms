@@ -45,7 +45,19 @@ module.exports = (env) => ({
                         }
                     }
                     ]
-            }
+            },
+            {
+                test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+                use: [
+                  {
+                    loader: 'url-loader?limit=100000',
+                  },
+                ],
+              },
+              {
+                test: /\.eot(\?v=\d+\.\d+\.\d+)?$\.(png|jpe?g|gif|svg)$/i,
+                use: "file-loader"
+              },
         ]
     },
     plugins: [
