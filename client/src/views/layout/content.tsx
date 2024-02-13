@@ -1,8 +1,10 @@
 import * as React from "react";
-import { Box, Input, Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 const medicalImage = require("../../images/medical.png").default;
 
 const Content: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <Box className="container">
       <div className="content">
@@ -17,6 +19,7 @@ const Content: React.FC = () => {
           size="large"
           variant="outlined"
           sx={{ marginTop: 2 }}
+          onClick={() => navigate(`/login`)}
         >
           Get Started
         </Button>

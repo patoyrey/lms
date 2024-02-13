@@ -13,15 +13,39 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+
 interface Props {
   window?: () => Window;
 }
+interface NavItems {
+  menu: string;
+  url: string;
+}
 const Nav: React.FC = (props: Props) => {
+  //Function to navigate
+  const handleButtonClick = (url: string) => {
+    navigate(`/${url}`);
+  };
   const drawerWidth = 240;
-  const navItems = ["Home", "Company", "Login"];
+
+  const navItems: NavItems[] = [
+    {
+      menu: "Home",
+      url: "",
+    },
+    {
+      menu: "Company",
+      url: "company",
+    },
+    {
+      menu: "Login",
+      url: "login",
+    },
+  ];
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const navigate = useNavigate();
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -33,10 +57,10 @@ const Nav: React.FC = (props: Props) => {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+        {navItems.map((item: NavItems, index: number) => (
+          <ListItem key={index} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <ListItemText primary={item.menu} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -68,9 +92,13 @@ const Nav: React.FC = (props: Props) => {
             LMS
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
+            {navItems.map((item: NavItems, index: number) => (
+              <Button
+                key={index}
+                onClick={() => handleButtonClick(item.url)}
+                sx={{ color: "#fff" }}
+              >
+                {item.menu}
               </Button>
             ))}
           </Box>
