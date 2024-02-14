@@ -3,23 +3,25 @@ import Button from '@mui/material/Button';
 
 type Props = {
     size: "small" | "medium" | "large"
-    variant:"text" | "outlined" | "contained"
+    variant: "text" | "outlined" | "contained"
     label: string
     onclick: () => void
+    style?: React.CSSProperties
 }
 
 const ButtonComponent: React.FC<Props> = ({
     size,
-    variant,  
+    variant,
     onclick,
-    label
+    label,
+    style
 }) => {
     return (
         <Button
             size={size}
             variant={variant}
-
-            onClick={()=>onclick()}
+            sx={style}
+            onClick={() => onclick()}
 
         >
             {label}
