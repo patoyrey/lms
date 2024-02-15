@@ -11,6 +11,7 @@ import LockIcon from '@mui/icons-material/Lock';
 const lockImage = require("../../images/lockimg.jpg").default;
 import { alignProperty } from "@mui/material/styles/cssUtils";
 import PasswordFormControl from "../components/passwordformcontrol";
+import ButtonComponent from "../components/button";
 
 
 const ChangePassword: React.FC = () => {
@@ -24,8 +25,8 @@ const ChangePassword: React.FC = () => {
     const handleClickShowPassword2 = () => setShowPassword2((show) => !show);
 
 
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
+    const reset = () => {
+        console.log("Reset Password")
     };
     return (
         <div className="changepass-container">
@@ -57,8 +58,14 @@ const ChangePassword: React.FC = () => {
                         label="Confirm New Password"
 
                     />
-                    <Button sx={{ width: '30ch' }} variant="contained" className="resetbtn">Reset Button</Button>
 
+                    <ButtonComponent
+                        size="large"
+                        variant="contained"
+                        label="Reset Button"
+                        onclick={() => reset()}
+                        style={{ width: '30ch' }}
+                    />
                 </div>
 
             </div>
