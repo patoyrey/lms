@@ -1,6 +1,6 @@
 require('dotenv').config();
 import express, { Express } from 'express'
-import { connect } from '../db_connection';
+import { connect } from './utils/schema';
 
 const app: Express = express()
 app.use(express.json())
