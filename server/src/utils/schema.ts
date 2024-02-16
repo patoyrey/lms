@@ -10,25 +10,25 @@ import { dummyField} from "../models/dummyData/Field"
 
 
 type FieldType = {
-  string: string
-  number: string
-}
+  string: string;
+  number: string;
+};
 const fieldType: FieldType = {
   string: "VARCHAR(255)",
-  number: "DOUBLE(10, 2)"
-}
+  number: "DOUBLE(10, 2)",
+};
 
-const DB_NAME = process.env.DB_NAME
+const DB_NAME = process.env.DB_NAME;
 
 export async function connect() {
-    await conn.connect(async () =>{
-        console.log("Connected!");
-        await conn.query(`CREATE DATABASE ${DB_NAME}`, () => {
-          console.log("Database created")
-        })
-        await conn.query(`USE ${DB_NAME}`, () => {
-          console.log("Database change")
-        })
+  await conn.connect(async () => {
+    console.log("Connected!");
+    await conn.query(`CREATE DATABASE ${DB_NAME}`, () => {
+      console.log("Database created");
+    });
+    await conn.query(`USE ${DB_NAME}`, () => {
+      console.log("Database change");
+    });
 
         let fields = Object.keys(new User({} as User))
         
