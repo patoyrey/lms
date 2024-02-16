@@ -131,6 +131,11 @@
     "@types/mime" "*"
     "@types/node" "*"
 
+"@types/uuid4@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/@types/uuid4/-/uuid4-2.0.3.tgz"
+  integrity sha512-/fyn8jzKzeL/wci7GOaz8TPjKapD+WJUBUCr/ED2xcUcx5fA9rZH2fDZiV2Z/a+040mp5Zi3dgIi/Vey/uQBxw==
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/abbrev/-/abbrev-1.1.1.tgz"
@@ -934,6 +939,11 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/utils-merge/-/utils-merge-1.0.1.tgz"
   integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
+
+uuid4@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/uuid4/-/uuid4-2.0.3.tgz"
+  integrity sha512-CTpAkEVXMNJl2ojgtpLXHgz23dh8z81u6/HEPiQFOvBc/c2pde6TVHmH4uwY0d/GLF3tb7+VDAj4+2eJaQSdZQ==
 
 v8-compile-cache-lib@^3.0.1:
   version "3.0.1"
