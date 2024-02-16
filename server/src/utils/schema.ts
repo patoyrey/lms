@@ -67,9 +67,10 @@ export async function connect() {
     })
     let test = `CREATE TABLE test (`
     fields.forEach((field: string, index: number) => {
+      const primarykey = index === 0 ? 'PRIMARY KEY' : ""
       const hasComma = index < (fields.length - 1) ? ',' : ''
       const closingParenthesis = index === (fields.length - 1) ? ')' : ''
-      test += `${field} ${fieldType[typeof dummyTest[field as keyof Test] as keyof FieldType]}${hasComma} ${closingParenthesis}`
+      test += `${field} ${fieldType[typeof dummyTest[field as keyof Test] as keyof FieldType]} ${primarykey} ${hasComma} ${closingParenthesis}`
 
     })
 
@@ -200,7 +201,7 @@ export async function connect() {
         typeof dummuyDoctor[
         field as unknown as keyof Doctor
         ] as unknown as keyof FieldType
-        ]
+      ]
         } ${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
@@ -226,7 +227,7 @@ export async function connect() {
         typeof dummyPatientsTest[
         field as unknown as keyof PatientsTest
         ] as unknown as keyof FieldType
-        ]
+      ]
         } ${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {

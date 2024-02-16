@@ -2,6 +2,8 @@ import { conn } from "../config/dbconfig/db_connection";
 import { LoginStatus } from "../enums/LoginStatus";
 import { UserType } from "../enums/UserType";
 import { UserResponse } from "../response/userResponse";
+import { v4 as uuidv4 } from 'uuid';
+import { Admin } from "./Admin";
 
 export class User {
   user_id: string;
@@ -20,16 +22,46 @@ export class User {
     this.userType = init.userType;
   }
 
-  public async add(): Promise<UserResponse> {
-    const query = `insert into user (${Object.keys(this).map((item: string) => item).join(',')}) values ("${Object.values(this).map((item: string) => item).join('","')}");`
+  //
+  public async add(admin: Admin, user: User): Promise<UserResponse> {
+    this.user_id = uuidv4()
+    let query = `insert into user SET ?`
     console.log("query: ", query)
-    await conn.query(query, function () {
-        console.log("User inserted")
-      })
-      
+    console.log("user data: ", user)
+
+    await conn.query(query, [this], (err: any) => {
+      if (err) {
+        return {
+          succeeded: false,
+          msg: err
+        }
+      }
+    })
+
+    switch (this.userType) {
+      case UserType.Admin:
+        admin.admin_id = uuidv4()
+        admin.user_id = this.user_id
+        console.log('admin data: ', admin)
+        query = `insert into admin SET ?`
+        await conn.query(query, [admin], (err: any) => {
+          console.log("Admin Inserted Successfully")
+          if (err) {
+            return {
+              succeeded: false,
+              msg: err
+            }
+          }
+        })
+      case UserType.Patient:
+      case UserType.Doctor:
+      case UserType.Nurse:
+      default: break
+    }
+
     return {
-        succeeded: true,
-        msg: ''
+      succeeded: true,
+      msg: ''
     }
   }
 }
