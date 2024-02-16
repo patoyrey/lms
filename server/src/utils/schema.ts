@@ -1,10 +1,13 @@
 import { conn } from "../config/dbconfig/db_connection";
-import { Doctor } from "../models/Doctor";
-import { PatientsTest } from "../models/PatientsTest";
+import { Admin } from "../models/Admin";
 import { User } from "../models/User";
-import { dummuyDoctor } from "../models/dummyData/Doctor";
-import { dummyPatientsTest } from "../models/dummyData/PatientsTest";
+import { Nurse } from "../models/Nurse";
+import { Field } from "../models/Field";
+import { dummyAdmin } from "../models/dummyData/Admin";
 import { dummyUser } from "../models/dummyData/User";
+import { dummyNurse} from "../models/dummyData/Nurse"
+import { dummyField} from "../models/dummyData/Field"
+
 
 type FieldType = {
   string: string;
@@ -27,79 +30,85 @@ export async function connect() {
       console.log("Database change");
     });
 
-    let fields = Object.keys(new User({} as User));
-    let dropIfExist = `DROP TABLE IF EXISTS user`;
-    await conn.query(dropIfExist, function () {
-      console.log("Table user drop");
-    });
-    let query = `CREATE TABLE user (`;
-    fields.forEach((field: string, index: number) => {
-      const hasComma = index < fields.length - 1 ? "," : "";
-      const closingParenthesis = index === fields.length - 1 ? ")" : "";
-      query += `${field} ${
-        fieldType[
-          typeof dummyUser[
-            field as unknown as keyof User
-          ] as unknown as keyof FieldType
-        ]
-      }${hasComma} ${closingParenthesis}`;
-    });
-    console.log(query);
-    await conn.query(query, function () {
-      console.log("Table user created");
-    });
+        let fields = Object.keys(new User({} as User))
+        
 
-    //* Field for Doctor Table
-    fields = Object.keys(new Doctor({} as Doctor));
+        //creates user table on DB 
+        let dropIfExist = `DROP TABLE IF EXISTS user`
+        await conn.query(dropIfExist, function () {
+          console.log("Table user drop")
+        })
+        let query = `CREATE TABLE user (`
+        fields.forEach((field: string, index: number) => {
+          console.log("fields: ", fieldType[typeof dummyUser[field as unknown as keyof(User)] as unknown as keyof FieldType])
+          const hasComma = index < (fields.length - 1) ? ',' : ''
+          const closingParenthesis = index === (fields.length - 1) ? ')' : ''
+          query += `${field} ${fieldType[typeof dummyUser[field as unknown as keyof(User)] as unknown as keyof FieldType]}${hasComma} ${closingParenthesis}`
+         
+        })
+        console.log(query)
+        await conn.query(query, function () {
+          console.log("Table user created")
+        })
 
-    //*Drop table if it exists
-    dropIfExist = "DROP TABLE IF EXISTS DOCTOR";
+        //creates admin table on DB
+        dropIfExist = `DROP TABLE IF EXISTS admin`
+        await conn.query(dropIfExist, function () {
+          console.log("Table admin drop")
+        })
 
-    await conn.query(dropIfExist, function () {
-      console.log("Table doctor drop");
-    });
-    query = `CREATE TABLE doctor(`;
+        fields = Object.keys(new Admin({} as Admin))
+        query = `CREATE TABLE admin (`
+        fields.forEach((field: string, index: number) => {
+          console.log("fields: ", fieldType[typeof dummyAdmin[field as unknown as keyof(Admin)] as unknown as keyof FieldType])
+          const hasComma = index < (fields.length - 1) ? ',' : ''
+          const closingParenthesis = index === (fields.length - 1) ? ')' : ''
+          query += `${field} ${fieldType[typeof dummyAdmin[field as unknown as keyof(Admin)] as unknown as keyof FieldType]}${hasComma} ${closingParenthesis}`
+         
+        })
+        await conn.query(query, function () {
+          console.log("Table admin created")
+        })
 
-    fields.forEach((field: string, index: number) => {
-      const hasComma = index < fields.length - 1 ? "," : "";
-      const closingParenthesis = index === fields.length - 1 ? ")" : "";
-      query += `${field} ${
-        fieldType[
-          typeof dummuyDoctor[
-            field as unknown as keyof Doctor
-          ] as unknown as keyof FieldType
-        ]
-      } ${hasComma} ${closingParenthesis}`;
-    });
-    await conn.query(query, function () {
-      console.log("Table doctor created");
-    });
 
-    //* Field for Patients Test
+        //creates field table
+        dropIfExist = `DROP TABLE IF EXISTS field`
+        await conn.query(dropIfExist, function () {
+          console.log("Table field drop")
+        })
 
-    fields = Object.keys(new PatientsTest({} as PatientsTest));
+        fields = Object.keys(new Field({} as Field))
+        query = `CREATE TABLE field (`
+        fields.forEach((field: string, index: number) => {
+          console.log("fields: ", fieldType[typeof dummyField[field as unknown as keyof(Field)] as unknown as keyof FieldType])
+          const hasComma = index < (fields.length - 1) ? ',' : ''
+          const closingParenthesis = index === (fields.length - 1) ? ')' : ''
+          query += `${field} ${fieldType[typeof dummyField[field as unknown as keyof(Field)] as unknown as keyof FieldType]}${hasComma} ${closingParenthesis}`
+         
+        })
+        await conn.query(query, function () {
+          console.log("Table admin created")
+        })
 
-    //* Drop table if the Patients test Exists
-    dropIfExist = "DROP TABLE IF EXISTS patientsTest";
-    await conn.query(dropIfExist, function () {
-      console.log("Table patientsTest drop");
-    });
+        //creates nurse table on DB
+        dropIfExist = `DROP TABLE IF EXISTS nurse`
+        await conn.query(dropIfExist, function () {
+          console.log("Table nurse drop")
+        })
 
-    query = `CREATE TABLE patientstest(`;
+        fields = Object.keys(new Nurse({} as Nurse))
+        query = `CREATE TABLE nurse (`
+        fields.forEach((field: string, index: number) => {
+          console.log("fields: ", fieldType[typeof dummyNurse[field as unknown as keyof(Nurse)] as unknown as keyof FieldType])
+          const hasComma = index < (fields.length - 1) ? ',' : ''
+          const closingParenthesis = index === (fields.length - 1) ? ')' : ''
+          query += `${field} ${fieldType[typeof dummyNurse[field as unknown as keyof(Nurse)] as unknown as keyof FieldType]}${hasComma} ${closingParenthesis}`
+         
+        })
+        await conn.query(query, function () {
+          console.log("Table admin created")
+        })
 
-    fields.forEach((field: string, index: number) => {
-      const hasComma = index < fields.length - 1 ? "," : "";
-      const closingParenthesis = index === fields.length - 1 ? ")" : "";
-      query += `${field} ${
-        fieldType[
-          typeof dummyPatientsTest[
-            field as unknown as keyof PatientsTest
-          ] as unknown as keyof FieldType
-        ]
-      } ${hasComma} ${closingParenthesis}`;
-    });
-    await conn.query(query, function () {
-      console.log("Table patientstest created");
-    });
-  });
-}
+
+      })
+  }
