@@ -9,4 +9,4 @@ export const dummyUser = new User({
   created_at: "createdAt",
   status: LoginStatus.Login,
   userType: UserType.Admin,
-});
+} as User);

@@ -1,5 +1,7 @@
+import { conn } from "../config/dbconfig/db_connection";
 import { LoginStatus } from "../enums/LoginStatus";
 import { UserType } from "../enums/UserType";
+import { UserResponse } from "../response/userResponse";
 
 export class User {
   user_id: string;
@@ -16,5 +18,18 @@ export class User {
     this.created_at = init.created_at;
     this.status = init.status;
     this.userType = init.userType;
+  }
+
+  public async add(): Promise<UserResponse> {
+    const query = `insert into user (${Object.keys(this).map((item: string) => item).join(',')}) values ("${Object.values(this).map((item: string) => item).join('","')}");`
+    console.log("query: ", query)
+    await conn.query(query, function () {
+        console.log("User inserted")
+      })
+      
+    return {
+        succeeded: true,
+        msg: ''
+    }
   }
 }
