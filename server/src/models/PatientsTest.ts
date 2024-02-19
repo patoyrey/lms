@@ -1,3 +1,7 @@
+import uuid4 from "uuid4";
+import { queryFields } from "../utils/QueryFields";
+import { PatientTestResponse } from "../response/patientsTestResponse";
+
 export class PatientsTest {
   patients_test_id: string;
   patient_id: string;
@@ -13,5 +17,23 @@ export class PatientsTest {
     this.result = init.result;
     this.created_at = init.created_at;
     this.updated_at = init.updated_at;
+  }
+
+  public async add(): Promise<PatientTestResponse> {
+    this.patients_test_id = uuid4();
+    let query = "insert into patientstest set ?";
+    return queryFields(query, this)
+      .then((res: any) => {
+        return {
+          succeeded: true,
+          msg: "Success",
+        };
+      })
+      .catch((error) => {
+        return {
+          succeeded: false,
+          msg: error.sqlMessage,
+        };
+      });
   }
 }

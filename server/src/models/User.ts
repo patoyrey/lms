@@ -5,6 +5,7 @@ import { UserType } from "../enums/UserType";
 import { UserResponse } from "../response/userResponse";
 import { Admin } from "./Admin";
 import { queryFields } from "../utils/QueryFields";
+import { Doctor } from "./Doctor";
 
 export class User {
   user_id: string;
@@ -49,16 +50,26 @@ export class User {
                   msg: error.sqlMessage,
                 };
               });
-          // await conn.query(query, [admin], (err: any) => {
-          //   console.log("Admin inserted");
-          //   if (err) {
-          //     return {
-          //       succeeded: false,
-          //       msg: err,
-          //     };
-          //   }
-          // });
 
+          case UserType.Doctor:
+            const doctor = new Doctor(data);
+            doctor.doc_id = uuid4();
+            doctor.user_id = this.user_id;
+            console.log("Doctor data: ", doctor);
+            query = "insert into doctor SET ? ";
+            return queryFields(query, doctor)
+              .then((result: any) => {
+                return {
+                  succeeded: true,
+                  msg: "Success",
+                };
+              })
+              .catch((error: any) => {
+                return {
+                  succeeded: false,
+                  msg: error.sqlMessage,
+                };
+              });
           default:
             return {
               succeeded: false,
