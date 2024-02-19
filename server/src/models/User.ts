@@ -1,9 +1,10 @@
-import { conn } from "../config/dbconfig/db_connection";
+import uuid4 from "uuid4";
+
 import { LoginStatus } from "../enums/LoginStatus";
 import { UserType } from "../enums/UserType";
 import { UserResponse } from "../response/userResponse";
-import { v4 as uuidv4 } from 'uuid';
 import { Admin } from "./Admin";
+import { queryFields } from "../utils/QueryFields";
 
 export class User {
   user_id: string;
@@ -22,46 +23,63 @@ export class User {
     this.userType = init.userType;
   }
 
-  //
-  public async add(admin: Admin, user: User): Promise<UserResponse> {
-    this.user_id = uuidv4()
-    let query = `insert into user SET ?`
-    console.log("query: ", query)
-    console.log("user data: ", user)
+  public async add(data: any): Promise<UserResponse> {
+    this.user_id = uuid4();
+    let query = `insert into user SET ?`;
+    console.log("query: ", query);
+    return queryFields(query, this)
+      .then((result: any) => {
+        switch (this.userType) {
+          case UserType.Admin:
+            const admin = new Admin(data);
+            admin.admin_id = uuid4();
+            admin.user_id = this.user_id;
+            console.log("admin data: ", admin);
+            query = "insert into admin SET ? ";
+            return queryFields(query, admin)
+              .then((result: any) => {
+                return {
+                  succeeded: true,
+                  msg: "Success",
+                };
+              })
+              .catch((error: any) => {
+                return {
+                  succeeded: false,
+                  msg: error.sqlMessage,
+                };
+              });
+          // await conn.query(query, [admin], (err: any) => {
+          //   console.log("Admin inserted");
+          //   if (err) {
+          //     return {
+          //       succeeded: false,
+          //       msg: err,
+          //     };
+          //   }
+          // });
 
-    await conn.query(query, [this], (err: any) => {
-      if (err) {
-        return {
-          succeeded: false,
-          msg: err
-        }
-      }
-    })
-
-    switch (this.userType) {
-      case UserType.Admin:
-        admin.admin_id = uuidv4()
-        admin.user_id = this.user_id
-        console.log('admin data: ', admin)
-        query = `insert into admin SET ?`
-        await conn.query(query, [admin], (err: any) => {
-          console.log("Admin Inserted Successfully")
-          if (err) {
+          default:
             return {
               succeeded: false,
-              msg: err
-            }
-          }
-        })
-      case UserType.Patient:
-      case UserType.Doctor:
-      case UserType.Nurse:
-      default: break
-    }
-
-    return {
-      succeeded: true,
-      msg: ''
-    }
+              msg: "User type not found",
+            };
+        }
+      })
+      .catch((error: any) => {
+        return {
+          succeeded: false,
+          msg: error.sqlMessage,
+        };
+      });
+    // await conn.query(query, [this], (err: any) => {
+    //   console.log("User inserted");
+    //   if (err) {
+    //     return {
+    //       succeeded: false,
+    //       msg: err,
+    //     };
+    //   }
+    // });
   }
 }

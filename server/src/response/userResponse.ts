@@ -1,6 +1,4 @@
-
-
 export type UserResponse = {
-    succeeded: boolean,
-    msg: string
-}
+  succeeded: boolean;
+  msg: any;
+};
