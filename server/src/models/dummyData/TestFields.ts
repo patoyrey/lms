@@ -6,4 +6,4 @@ export const dummyTestFields = new TestFields({
     fields_id: "fieldsId",
     test_id: "testId",
 
-})
+}as TestFields) 
