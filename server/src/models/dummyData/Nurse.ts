@@ -8,4 +8,4 @@ export const dummyNurse = new Nurse ({
     created_at: "created_at",
     updated_at: "updated_at",
     user_id: "user_id"
-})
+} as Nurse)

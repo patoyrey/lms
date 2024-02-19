@@ -1,3 +1,6 @@
+import { queryFields } from "../utils/QueryFields"
+import uuid4 from "uuid4";
+import { TestField } from "../response/testFieldsResponse";
 
 
 export class TestFields {
@@ -11,6 +14,16 @@ export class TestFields {
         this.test_id = init.test_id
 
     }
-
+    public async add(): Promise<TestField> {
+        this.testfields_id = uuid4();
+        const query = `insert into testfields SET ?`;
+        console.log(query);
+        
+        queryFields(query, this);
+        return {
+          succeeded: true,
+          msg: "testfield data inserted",
+        };
+      }
 
 }

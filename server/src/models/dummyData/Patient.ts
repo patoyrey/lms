@@ -16,4 +16,4 @@ export const dummyPatient = new Patient({
     patient_age: 18,
     created_at: 'createdAt',
     updated_at: 'updated_at'
-})
+} as Patient)

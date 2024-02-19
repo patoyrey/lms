@@ -1,3 +1,9 @@
+
+import { NurseResponse } from "../response/nurseResponse";
+import { queryFields } from "../utils/QueryFields"
+import uuid4 from "uuid4";
+
+
 export class Nurse {
     nurse_id: string
     fname: string
@@ -16,4 +22,17 @@ export class Nurse {
         this.updated_at = init.updated_at
         this.user_id = init.user_id
     }
+    public async add(): Promise<NurseResponse> {
+        this.nurse_id = uuid4();
+        const query = `insert into nurse SET ?`;
+        console.log(query);
+        
+        queryFields(query, this);
+        return {
+          succeeded: true,
+          msg: "",
+        };
+      }
+
+
 }
