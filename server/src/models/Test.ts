@@ -1,4 +1,6 @@
-
+import { conn } from "../config/dbconfig/db_connection";
+import { UserResponse } from "../response/userResponse"
+import { v4 as uuidv4 } from 'uuid';
 
 export class Test {
     test_id: string
@@ -9,6 +11,24 @@ export class Test {
         this.test_name = init.test_name
 
     }
+    public async add(): Promise<UserResponse> {
+        this.test_id = uuidv4()
+        const query = `insert into test SET ?`
+        console.log("query: ", query)
+        await conn.query(query, [this], (err: any) => {
+            if (err) {
+                return {
+                    succeeded: false,
+                    msg: err
+                }
+            }
+        })
 
+
+        return {
+            succeeded: true,
+            msg: ''
+        }
+    }
 
 }
