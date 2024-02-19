@@ -1,4 +1,7 @@
+import uuid4 from "uuid4"
 import { Gender } from "../enums/Gender"
+import { UserResponse } from "../response/userResponse"
+import { conn } from "../config/dbconfig/db_connection"
 
 
 export class Patient {
@@ -32,6 +35,24 @@ export class Patient {
         this.created_at = init.created_at
         this.updated_at = init.updated_at
     }
+    public async add(): Promise<UserResponse> {
+        // this.patient_id = uuid4();
 
+        const query = `insert into patient SET ?`;
+        console.log("query: ", query);
+        await conn.query(query, [this], (err: any) => {
+            if (err) {
+                return {
+                    succeeded: false,
+                    msg: err,
+                };
+            }
+        });
+
+        return {
+            succeeded: true,
+            msg: "",
+        };
+    }
 
 }
