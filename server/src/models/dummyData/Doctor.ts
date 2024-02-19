@@ -18,4 +18,4 @@ export const dummuyDoctor = new Doctor({
   doc_created_at: "doc_created_at",
   doc_udpated_at: "doc_updated_at",
   user_id: "user_id",
-});
+} as Doctor);

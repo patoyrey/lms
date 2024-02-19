@@ -7,4 +7,4 @@ export const dummyPatientsTest = new PatientsTest({
   result: "result",
   created_at: "created_at",
   updated_at: "updated_at",
-});
+} as PatientsTest);

@@ -89,11 +89,13 @@ export async function connect() {
     });
     let testfields = `CREATE TABLE testfields (`;
     fields.forEach((field: string, index: number) => {
+      const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const hasComma = index < fields.length - 1 ? "," : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
       testfields += `${field} ${fieldType[
         typeof dummyTestFields[field as keyof TestFields] as keyof FieldType
         ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
         }${hasComma} ${closingParenthesis}`;
     });
     console.log(testfields);
@@ -111,10 +113,12 @@ export async function connect() {
     fields.forEach((field: string, index: number) => {
       const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const hasComma = index < fields.length - 1 ? "," : "";
+      const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
       patient += `${field} ${fieldType[
         typeof dummyPatient[field as keyof Patient] as keyof FieldType
         ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
         } ${primarykey} ${hasComma} ${closingParenthesis}`;
     });
 
@@ -157,12 +161,14 @@ export async function connect() {
     query = `CREATE TABLE field (`;
     fields.forEach((field: string, index: number) => {
       const hasComma = index < fields.length - 1 ? "," : "";
+      const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
       query += `${field} ${fieldType[
         typeof dummyField[
         field as unknown as keyof Field
         ] as unknown as keyof FieldType
         ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
         }${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
@@ -179,12 +185,14 @@ export async function connect() {
     query = `CREATE TABLE nurse (`;
     fields.forEach((field: string, index: number) => {
       const hasComma = index < fields.length - 1 ? "," : "";
+      const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
       query += `${field} ${fieldType[
         typeof dummyNurse[
         field as unknown as keyof Nurse
         ] as unknown as keyof FieldType
         ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
         }${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
@@ -204,12 +212,14 @@ export async function connect() {
 
     fields.forEach((field: string, index: number) => {
       const hasComma = index < fields.length - 1 ? "," : "";
+      const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
       query += `${field} ${fieldType[
         typeof dummuyDoctor[
         field as unknown as keyof Doctor
         ] as unknown as keyof FieldType
         ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
         } ${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
@@ -230,12 +240,14 @@ export async function connect() {
 
     fields.forEach((field: string, index: number) => {
       const hasComma = index < fields.length - 1 ? "," : "";
+      const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
       query += `${field} ${fieldType[
         typeof dummyPatientsTest[
         field as unknown as keyof PatientsTest
         ] as unknown as keyof FieldType
         ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
         } ${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
