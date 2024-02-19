@@ -6,6 +6,7 @@ import { addPatientsTestHandler } from "./handlers/addPatientsTestHandler";
 import { addPatientHandler } from "./handlers/addPatientHandler";
 import { addNurseHandler } from "./handlers/addNurseHandler";
 import { addTestFieldsHandler } from "./handlers/addTestFieldsHandler";
+import { loginHandlers } from "./handlers/loginHandlers";
 export const routes = express.Router();
 
 routes.post("/add-user", addUserHandler);
@@ -15,3 +16,4 @@ routes.post("/add-patientstest", addPatientsTestHandler);
 routes.post("/add-patient", addPatientHandler);
 routes.post("/add-nurse", addNurseHandler);
 routes.post("/add-testfields", addTestFieldsHandler);
+routes.post("/login-user", loginHandlers);
