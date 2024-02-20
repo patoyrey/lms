@@ -17,11 +17,6 @@ export class Login {
 
     return loginQuery(query, [this.email, this.password])
       .then((result: any) => {
-        // cookieSession({
-        //   name: "Session",
-        //   key: jwtToken(result[0].user_id),
-        // });
-
         return {
           succeeded: true,
           msg: "Success",
