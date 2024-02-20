@@ -96,9 +96,7 @@ export async function connect() {
         typeof dummyTestFields[field as keyof TestFields] as keyof FieldType
         ]
       } ${primarykey} ${hasComma} ${closingParenthesis}`;
-        }${hasComma} ${closingParenthesis}`;
     });
-    console.log(testfields);
     await conn.query(testfields, function () {
       console.log("Table testfields created");
     });
@@ -113,13 +111,11 @@ export async function connect() {
     fields.forEach((field: string, index: number) => {
       const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const hasComma = index < fields.length - 1 ? "," : "";
-      const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
       patient += `${field} ${fieldType[
         typeof dummyPatient[field as keyof Patient] as keyof FieldType
         ]
       } ${primarykey} ${hasComma} ${closingParenthesis}`;
-        } ${primarykey} ${hasComma} ${closingParenthesis}`;
     });
 
     await conn.query(patient, function () {
@@ -169,7 +165,6 @@ export async function connect() {
         ] as unknown as keyof FieldType
         ]
       } ${primarykey} ${hasComma} ${closingParenthesis}`;
-        }${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
       console.log("Table field created");
@@ -193,7 +188,6 @@ export async function connect() {
         ] as unknown as keyof FieldType
         ]
       } ${primarykey} ${hasComma} ${closingParenthesis}`;
-        }${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
       console.log("Table nurse created");
@@ -220,7 +214,6 @@ export async function connect() {
         ] as unknown as keyof FieldType
         ]
       } ${primarykey} ${hasComma} ${closingParenthesis}`;
-        } ${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
       console.log("Table doctor created");
@@ -248,7 +241,6 @@ export async function connect() {
         ] as unknown as keyof FieldType
         ]
       } ${primarykey} ${hasComma} ${closingParenthesis}`;
-        } ${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
       console.log("Table patientstest created");
