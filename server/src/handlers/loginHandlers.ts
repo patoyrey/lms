@@ -4,10 +4,10 @@ import { Login } from "../models/Login";
 export const loginHandlers = async (req: Request, res: Response) => {
   const login = new Login(req.body);
   const response = await login.select();
-  console.log(response);
-  req.session = {
-    cookies: response.token,
-  };
-  console.log("Req", req.session);
+  console.log("Token", response.token);
+  res.cookie(response.token.toString(), {
+    httpOnly: true,
+  });
+  console.log("Req", req);
   return res.status(200).json(req.session);
 };
