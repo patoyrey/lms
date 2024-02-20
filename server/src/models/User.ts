@@ -55,7 +55,7 @@ export class User {
             const doctor = new Doctor(data);
             doctor.doc_id = uuid4();
             doctor.user_id = this.user_id;
-            console.log("Doctor data: ", doctor);
+
             query = "insert into doctor SET ? ";
             return queryFields(query, doctor)
               .then((result: any) => {
