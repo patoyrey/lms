@@ -7,9 +7,10 @@ import { addPatientHandler } from "./handlers/addPatientHandler";
 import { addNurseHandler } from "./handlers/addNurseHandler";
 import { addTestFieldsHandler } from "./handlers/addTestFieldsHandler";
 import { loginHandlers } from "./handlers/loginHandlers";
+import { middleware } from "./middleware/middleware";
 export const routes = express.Router();
 
-routes.post("/add-user", addUserHandler);
+routes.post("/add-user", middleware, addUserHandler);
 routes.post("/add-fields", addFieldsHandler);
 routes.post("/add-test", addTestHandler);
 routes.post("/add-patientstest", addPatientsTestHandler);

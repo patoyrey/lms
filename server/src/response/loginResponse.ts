@@ -1,4 +1,5 @@
 export type LoginResponse = {
   succeeded: boolean;
-  id: string;
+  msg: string;
+  token?: any;
 };

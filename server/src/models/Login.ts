@@ -1,6 +1,7 @@
+import { jwtToken } from "../jwt/jwttoken";
 import { LoginResponse } from "../response/loginResponse";
 import { loginQuery } from "../utils/QueryFields";
-const jwt = require("jsonwebtoken");
+
 export class Login {
   email: string;
   password: string;
@@ -16,20 +17,22 @@ export class Login {
 
     return loginQuery(query, [this.email, this.password])
       .then((result: any) => {
-        const token = jwt.sign(
-          `${result[0].user_id}${result[0].email}`,
-          process.env.ACCESS_TOKEN
-        );
+        // cookieSession({
+        //   name: "Session",
+        //   key: jwtToken(result[0].user_id),
+        // });
+
         return {
           succeeded: true,
-          id: `${result[0].user_id}${result[0].email}`,
-          token: token,
+          msg: "Success",
+          token: jwtToken(result[0].user_id),
         };
       })
       .catch((error: any) => {
         return {
           succeeded: false,
-          id: error.sqlMessage,
+          msg: error.message,
+          token: undefined,
         };
       });
   }
