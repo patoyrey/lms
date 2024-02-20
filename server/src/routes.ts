@@ -8,7 +8,7 @@ import { addNurseHandler } from "./handlers/addNurseHandler";
 import { addTestFieldsHandler } from "./handlers/addTestFieldsHandler";
 import { loginHandlers } from "./handlers/loginHandlers";
 import { middleware } from "./middleware/middleware";
-import { jwtToken } from "./jwt/jwttoken";
+
 export const routes = express.Router();
 
 routes.post("/add-user", middleware, addUserHandler);

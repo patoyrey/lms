@@ -12,12 +12,11 @@ app.use("/api", routes);
 app.set("trust proxy", true);
 app.use(
   cookieSession({
-    name: "session",
-    keys: [`${process.env.ACCESS_TOKEN}`],
     signed: false,
     secure: true,
   })
 );
+
 const port = process.env.PORT ?? 5000;
 
 app.listen(port, () => {
