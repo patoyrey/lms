@@ -13,14 +13,13 @@ export class Login {
 
   public async select(): Promise<LoginResponse> {
     const query = `select * from user where email = ? and password = ?`;
-    console.log(this);
 
     return loginQuery(query, [this.email, this.password])
       .then((result: any) => {
         return {
           succeeded: true,
           msg: "Success",
-          token: jwtToken(result[0].user_id),
+          token: jwtToken(result[0].user_id, this.email),
         };
       })
       .catch((error: any) => {
