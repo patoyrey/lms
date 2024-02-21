@@ -1,228 +1,302 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: Poppins;
 }
 
 .signContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    /* padding-left: 500px;
-    padding-right: 550px;
-    padding-top: 7%; */
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 .bg {
-    background-color: red;
-    height: 100vh;
-    width: 100%;
+  background-color: red;
+  height: 100vh;
+  width: 100%;
 }
 
 .container {
-    width: 100%;
-    height: 90vh;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
-.container>img {
-    width: 30rem;
-    height: 30rem;
-    animation: paraLaxRight 0.6s ease-in;
+.container > img {
+  width: 30rem;
+  height: 30rem;
+  animation: paraLaxRight 0.6s ease-in;
 }
 
 .content {
-    width: 50%;
-    animation: paraLaxLeft 0.6s ease-in;
-    padding: 0rem 0rem 0rem 4rem;
+  width: 50%;
+  animation: paraLaxLeft 0.6s ease-in;
+  padding: 0rem 0rem 0rem 4rem;
 }
 
-.content>h2 {
-    font-size: 3rem;
+.content > h2 {
+  font-size: 3rem;
 }
 
-.content>h1 {
-    font-size: 5rem;
+.content > h1 {
+  font-size: 5rem;
 }
 
-.content>p {
-    width: auto;
+.content > p {
+  width: auto;
 }
 
 footer {
-    padding: 2rem;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    background-color: #bbdefb;
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: #bbdefb;
 }
 
 @media screen and (max-width: 600px) {
+  .container > img,
+  .left-col,
+  .doctor1_img {
+    display: none;
+  }
 
-    .container>img,
-    .left-col,
-    .doctor1_img {
-        display: none;
+  .right-col {
+    width: 100%;
+  }
 
-    }
+  .content {
+    width: 100%;
+    padding: 0rem 0rem 0rem 4rem;
+  }
 
-    .right-col {
-        width: 100%;
-
-    }
-
-    .content {
-        width: 100%;
-        padding: 0rem 0rem 0rem 4rem;
-    }
-
-    .content>h1 {
-        font-size: 5rem;
-    }
+  .content > h1 {
+    font-size: 5rem;
+  }
 }
 
 @keyframes paraLaxLeft {
-    from {
-        position: relative;
-        left: -2rem;
-    }
+  from {
+    position: relative;
+    left: -2rem;
+  }
 
-    to {
-        position: relative;
-        left: 0rem;
-    }
+  to {
+    position: relative;
+    left: 0rem;
+  }
 }
 
 @keyframes paraLaxRight {
-    from {
-        position: relative;
-        right: -2rem;
-    }
+  from {
+    position: relative;
+    right: -2rem;
+  }
 
-    to {
-        position: relative;
-        right: 0rem;
-    }
+  to {
+    position: relative;
+    right: 0rem;
+  }
 }
 
 .box {
-    background-color: #ffffff;
-    height: 25rem;
-    width: 20rem;
+  background-color: #ffffff;
+  padding-top: 16px;
+  height: 22rem;
+  width: 20rem;
 
-    border-radius: 15px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .poppins-font {
-    font-family: Poppins;
-    font-size: 12px;
-    color: gray;
+  font-family: Poppins;
+  font-size: 12px;
+  color: gray;
 }
 
 .forgotPass {
-    font-family: Poppins;
-    font-size: 12px;
-    text-align: right;
-    text-decoration: none;
-    color: gray;
-    padding-right: 35px;
+  font-family: Poppins;
+  font-size: 12px;
+  text-align: right;
+  text-decoration: none;
+  color: gray;
+  padding-right: 35px;
 }
 
 .forgotPassHyperLink {
-    text-decoration: none;
-    color: gray;
-
+  text-decoration: none;
+  color: gray;
 }
 
 .nav-logo {
-    width: 2rem;
-    height: 2rem;
-    margin-right: 1rem;
-    filter: drop-shadow(0px 5px 10px #1f7fce);
-    filter: saturate(500%);
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+  filter: drop-shadow(0px 5px 10px #1f7fce);
+  filter: saturate(500%);
 }
 
 .forgotPassHyperLink:hover {
-
-    color: #2196F3;
+  color: #2196f3;
 }
 
 .imgLogo {
-    height: 90px;
-    width: 90px;
+  height: 90px;
+  width: 90px;
 }
 
 .doctor1_img {
-    height: 405px;
-    width: 720px;
-    position: absolute;
-    bottom: 5px;
-    right: 0px;
-    z-index: -1;
+  height: 405px;
+  width: 720px;
+  position: absolute;
+  bottom: 5px;
+  right: 0px;
+  z-index: -1;
 }
 
 .changepass-container {
-
-    width: 100%;
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .formcontrol {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .right-col {
-    margin-top: 5rem;
-    background-color: aliceblue;
-    height: 28rem;
-    width: 25rem;
-    border-bottom: 20px;
-    border-radius: 50px;
-    box-shadow: 6px 9px 18px 1px #4f4f4f;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  margin-top: 5rem;
+  background-color: aliceblue;
+  height: 28rem;
+  width: 25rem;
+  border-bottom: 20px;
+  border-radius: 50px;
+  box-shadow: 6px 9px 18px 1px #4f4f4f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .right-col-content {
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.right-col>p {
-    font-family: "Poppins";
-    color: #2196F3;
-    margin: 0;
-    padding-bottom: 20px;
-    font-size: 30px;
+.right-col > p {
+  font-family: "Poppins";
+  color: #2196f3;
+  margin: 0;
+  padding-bottom: 20px;
+  font-size: 30px;
 }
 
-.left-col>img {
-    width: 45rem;
-
+.left-col > img {
+  width: 45rem;
 }
-
 
 .left-col {
-    width: 60%;
+  width: 60%;
+}
+
+.left-right-spacing {
+  font-family: Poppins;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tests {
+  background-color: #ffffff;
+  height: 70vh;
+  width: 90%;
+  padding: 2%;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.tests2 {
+  background-color: #ffffff;
+  font-family: Poppins;
+  padding: 2%;
+  height: 25rem;
+  width: 30rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.field1 {
+  background-color: #ffffff;
+  font-family: Poppins;
+  padding: 2%;
+  height: 25rem;
+  width: 30rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.boxes {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.fields {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modalStyle {
+  background-color: #ffffff;
+  font-family: Poppins;
+  padding: 10%;
+  height: 25vh;
+  gap: 1rem;
+  width: 30rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
