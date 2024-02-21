@@ -12,3 +12,15 @@ export async function queryFields(query: string, data: object) {
     });
   });
 }
+
+export async function loginQuery(query: string, data: object) {
+  return new Promise(async (resolve, reject) => {
+    await conn.query(query, data, (err: any, result: any) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}
