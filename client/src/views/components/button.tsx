@@ -20,7 +20,7 @@ const ButtonComponent: React.FC<Props> = ({
         <Button
             size={size}
             variant={variant}
-            sx={style}
+            style={style}
             onClick={() => onclick()}
 
         >
