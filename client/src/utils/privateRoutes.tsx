@@ -9,7 +9,6 @@ const PrivateRoutes = () => {
       .then((res: any) => {
         if (res) {
           console.log("Private Routes", res);
-          setAuth(true);
         } else {
           setAuth(false);
         }

@@ -26,6 +26,8 @@ const SignIn: React.FC = () => {
     await LoginService.post(props, "login-user").then((res: any) => {
       if (res.succeeded) {
         navigate("/");
+      } else {
+        console.log(res);
       }
     });
   };
