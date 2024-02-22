@@ -24,7 +24,7 @@ const Fields: React.FC = () => {
     const props = {
       field_name: fieldName,
     } as unknown as Field;
-    console.log(await FieldService.add(props, "add-fields"));
+    // console.log(await FieldService.add(props, "add-fields"));
     const res = await FieldService.add(props, "add-fields");
     if (res) {
       alert("Insert Succeded");

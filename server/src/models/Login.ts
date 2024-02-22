@@ -1,5 +1,4 @@
-
-import { jwtToken } from "../JWT/jwttoken";
+import { jwtToken } from "../jwt/jwttoken";
 import { LoginResponse } from "../response/loginResponse";
 import { loginQuery } from "../utils/QueryFields";
 

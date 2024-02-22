@@ -5,6 +5,7 @@ import "./style.css";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./store";
+
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -19,6 +20,7 @@ root.render(
     <PersistGate loading={null} persistor={persistor}>
       <React.StrictMode>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <AppRouter />
       </React.StrictMode>
     </PersistGate>
