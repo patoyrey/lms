@@ -1,22 +1,47 @@
-import React, { useState } from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import React, { useEffect, useState } from "react";
+
 import Box from "@mui/material/Box";
 const image_disp = require("../../images/doctor1.png").default;
 const logo = require("../../images/logo.png").default;
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { IconButton, InputAdornment } from "@mui/material";
+
 import TextInput from "../components/textfield";
 import ButtonComponent from "../components/button";
+import { LoginService } from "../../services/loginservice";
+import { Login } from "../../interface/login";
+import { useNavigate } from "react-router-dom";
+import { CheckAuth } from "../../services/checkAuthServices";
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const login = () => {
-    console.log("button clicked");
+  const navigate = useNavigate();
+
+  const login = async () => {
+    const props = {
+      email: email,
+      password: password,
+    } as unknown as Login;
+
+    await LoginService.post(props, "login-user").then((res: any) => {
+      if (res.succeeded) {
+        navigate("/");
+      } else {
+        console.log(res);
+      }
+    });
   };
+
+  useEffect(() => {
+    CheckAuth.get("get-auth")
+      .then((res: any) => {
+        if (res) {
+          navigate("/");
+        }
+      })
+      .catch((error) => {});
+  }, []);
+
   return (
     <Box
       component="form"
