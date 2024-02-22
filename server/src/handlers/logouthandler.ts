@@ -5,8 +5,7 @@ export const logoutHandler = async (req: Request, res: Response) => {
     succeeded: true,
   };
 
-  req.session!.token = null;
-
-  console.log("Logout", req.session);
+  res.clearCookie("jwt");
+  res.clearCookie("jwt.sig");
   return res.status(200).json(response);
 };
