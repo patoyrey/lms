@@ -7,9 +7,8 @@ const PrivateRoutes = () => {
   useEffect(() => {
     CheckAuth.get("get-auth")
       .then((res: any) => {
-        if (res) {
+        if (!res) {
           console.log("Private Routes", res);
-        } else {
           setAuth(false);
         }
       })
