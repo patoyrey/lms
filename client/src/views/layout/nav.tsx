@@ -13,7 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-const logo = require("../../images/white_logo.png").default
+const logo = require("../../images/white_logo.png").default;
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -43,11 +43,11 @@ const Nav: React.FC = (props: Props) => {
     },
     {
       menu: "Test",
-      url: "test",
+      url: "tests",
     },
     {
       menu: "Fields",
-      url: "field-page",
+      url: "fields",
     },
     {
       menu: "Testfields",
@@ -56,6 +56,10 @@ const Nav: React.FC = (props: Props) => {
     {
       menu: "Patient Test",
       url: "patienttest",
+    },
+    {
+      menu: "Logout",
+      url: "logout",
     },
   ];
   const { window } = props;
@@ -74,7 +78,8 @@ const Nav: React.FC = (props: Props) => {
       <Divider />
       <List>
         {navItems.map((item: NavItems, index: number) => (
-          <ListItem key={index} disablePadding>
+
+          <ListItem key={index} disablePadding onClick={() => handleButtonClick(item.url)}>
             <ListItemButton sx={{ textAlign: "center" }}>
               <ListItemText primary={item.menu} />
             </ListItemButton>
@@ -100,7 +105,8 @@ const Nav: React.FC = (props: Props) => {
           >
             <MenuIcon />
           </IconButton>
-          <img src={logo} alt="logo" className="nav-logo" />
+          <img src={logo} alt="logo" className="nav-logo" onClick={() => navigate("/")} style={{ cursor: "pointer" }} />
+
           <Typography
             variant="h6"
             component="div"
@@ -110,7 +116,6 @@ const Nav: React.FC = (props: Props) => {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item: NavItems, index: number) => (
-
               <Button
                 key={index}
                 onClick={() => handleButtonClick(item.url)}
@@ -118,8 +123,12 @@ const Nav: React.FC = (props: Props) => {
                 sx={{
                   color: "#fff",
                   fontWeight: 600,
-                  '&:hover': { color: '#00BFBA', textShadow: '2px 2px 4px rgba(0, 0, 0, 0.2)' },
-                  backgroundColor: activeLink === item.url ? '#00BFBA' : "inherit",
+                  "&:hover": {
+                    color: "#00BFBA",
+                    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+                  },
+                  backgroundColor:
+                    activeLink === item.url ? "#00BFBA" : "inherit",
                 }}
               >
                 {item.menu}

@@ -15,14 +15,7 @@ type Props = {
 
 const PasswordFormControl: React.FC<Props> = ({ id, label }) => {
     const [showoldPassword, setShowPassword] = React.useState(false);
-    const [shownewPassword, setShowPassword1] = React.useState(false);
-    const [showconfirmPassword, setShowPassword2] = React.useState(false);
     return (
-        // <FilledInput
-        //     id={id}
-        //     type={type}
-        //     endAdornment={endAdornment}
-        // />
         <FormControl sx={{ m: 1, backgroundColor: "white" }} variant="filled" >
             <InputLabel >{label}</InputLabel>
             <FilledInput
