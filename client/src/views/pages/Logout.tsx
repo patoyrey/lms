@@ -10,16 +10,17 @@ const Logout = () => {
         if (res) {
           console.log("Private Routes", res);
           setLogout(true);
-        } else {
-          setLogout(false);
         }
+        // else {
+        //   setLogout(false);
+        // }
       })
       .catch((error: any) => {
-        setLogout(false);
+        // setLogout(false);
       });
   }, []);
 
-  return logout ? <Navigate to="/signin" replace /> : "";
+  return logout ? <Navigate to="/landing" replace /> : "";
 };
 
 export default Logout;

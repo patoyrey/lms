@@ -44,7 +44,7 @@ const Fields: React.FC = () => {
             <div className="modalStyle">
               <Textfield
                 value={fieldName}
-                onchange={(val: string) => setFieldName(val)}
+                onchange={(val) => setFieldName(val.target.value)}
                 type="search"
                 placeholder="Field Name"
                 variant="outlined"
@@ -69,7 +69,7 @@ const Fields: React.FC = () => {
           <div className="fields">
             <Textfield
               value={search}
-              onchange={(val: string) => setSearch(val)}
+              onchange={(val) => setSearch(val.target.value)}
               placeholder="Search"
               type="search"
               variant="outlined"

@@ -9,7 +9,6 @@ const Layout: React.FC = (props) => {
     <div>
       <Nav />
       <Outlet />
-      <Footer />
     </div>
   );
 };

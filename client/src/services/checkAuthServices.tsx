@@ -11,6 +11,7 @@ export class CheckAuth {
           .get(`${baseUrl}${pathName}`)
           .then((response: any) => {
             res(response.data.succeeded);
+            console.log("Check Auth", response.data)
           })
           .catch((error) => {
             rej(error);

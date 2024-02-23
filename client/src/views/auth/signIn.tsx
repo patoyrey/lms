@@ -6,24 +6,38 @@ const logo = require("../../images/logo.png").default;
 
 import TextInput from "../components/textfield";
 import ButtonComponent from "../components/button";
+import HomePage from "../pages/HomePage";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
+import userSlice, { setEmail, setPassword } from "../../redux/userSlice";
+
 import { LoginService } from "../../services/loginservice";
 import { Login } from "../../interface/login";
 import { useNavigate } from "react-router-dom";
 import { CheckAuth } from "../../services/checkAuthServices";
 
 const SignIn: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const email = useSelector((state: RootState) => state.user.email)
+  const password = useSelector((state: RootState) => state.user.password);
+  const user = useSelector((state: RootState) => state.user);
+
+  const dispatch = useDispatch();
+
+
+  const handleOnChange = (event: any) => {
+    const { name, value } = event.target;
+    if (name === "email") {
+      dispatch(setEmail(value));
+    } else if (name === "password") {
+      dispatch(setPassword(value));
+    }
+  }
 
   const navigate = useNavigate();
 
-  const login = async () => {
-    const props = {
-      email: email,
-      password: password,
-    } as unknown as Login;
+  const handleLogin = async () => {
 
-    await LoginService.post(props, "login-user").then((res: any) => {
+    await LoginService.post(user as unknown as Login, "login-user").then((res: any) => {
       if (res.succeeded) {
         navigate("/");
       } else {
@@ -32,15 +46,7 @@ const SignIn: React.FC = () => {
     });
   };
 
-  useEffect(() => {
-    CheckAuth.get("get-auth")
-      .then((res: any) => {
-        if (res) {
-          navigate("/");
-        }
-      })
-      .catch((error) => {});
-  }, []);
+
 
   return (
     <Box
@@ -61,16 +67,18 @@ const SignIn: React.FC = () => {
           <br></br>
           <TextInput
             value={email}
-            onchange={(val: string) => setEmail(val)}
+            onchange={(e: any) => handleOnChange(e)}
             placeholder="Email"
+            name="email"
             type="email"
             required={true}
           />
           <TextInput
             value={password}
-            onchange={(val: string) => setPassword(val)}
             placeholder="Password"
             type="password"
+            onchange={(e: any) => handleOnChange(e)}
+            name="password"
             required={true}
           />
 
@@ -78,7 +86,7 @@ const SignIn: React.FC = () => {
             size="large"
             variant="contained"
             label="Login"
-            onclick={() => login()}
+            onclick={() => { handleLogin(); }}
           />
 
           <div className="forgotPass ">

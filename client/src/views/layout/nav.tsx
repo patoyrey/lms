@@ -78,7 +78,8 @@ const Nav: React.FC = (props: Props) => {
       <Divider />
       <List>
         {navItems.map((item: NavItems, index: number) => (
-          <ListItem key={index} disablePadding>
+
+          <ListItem key={index} disablePadding onClick={() => handleButtonClick(item.url)}>
             <ListItemButton sx={{ textAlign: "center" }}>
               <ListItemText primary={item.menu} />
             </ListItemButton>
@@ -104,7 +105,8 @@ const Nav: React.FC = (props: Props) => {
           >
             <MenuIcon />
           </IconButton>
-          <img src={logo} alt="logo" className="nav-logo" />
+          <img src={logo} alt="logo" className="nav-logo" onClick={() => navigate("/")} style={{ cursor: "pointer" }} />
+
           <Typography
             variant="h6"
             component="div"
