@@ -17,7 +17,7 @@ const PrivateRoutes = () => {
       });
   }, []);
 
-  return auth ? <Outlet /> : <Navigate to="/signin" replace />;
+  return auth ? <Outlet /> : <Navigate to="/home" replace />;
 };
 
 export default PrivateRoutes;

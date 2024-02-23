@@ -1,12 +1,60 @@
-import { Box, Button, Modal } from "@mui/material";
+import { Alert, AlertTitle, Box, Button, Modal } from "@mui/material";
 import React, { useState } from "react";
 import Textfield from "../components/textfield";
 import ButtonComponent from "../components/button";
 import ModalComponent from "../components/ModalComponent";
 import { Test } from "../../interface/test";
 import { TestService } from "../../services/testService";
+import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
+import AlertComponent from "../components/alert";
+
+interface StateSnackbar extends SnackbarOrigin {
+  open: boolean;
+}
 
 const Tests: React.FC = () => {
+  const [openSnackAlert, setOpenSnackAlert] = React.useState(false);
+  const [openSnackFailAlert, setOpenFailSnackAlert] = React.useState(false);
+  const [openSnackNetworkFailAlert, setOpenNetworkFailSnackAlert] =
+    React.useState(false);
+
+  const [stateSnackbarAlert, setStateSnackbar] = React.useState<StateSnackbar>({
+    open: false,
+    vertical: "top",
+    horizontal: "center",
+  });
+  const { vertical, horizontal } = stateSnackbarAlert;
+
+  const handleCloseSnackbar = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackAlert(false);
+  };
+
+  const handleFailCloseSnackbar = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenFailSnackAlert(false);
+  };
+
+  const handleNetworkFailCloseSnackbar = (
+    event: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenNetworkFailSnackAlert(false);
+  };
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -19,11 +67,24 @@ const Tests: React.FC = () => {
   const [testName, setTestName] = useState<string>("");
 
   const add = async () => {
-    console.log(" add test button clicked", testName);
-    const props = {
-      test_name: testName,
-    } as unknown as Test;
-    console.log(await TestService.add(props, "add-test"));
+    try {
+      console.log(" add test button clicked", testName);
+      const props = {
+        test_name: testName,
+      } as unknown as Test;
+      const res = await TestService.add(props, "add-test");
+      if (res) {
+        setOpenSnackAlert(true);
+        setTestName("");
+      } else {
+        alert("Failed to Insert!");
+        setOpenFailSnackAlert(true);
+        setTestName("");
+      }
+    } catch (error) {
+      setOpenNetworkFailSnackAlert(true);
+      setTestName("");
+    }
   };
   const searchHandle = () => {
     console.log(" search button clicked");
@@ -31,6 +92,32 @@ const Tests: React.FC = () => {
 
   return (
     <Box className="left-right-spacing">
+      <AlertComponent
+        className="alert"
+        severity="success"
+        open={openSnackAlert}
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical, horizontal }}
+        onClose={handleCloseSnackbar}
+        message="Successfully inserted!"
+      />
+      <AlertComponent
+        open={openSnackFailAlert}
+        severity="warning"
+        message="Failed to insert!"
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical, horizontal }}
+        onClose={handleFailCloseSnackbar}
+      />
+      <AlertComponent
+        open={openSnackNetworkFailAlert}
+        severity="warning"
+        message="Network Error"
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical, horizontal }}
+        onClose={handleNetworkFailCloseSnackbar}
+      />
+
       <ModalComponent open={open} close={() => handleClose()}>
         <Box>
           <div className="modal">
@@ -86,6 +173,7 @@ const Tests: React.FC = () => {
               onclick={() => handleOpen()}
             />
           </div>
+
           <table>
             <tbody>
               <tr>

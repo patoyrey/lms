@@ -17,12 +17,11 @@ import { useNavigate } from "react-router-dom";
 import { CheckAuth } from "../../services/checkAuthServices";
 
 const SignIn: React.FC = () => {
-  const email = useSelector((state: RootState) => state.user.email)
+  const email = useSelector((state: RootState) => state.user.email);
   const password = useSelector((state: RootState) => state.user.password);
   const user = useSelector((state: RootState) => state.user);
 
   const dispatch = useDispatch();
-
 
   const handleOnChange = (event: any) => {
     const { name, value } = event.target;
@@ -31,22 +30,31 @@ const SignIn: React.FC = () => {
     } else if (name === "password") {
       dispatch(setPassword(value));
     }
-  }
+  };
 
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-
-    await LoginService.post(user as unknown as Login, "login-user").then((res: any) => {
-      if (res.succeeded) {
-        navigate("/");
-      } else {
-        console.log(res);
+    await LoginService.post(user as unknown as Login, "login-user").then(
+      (res: any) => {
+        if (res.succeeded) {
+          navigate("/");
+        } else {
+          console.log(res);
+        }
       }
-    });
+    );
   };
 
-
+  useEffect(() => {
+    CheckAuth.get("get-auth")
+      .then((res: any) => {
+        if (res) {
+          navigate("/");
+        }
+      })
+      .catch((error) => {});
+  }, []);
 
   return (
     <Box
@@ -82,18 +90,20 @@ const SignIn: React.FC = () => {
             required={true}
           />
 
-          <ButtonComponent
-            size="large"
-            variant="contained"
-            label="Login"
-            onclick={() => { handleLogin(); }}
-          />
-
           <div className="forgotPass ">
             <a href="/password-reset" className="forgotPassHyperLink">
               Forgot Password?
             </a>
           </div>
+
+          <ButtonComponent
+            size="large"
+            variant="contained"
+            label="Login"
+            onclick={() => {
+              handleLogin();
+            }}
+          />
         </center>
       </div>
       <div>
