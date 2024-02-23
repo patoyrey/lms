@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Nav from "../layout/nav";
 import { RootState } from "../../store";
 
-const HomePage: React.FC = () => {
+const PatientTests: React.FC = () => {
 
     const user = useSelector((state: RootState) => state.user);
 
@@ -12,7 +12,7 @@ const HomePage: React.FC = () => {
         <div>
             <div className="homepage-content">
 
-                <h1> WELCOME {user.email} {user.password}</h1>
+                <h1> WELCOME PatientTest</h1>
 
 
             </div>
@@ -20,4 +20,4 @@ const HomePage: React.FC = () => {
     );
 };
 
-export default HomePage;
+export default PatientTests;

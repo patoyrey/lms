@@ -37,7 +37,7 @@ const Tests: React.FC = () => {
             <div className="modalStyle">
               <Textfield
                 value={testName}
-                onchange={(val: string) => setTestName(val)}
+                onchange={(val) => setTestName(val.target.value)}
                 type="search"
                 placeholder="Test Field"
                 variant="outlined"
@@ -63,7 +63,7 @@ const Tests: React.FC = () => {
           <div className="fields">
             <Textfield
               value={search}
-              onchange={(val: string) => setSearch(val)}
+              onchange={(val) => setSearch(val.target.value)}
               placeholder="Search"
               type="search"
               variant="outlined"

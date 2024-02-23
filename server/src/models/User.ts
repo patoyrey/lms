@@ -1,5 +1,5 @@
 import uuid4 from "uuid4";
-
+import bcrypt from "bcryptjs";
 import { LoginStatus } from "../enums/LoginStatus";
 import { UserType } from "../enums/UserType";
 import { UserResponse } from "../response/userResponse";
@@ -28,6 +28,7 @@ export class User {
 
   public async add(data: any): Promise<UserResponse> {
     this.user_id = uuid4();
+    this.password = bcrypt.hashSync(this.password, 8);
     let query = `insert into user SET ?`;
     console.log("query: ", query);
     return queryFields(query, this)
