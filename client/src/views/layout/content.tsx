@@ -19,7 +19,7 @@ const Content: React.FC = () => {
           size="large"
           variant="outlined"
           sx={{ marginTop: 2 }}
-          onClick={() => navigate(`/login`)}
+          onClick={() => navigate(`/signIn`)}
         >
           Get Started
         </Button>

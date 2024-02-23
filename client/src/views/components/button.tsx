@@ -14,14 +14,14 @@ const ButtonComponent: React.FC<Props> = ({
     variant,
     onclick,
     label,
-    style
+    style,
 }) => {
     return (
         <Button
             size={size}
             variant={variant}
             style={style}
-            onClick={() => onclick()}
+            onClick={(event: React.MouseEvent) => onclick()}
 
         >
             {label}
