@@ -20,7 +20,7 @@ const Logout = () => {
       });
   }, []);
 
-  return logout ? <Navigate to="/landing" replace /> : "";
+  return logout ? <Navigate to="/home" replace /> : "";
 };
 
 export default Logout;
