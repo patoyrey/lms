@@ -9,7 +9,11 @@ import ButtonComponent from "../components/button";
 import HomePage from "../pages/HomePage";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import userSlice, { setEmail, setPassword } from "../../redux/userSlice";
+import userSlice, {
+  setEmail,
+  setPassword,
+  setPatienInfo,
+} from "../../redux/userSlice";
 
 import { LoginService } from "../../services/loginservice";
 import { Login } from "../../interface/login";
@@ -30,6 +34,15 @@ const SignIn: React.FC = () => {
     } else if (name === "password") {
       dispatch(setPassword(value));
     }
+  };
+
+  const handOnChangePatient = (event: any) => {
+    const [name, value] = event.target;
+    const payload = {
+      name,
+      value,
+    };
+    dispatch(setPatienInfo(payload));
   };
 
   const navigate = useNavigate();

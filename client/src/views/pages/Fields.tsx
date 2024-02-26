@@ -1,12 +1,15 @@
-import { Alert, Box, Button, Modal } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Typography } from "@mui/material";
+import React from "react";
 import Textfield from "../components/textfield";
 import ButtonComponent from "../components/button";
 import ModalComponent from "../components/ModalComponent";
 import { FieldService } from "../../services/fieldservice";
-import { Field } from "../../interface/field";
-import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
+
+import { SnackbarOrigin } from "@mui/material/Snackbar";
 import AlertComponent from "../components/alert";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { clearField, setField } from "../../redux/fieldSlice";
 
 interface StateSnackbar extends SnackbarOrigin {
   open: boolean;
@@ -15,6 +18,8 @@ interface StateSnackbar extends SnackbarOrigin {
 const Fields: React.FC = () => {
   const [openSnackAlert, setOpenSnackAlert] = React.useState(false);
   const [openSnackFailAlert, setOpenFailSnackAlert] = React.useState(false);
+  const fields = useSelector((state: RootState) => state.field);
+  const dispatch = useDispatch();
   const [openSnackNetworkFailAlert, setOpenNetworkFailSnackAlert] =
     React.useState(false);
 
@@ -65,28 +70,28 @@ const Fields: React.FC = () => {
     setOpen(false);
   };
 
-  const [search, setSearch] = useState<string>("");
-  const [fieldName, setFieldName] = useState<string>("");
+  const handleOnChange = (event: any) => {
+    const { name, value } = event.target;
+    const payload = {
+      name,
+      value,
+    };
+    dispatch(setField(payload));
+  };
 
   const add = async () => {
     try {
-      console.log(" add field button clicked", fieldName);
-      const props = {
-        field_name: fieldName,
-      } as unknown as Field;
-
-      const res = await FieldService.add(props, "add-fields");
+      const res = await FieldService.add(fields, "add-fields");
       if (res) {
         setOpenSnackAlert(true);
-        setFieldName("");
+
+        dispatch(clearField());
+        console.log(fields);
       } else {
-        alert("Failed to Insert!");
         setOpenFailSnackAlert(true);
-        setFieldName("");
       }
     } catch (error) {
       setOpenNetworkFailSnackAlert(true);
-      setFieldName("");
     }
   };
   const searchHandle = () => {
@@ -124,18 +129,160 @@ const Fields: React.FC = () => {
       <ModalComponent open={open} close={() => handleClose()}>
         <Box>
           <div className="modal">
+            {" "}
             <div className="modalStyle">
-              <Textfield
-                value={fieldName}
-                onchange={(val) => setFieldName(val.target.value)}
-                type="search"
-                placeholder="Field Name"
-                variant="outlined"
-                size="small"
-                required={true}
-              />
+              <div className="patient-ref-container">
+                {" "}
+                <Typography
+                  variant="h6"
+                  display="block"
+                  sx={{ mb: 2 }}
+                  gutterBottom
+                >
+                  Adding Fields
+                </Typography>
+                <div className="patient-ref">
+                  <div>
+                    <Typography variant="body2" display="block" gutterBottom>
+                      Field Name :
+                    </Typography>
+                    <Textfield
+                      value={fields.field_name}
+                      onchange={(val) => handleOnChange(val)}
+                      type="search"
+                      variant="outlined"
+                      name="field_name"
+                      size="small"
+                      required={true}
+                    />
+                  </div>
+
+                  <div>
+                    <Typography variant="body2" display="block" gutterBottom>
+                      Unit :
+                    </Typography>
+                    <Textfield
+                      value={fields.unit}
+                      onchange={(val) => handleOnChange(val)}
+                      type="search"
+                      variant="outlined"
+                      name="unit"
+                      size="small"
+                      required={true}
+                    />
+                  </div>
+                  <div>
+                    <Typography variant="body2" display="block" gutterBottom>
+                      Main Reference Range :
+                    </Typography>
+                    <Textfield
+                      value={fields.mainRefRange}
+                      onchange={(val) => handleOnChange(val)}
+                      type="search"
+                      variant="outlined"
+                      name="mainRefRange"
+                      size="small"
+                      required={true}
+                    />
+                  </div>
+
+                  <div>
+                    <Typography variant="body2" display="block" gutterBottom>
+                      Female Reference Range :
+                    </Typography>
+                    <Textfield
+                      value={fields.femaleRefRange}
+                      onchange={(val) => handleOnChange(val)}
+                      type="search"
+                      variant="outlined"
+                      name="femaleRefRange"
+                      size="small"
+                      required={true}
+                    />
+                  </div>
+
+                  <div>
+                    <Typography variant="body2" display="block" gutterBottom>
+                      Reference Range :
+                    </Typography>
+                    <Textfield
+                      value={fields.RefRange}
+                      onchange={(val) => handleOnChange(val)}
+                      type="search"
+                      variant="outlined"
+                      name="RefRange"
+                      size="small"
+                      required={true}
+                    />
+                  </div>
+
+                  <div>
+                    {" "}
+                    <Typography variant="body2" display="block" gutterBottom>
+                      Desirable Reference Range :
+                    </Typography>
+                    <Textfield
+                      value={fields.DesirableRefRange}
+                      onchange={(val) => handleOnChange(val)}
+                      type="search"
+                      variant="outlined"
+                      name="DesirableRefRange"
+                      size="small"
+                      required={true}
+                    />
+                  </div>
+
+                  <div>
+                    {" "}
+                    <Typography variant="body2" display="block" gutterBottom>
+                      Borderline Reference Range :
+                    </Typography>
+                    <Textfield
+                      value={fields.borderlineRefRange}
+                      onchange={(val) => handleOnChange(val)}
+                      type="search"
+                      variant="outlined"
+                      name="borderlineRefRange"
+                      size="small"
+                      required={true}
+                    />
+                  </div>
+
+                  <div>
+                    {" "}
+                    <Typography variant="body2" display="block" gutterBottom>
+                      High Risk Reference Range :
+                    </Typography>
+                    <Textfield
+                      value={fields.highRiskRefRange}
+                      onchange={(val) => handleOnChange(val)}
+                      type="search"
+                      variant="outlined"
+                      name="highRiskRefRange"
+                      size="small"
+                      required={true}
+                    />
+                  </div>
+
+                  <div>
+                    {" "}
+                    <Typography variant="body2" display="block" gutterBottom>
+                      Other :
+                    </Typography>
+                    <Textfield
+                      value={fields.other}
+                      onchange={(val) => handleOnChange(val)}
+                      type="search"
+                      variant="outlined"
+                      name="other"
+                      size="small"
+                      required={true}
+                    />
+                  </div>
+                </div>
+              </div>
               <ButtonComponent
-                style={{ height: 40 }}
+                style={{ height: 40, width: "10rem" }}
                 size="large"
                 variant="contained"
                 label="Add"
@@ -151,8 +298,8 @@ const Fields: React.FC = () => {
         <div className="tests">
           <div className="fields">
             <Textfield
-              value={search}
-              onchange={(val) => setSearch(val.target.value)}
+              value=""
+              onchange={(e) => console.log(e.target.value)}
               placeholder="Search"
               type="search"
               variant="outlined"

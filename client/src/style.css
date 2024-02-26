@@ -231,7 +231,7 @@ footer {
 
 .tests {
   background-color: #ffffff;
-  height: 70vh;
+  height: 85vh;
   width: 90%;
   padding: 2%;
   border-radius: 15px;
@@ -291,21 +291,58 @@ footer {
 .modalStyle {
   background-color: #ffffff;
   font-family: Poppins;
-  padding-top: 6%;
-  padding-left: 6%;
-  padding-right: 6%;
-  height: 25vh;
+
+  padding: 2rem 1rem 1rem 1rem;
   gap: 1rem;
-  width: 30rem;
+
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   display: flex;
   flex-direction: column;
   justify-content: top;
+  align-items: center;
   position: relative;
 }
 
 .alert {
   position: absolute;
   top: 28rem;
+}
+.patient-info-container {
+  width: 40rem;
+}
+
+.patient-ref-container {
+  width: 50rem;
+}
+
+.patient-ref {
+  width: 100%;
+  gap: 2rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.modal-patients-contianer {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+.modal-patients-form {
+  background-color: #ffffff;
+  display: flex;
+  width: 50rem;
+  padding: 1rem;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  border-radius: 1rem;
+  border: none;
+}
+.patients-container {
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
 }

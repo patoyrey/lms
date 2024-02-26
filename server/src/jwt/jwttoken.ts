@@ -4,6 +4,7 @@ export const jwtToken = (id: string, email: string) => {
     {
       id: id,
       email: email,
+      exp: Math.floor(Date.now() / 1000) + 60 * 60,
     },
     process.env.ACCESS_TOKEN
   );

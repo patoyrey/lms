@@ -15,11 +15,11 @@ export const routes = express.Router();
 
 routes.post("/add-user", middleware, addUserHandler);
 routes.post("/add-fields", middleware, addFieldsHandler);
-routes.post("/add-test", addTestHandler);
-routes.post("/add-patientstest", addPatientsTestHandler);
-routes.post("/add-patient", addPatientHandler);
-routes.post("/add-nurse", addNurseHandler);
-routes.post("/add-testfields", addTestFieldsHandler);
+routes.post("/add-test", middleware, addTestHandler);
+routes.post("/add-patientstest", middleware, addPatientsTestHandler);
+routes.post("/add-patient", middleware, addPatientHandler);
+routes.post("/add-nurse", middleware, addNurseHandler);
+routes.post("/add-testfields", middleware, addTestFieldsHandler);
 routes.get("/user-logout", logoutHandler);
 routes.post("/login-user", loginHandlers);
 
