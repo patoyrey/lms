@@ -33,17 +33,12 @@ export class Field {
 
   public async add(): Promise<FieldResponse> {
     this.field_id = uuid4();
+    this.createdAt = new Date().toString();
     const query = `insert into field SET ?`;
+
     console.log(this);
     console.log(query);
-    // await conn.query(query, [this], (err: any) => {
-    //   if (err) {
-    //     return {
-    //       succeeded: false,
-    //       msg: err,
-    //     };
-    //   }
-    // });
+
     queryFields(query, this);
     return {
       succeeded: true,

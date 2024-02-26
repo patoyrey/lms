@@ -2,7 +2,7 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 type Props = {
   label?: string;
-  value: string;
+  value: string | number;
   onchange: (val: any) => void;
   placeholder?: string;
   type: string;
@@ -10,7 +10,7 @@ type Props = {
   size?: "small" | "medium";
   required: boolean;
   style?: React.CSSProperties;
-  name?: string
+  name?: string;
 };
 
 const TextInput: React.FC<Props> = ({
@@ -23,7 +23,7 @@ const TextInput: React.FC<Props> = ({
   size,
   required,
   style,
-  name
+  name,
 }) => {
   return (
     <TextField
