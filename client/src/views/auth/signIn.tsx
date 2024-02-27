@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-
 import Box from "@mui/material/Box";
-const image_disp = require("../../images/doctor1.png").default;
 const logo = require("../../images/logo.png").default;
-
+const img_right = require("../../images/laboratory.jpg").default;
 import TextInput from "../components/textfield";
 import ButtonComponent from "../components/button";
-import HomePage from "../pages/HomePage";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import userSlice, {
@@ -19,11 +16,31 @@ import { LoginService } from "../../services/loginservice";
 import { Login } from "../../interface/login";
 import { useNavigate } from "react-router-dom";
 import { CheckAuth } from "../../services/checkAuthServices";
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  TextField,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const SignIn: React.FC = () => {
   const email = useSelector((state: RootState) => state.user.email);
   const password = useSelector((state: RootState) => state.user.password);
   const user = useSelector((state: RootState) => state.user);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [error, setError] = useState<string>("");
+  const [status, setStatus] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
 
   const dispatch = useDispatch();
 
@@ -48,15 +65,22 @@ const SignIn: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    await LoginService.post(user as unknown as Login, "login-user").then(
-      (res: any) => {
-        if (res.succeeded) {
-          navigate("/");
-        } else {
-          console.log(res);
+    try {
+      await LoginService.post(user as unknown as Login, "login-user").then(
+        (res: any) => {
+          if (res.succeeded) {
+            navigate("/");
+          } else {
+            console.log(res);
+            setError(res.msg);
+            setStatus(true);
+          }
         }
-      }
-    );
+      );
+    } catch {
+      setError("Invalid Entry");
+      setStatus(true);
+    }
   };
 
   useEffect(() => {
@@ -73,35 +97,48 @@ const SignIn: React.FC = () => {
     <Box
       component="form"
       sx={{
-        "& .MuiTextField-root": { m: 0.5, width: "30ch" },
-        "& button": { m: 1, width: "28ch" },
+        "& .MuiTextField-root": { m: 1, width: "100%" },
+        "& button": { m: 1, width: "37ch" },
       }}
       noValidate
       autoComplete="off"
       className="signContainer"
     >
       <div className="box">
-        {/* LOGIN CREDENTIALS */}
-        <center>
+        <div className="left">
           <img className="imgLogo" src={logo} alt="logo"></img>
-          <br></br>
-          <br></br>
           <TextInput
+            error={status}
             value={email}
             onchange={(e: any) => handleOnChange(e)}
-            placeholder="Email"
             name="email"
+            label="Email"
             type="email"
-            required={true}
           />
+
           <TextInput
             value={password}
-            placeholder="Password"
-            type="password"
+            error={status}
+            type={showPassword ? "text" : "password"}
             onchange={(e: any) => handleOnChange(e)}
             name="password"
-            required={true}
-          />
+            label="Password"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                    style={{ fontSize: "2px" }}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          ></TextInput>
 
           <div className="forgotPass ">
             <a href="/password-reset" className="forgotPassHyperLink">
@@ -109,18 +146,21 @@ const SignIn: React.FC = () => {
             </a>
           </div>
 
-          <ButtonComponent
-            size="large"
-            variant="contained"
-            label="Login"
-            onclick={() => {
-              handleLogin();
-            }}
-          />
-        </center>
-      </div>
-      <div>
-        <img className="doctor1_img" src={image_disp} alt="doctor1"></img>
+          <div className="login_btn">
+            <p className="errorMessage">{error}</p>
+            <ButtonComponent
+              size="large"
+              variant="contained"
+              label="Login"
+              onclick={() => {
+                handleLogin();
+              }}
+            />
+          </div>
+        </div>
+        <div className="right">
+          <img className="img_right" src={img_right} alt="laboratory"></img>
+        </div>
       </div>
     </Box>
   );

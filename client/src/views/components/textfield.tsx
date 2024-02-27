@@ -8,9 +8,13 @@ type Props = {
   type: string;
   variant?: "outlined" | "filled" | "standard";
   size?: "small" | "medium";
-  required: boolean;
+  required?: boolean;
   style?: React.CSSProperties;
   name?: string;
+  InputProps?: any;
+  helperText?: string;
+  error?: boolean;
+  color?: any;
 };
 
 const TextInput: React.FC<Props> = ({
@@ -24,11 +28,16 @@ const TextInput: React.FC<Props> = ({
   required,
   style,
   name,
+  InputProps,
+  helperText,
+  color,
+  error,
 }) => {
   return (
     <TextField
+      error={error}
       required={required}
-      color="primary"
+      color={color}
       variant={variant}
       label={label}
       type={type}
@@ -38,6 +47,8 @@ const TextInput: React.FC<Props> = ({
       placeholder={placeholder}
       style={style}
       name={name}
+      InputProps={InputProps}
+      helperText={helperText}
     />
   );
 };
