@@ -10,6 +10,7 @@ import { loginHandlers } from "./handlers/loginHandlers";
 import { middleware } from "./middleware/middleware";
 import { checkAuthHandler } from "./handlers/checkAuthHandler";
 import { logoutHandler } from "./handlers/logouthandler";
+import { retrieveFieldHandler } from "./handlers/retrieveFieldHandler";
 
 export const routes = express.Router();
 
@@ -24,3 +25,4 @@ routes.get("/user-logout", logoutHandler);
 routes.post("/login-user", loginHandlers);
 
 routes.get("/get-auth", middleware, checkAuthHandler);
+routes.get("/retrieve-field", middleware, retrieveFieldHandler);

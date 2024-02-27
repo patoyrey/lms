@@ -24,3 +24,15 @@ export async function loginQuery(query: string, data: object) {
     });
   });
 }
+
+export async function retrieveData(query: any) {
+  return new Promise(async (resolve, reject) => {
+    await conn.query(query, (err: any, result: any) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+}

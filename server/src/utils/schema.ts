@@ -158,10 +158,10 @@ export async function connect() {
     });
 
     //creates field table
-    dropIfExist = `DROP TABLE IF EXISTS field`;
-    await conn.query(dropIfExist, function () {
-      console.log("Table field drop");
-    });
+    // dropIfExist = `DROP TABLE IF EXISTS field`;
+    // await conn.query(dropIfExist, function () {
+    //   console.log("Table field drop");
+    // });
 
     fields = Object.keys(new Field({} as Field));
     query = `CREATE TABLE field (`;
