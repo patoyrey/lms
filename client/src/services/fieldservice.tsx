@@ -16,7 +16,5 @@ export class FieldService {
           rej(error);
         });
     });
-
-    //if mag update
   };
 }
