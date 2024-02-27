@@ -12,7 +12,7 @@ const LandingLayout: React.FC = (props) => {
         CheckAuth.get("get-auth")
             .then((res: any) => {
                 if (res) {
-                    navigate("/landing");
+                    navigate("/home");
                 }
             })
             .catch((error) => { });

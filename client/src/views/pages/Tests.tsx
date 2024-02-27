@@ -1,4 +1,5 @@
 import { Alert, AlertTitle, Box, Button, Modal } from "@mui/material";
+import { SelectChangeEvent } from "@mui/material";
 import React, { useState } from "react";
 import Textfield from "../components/textfield";
 import ButtonComponent from "../components/button";
@@ -7,7 +8,10 @@ import { Test } from "../../interface/test";
 import { TestService } from "../../services/testService";
 import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
 import AlertComponent from "../components/alert";
-
+import { useDispatch, useSelector } from "react-redux";
+import { clearTest, setTest } from "../../redux/testSlice";
+import { RootState } from "../../store";
+import DropDown from "../components/dropdownComponent";
 interface StateSnackbar extends SnackbarOrigin {
   open: boolean;
 }
@@ -55,6 +59,13 @@ const Tests: React.FC = () => {
     setOpenNetworkFailSnackAlert(false);
   };
 
+
+
+  const dispatch = useDispatch()
+  const [selectedOption, setSelectedOption] = useState<string>("");
+  const options: string[] = ["Option 1", "Option 2", "Option 3"];
+  const testt = useSelector((state: RootState) => state.test)
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -85,9 +96,30 @@ const Tests: React.FC = () => {
       setOpenNetworkFailSnackAlert(true);
       setTestName("");
     }
+    console.log(" add test button clicked", testName);
+    console.log(testt)
+    dispatch(clearTest())
+    // const props = {
+    //   test_name: selectedOption,
+    // } as unknown as Test;
+
+    //console.log(await TestService.add(testt, "add-test"));
+
   };
   const searchHandle = () => {
     console.log(" search button clicked");
+  };
+  // DROPDOWN
+
+
+  const handleDropdownChange = (event: SelectChangeEvent) => {
+    setSelectedOption(event.target.value)
+    const { name, value } = event.target;
+    const payload = {
+      name, value
+    }
+    dispatch(setTest(payload))
+    console.log(payload)
   };
 
   return (
@@ -122,15 +154,18 @@ const Tests: React.FC = () => {
         <Box>
           <div className="modal">
             <div className="modalStyle">
-              <Textfield
-                value={testName}
-                onchange={(val) => setTestName(val.target.value)}
-                type="search"
-                placeholder="Test Field"
-                variant="outlined"
-                size="small"
-                required={true}
+
+              <DropDown
+                inputlabel="Select"
+                options={options}
+                value={testt.test_name}
+                label="DropDown"
+                variant="standard"
+                name="test_name"
+                formsize={370}
+                onchange={handleDropdownChange}
               />
+
               <ButtonComponent
                 style={{ height: 40 }}
                 size="large"
@@ -177,7 +212,7 @@ const Tests: React.FC = () => {
           <table>
             <tbody>
               <tr>
-                <td>Complete Blood Count</td>
+                <td></td>
               </tr>
               <tr>
                 <td>Urinalysis</td>
