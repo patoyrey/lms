@@ -36,11 +36,11 @@ const SignIn: React.FC = () => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleMouseDownPassword = (
-    event: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    event.preventDefault();
-  };
+  // const handleMouseDownPassword = (
+  //   event: React.MouseEvent<HTMLButtonElement>
+  // ) => {
+  //   event.preventDefault();
+  // };
 
   const dispatch = useDispatch();
 
@@ -90,7 +90,7 @@ const SignIn: React.FC = () => {
           navigate("/");
         }
       })
-      .catch((error) => {});
+      .catch((error) => { });
   }, []);
 
   return (
@@ -129,7 +129,7 @@ const SignIn: React.FC = () => {
                   <IconButton
                     aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
+                    // onMouseDown={handleMouseDownPassword}
                     edge="end"
                     style={{ fontSize: "2px" }}
                   >
@@ -141,9 +141,12 @@ const SignIn: React.FC = () => {
           ></TextInput>
 
           <div className="forgotPass ">
-            <a href="/password-reset" className="forgotPassHyperLink">
+            <a href="/email-verify" className="forgotPassHyperLink">
               Forgot Password?
             </a>
+            {/* <a href="/password-reset" className="forgotPassHyperLink">
+              Forgot Password?
+            </a> */}
           </div>
 
           <div className="login_btn">

@@ -7,6 +7,7 @@ type Props = {
   label: string;
   onclick: () => void;
   style?: React.CSSProperties;
+  disabled?: boolean
 };
 
 const ButtonComponent: React.FC<Props> = ({
@@ -15,6 +16,7 @@ const ButtonComponent: React.FC<Props> = ({
   onclick,
   label,
   style,
+  disabled
 }) => {
   return (
     <Button
@@ -22,6 +24,7 @@ const ButtonComponent: React.FC<Props> = ({
       variant={variant}
       style={style}
       onClick={() => onclick()}
+      disabled={disabled}
     >
       {label}
     </Button>
