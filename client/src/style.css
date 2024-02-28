@@ -236,14 +236,8 @@ footer {
 }
 
 .tests {
-  background-color: #ffffff;
-  height: 85vh;
-  width: 90%;
-  padding: 2%;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 0px 3rem 3rem 3rem;
+  width: 100%;
 }
 
 .tests2 {
@@ -285,6 +279,7 @@ footer {
   justify-content: space-between;
   gap: 10px;
   flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 
 .modal {
@@ -308,6 +303,12 @@ footer {
   justify-content: top;
   align-items: center;
   position: relative;
+}
+.fields-modal {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .alert {
@@ -377,4 +378,11 @@ footer {
 .errorMessage {
   color: red;
   font-size: 12px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2rem;
 }

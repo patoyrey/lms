@@ -1,17 +1,21 @@
-import { Alert, AlertTitle, Box, Button, Modal } from "@mui/material";
-import { SelectChangeEvent } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Typography } from "@mui/material";
+
+import React, { useEffect, useState } from "react";
 import Textfield from "../components/textfield";
 import ButtonComponent from "../components/button";
 import ModalComponent from "../components/ModalComponent";
-import { Test } from "../../interface/test";
+
 import { TestService } from "../../services/testService";
-import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
+import { SnackbarOrigin } from "@mui/material/Snackbar";
 import AlertComponent from "../components/alert";
 import { useDispatch, useSelector } from "react-redux";
-import { clearTest, setTest } from "../../redux/testSlice";
+import { clearTest, fetchAllLabTest, setTest } from "../../redux/testSlice";
 import { RootState } from "../../store";
-import DropDown from "../components/dropdownComponent";
+import axios from "axios";
+import { Test } from "../../interface/test";
+import TestLabTable from "../../table/testlabTable";
+import { setField, setSelectedTestID } from "../../redux/fieldSlice";
+
 interface StateSnackbar extends SnackbarOrigin {
   open: boolean;
 }
@@ -21,6 +25,10 @@ const Tests: React.FC = () => {
   const [openSnackFailAlert, setOpenFailSnackAlert] = React.useState(false);
   const [openSnackNetworkFailAlert, setOpenNetworkFailSnackAlert] =
     React.useState(false);
+  const dispatch = useDispatch();
+
+  const [open, setOpen] = React.useState(false);
+  const test = useSelector((state: RootState) => state.test);
 
   const [stateSnackbarAlert, setStateSnackbar] = React.useState<StateSnackbar>({
     open: false,
@@ -28,7 +36,16 @@ const Tests: React.FC = () => {
     horizontal: "center",
   });
   const { vertical, horizontal } = stateSnackbarAlert;
+  //Function get lab test
+  const getAllLabTest = async () => {
+    try {
+      const res = await dispatch(fetchAllLabTest());
 
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const handleCloseSnackbar = (
     event: React.SyntheticEvent | Event,
     reason?: string
@@ -59,14 +76,9 @@ const Tests: React.FC = () => {
     setOpenNetworkFailSnackAlert(false);
   };
 
-
-
-  const dispatch = useDispatch()
   const [selectedOption, setSelectedOption] = useState<string>("");
   const options: string[] = ["Option 1", "Option 2", "Option 3"];
-  const testt = useSelector((state: RootState) => state.test)
 
-  const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -75,52 +87,54 @@ const Tests: React.FC = () => {
   };
 
   const [search, setSearch] = useState<string>("");
-  const [testName, setTestName] = useState<string>("");
 
   const add = async () => {
     try {
-      console.log(" add test button clicked", testName);
-      const props = {
-        test_name: testName,
-      } as unknown as Test;
-      const res = await TestService.add(props, "add-test");
+      const res = await TestService.add(
+        test.test_lab as unknown as Test,
+        "add-test"
+      );
       if (res) {
         setOpenSnackAlert(true);
-        setTestName("");
+
+        dispatch(clearTest());
+        getAllLabTest();
       } else {
-        alert("Failed to Insert!");
         setOpenFailSnackAlert(true);
-        setTestName("");
       }
     } catch (error) {
       setOpenNetworkFailSnackAlert(true);
-      setTestName("");
     }
-    console.log(" add test button clicked", testName);
-    console.log(testt)
-    dispatch(clearTest())
+
+    // console.log(testt);
+    dispatch(clearTest());
     // const props = {
     //   test_name: selectedOption,
     // } as unknown as Test;
 
     //console.log(await TestService.add(testt, "add-test"));
-
   };
   const searchHandle = () => {
     console.log(" search button clicked");
   };
   // DROPDOWN
 
-
-  const handleDropdownChange = (event: SelectChangeEvent) => {
-    setSelectedOption(event.target.value)
-    const { name, value } = event.target;
+  const handleOnChange = (e: any) => {
+    const { name, value } = e.target;
     const payload = {
-      name, value
-    }
-    dispatch(setTest(payload))
-    console.log(payload)
+      name,
+      value,
+    };
+    dispatch(setTest(payload));
+    console.log(name);
   };
+
+  //Select Test
+
+  useEffect(() => {
+    getAllLabTest();
+    console.log("Test Result", test.tests);
+  }, []);
 
   return (
     <Box className="left-right-spacing">
@@ -154,32 +168,52 @@ const Tests: React.FC = () => {
         <Box>
           <div className="modal">
             <div className="modalStyle">
-
-              <DropDown
-                inputlabel="Select"
-                options={options}
-                value={testt.test_name}
-                label="DropDown"
-                variant="standard"
-                name="test_name"
-                formsize={370}
-                onchange={handleDropdownChange}
-              />
-
+              <div>
+                <Typography variant="body2" display="block" gutterBottom>
+                  Test Name:
+                </Typography>
+                <Textfield
+                  value={test.test_lab.test_name}
+                  type="text"
+                  onchange={handleOnChange}
+                  name="test_name"
+                />
+              </div>
+              <div>
+                <Typography variant="body2" display="block" gutterBottom>
+                  Test Description:
+                </Typography>
+                <Textfield
+                  value={test.test_lab.test_desc}
+                  type="text"
+                  onchange={handleOnChange}
+                  name="test_desc"
+                />
+              </div>
+              <div>
+                <Typography variant="body2" display="block" gutterBottom>
+                  Test Price:
+                </Typography>
+                <Textfield
+                  value={test.test_lab.test_price}
+                  type="number"
+                  onchange={handleOnChange}
+                  name="test_price"
+                />
+              </div>
               <ButtonComponent
-                style={{ height: 40 }}
-                size="large"
+                size="medium"
                 variant="contained"
-                label="Add"
+                label="Add Test"
+                style={{ height: 40, width: "100%" }}
                 onclick={() => add()}
+                color="primary"
               />
             </div>
           </div>
         </Box>
       </ModalComponent>
 
-      <h1>LABORATORY TESTS</h1>
-      <br></br>
       <div className="boxes">
         <div className="tests">
           <div className="fields">
@@ -199,6 +233,7 @@ const Tests: React.FC = () => {
               label="Search"
               style={{ height: 40, width: "10%" }}
               onclick={() => searchHandle()}
+              color="secondary"
             />
             <ButtonComponent
               size="medium"
@@ -206,19 +241,11 @@ const Tests: React.FC = () => {
               label="Add Test"
               style={{ height: 40, width: "15%" }}
               onclick={() => handleOpen()}
+              color="primary"
             />
           </div>
 
-          <table>
-            <tbody>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Urinalysis</td>
-              </tr>
-            </tbody>
-          </table>
+          <TestLabTable testlab={test.tests} />
         </div>
       </div>
     </Box>

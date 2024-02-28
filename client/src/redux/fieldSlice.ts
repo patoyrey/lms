@@ -4,7 +4,7 @@ import { Field_Entity } from "../entity/fieldEntity";
 import { FieldService } from "../services/fieldservice";
 
 const initialState: Field = {
-  Field_lab: {
+  field_lab: {
     field_id: "",
     field_name: "",
     unit: "",
@@ -15,6 +15,10 @@ const initialState: Field = {
     borderlineRefRange: "",
     highRiskRefRange: "",
     other: "",
+  },
+  test_fields: {
+    test_id: "",
+    fields_id: [],
   },
   field: [],
 };
@@ -32,14 +36,29 @@ const fieldSlice = createSlice({
   initialState,
   reducers: {
     setField: (state, action) => {
-      state.Field_lab = {
-        ...state.Field_lab,
+      state.field_lab = {
+        ...state.field_lab,
         [action.payload.name]: action.payload.value,
       };
     },
+    setSelectedTestID: (state, action) => {
+      state.test_fields.test_id = action.payload;
+    },
+    setSelectFieldsId: (state, action) => {
+      const field_id = action.payload;
+
+      const index = state.test_fields.fields_id.indexOf(field_id);
+
+      console.log("Index", index);
+      if (index === -1) {
+        state.test_fields.fields_id.push(field_id);
+      } else {
+        state.test_fields.fields_id.splice(index, 1);
+      }
+    },
     clearField: (state) => {
-      state.Field_lab = {
-        ...initialState.Field_lab,
+      state.field_lab = {
+        ...initialState.field_lab,
       };
     },
   },
@@ -56,5 +75,6 @@ const fieldSlice = createSlice({
   },
 });
 
-export const { setField, clearField } = fieldSlice.actions;
+export const { setField, clearField, setSelectedTestID, setSelectFieldsId } =
+  fieldSlice.actions;
 export default fieldSlice.reducer;

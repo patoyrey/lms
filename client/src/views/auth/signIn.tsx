@@ -128,8 +128,7 @@ const SignIn: React.FC = () => {
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
-                    onClick={
-                      handleClickShowPassword}
+                    onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                     style={{ fontSize: "2px" }}
@@ -156,6 +155,7 @@ const SignIn: React.FC = () => {
               onclick={() => {
                 handleLogin();
               }}
+              color="primary"
             />
           </div>
         </div>

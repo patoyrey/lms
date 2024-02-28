@@ -7,6 +7,14 @@ type Props = {
   label: string;
   onclick: () => void;
   style?: React.CSSProperties;
+  color:
+    | "secondary"
+    | "success"
+    | "error"
+    | "inherit"
+    | "primary"
+    | "info"
+    | "warning";
 };
 
 const ButtonComponent: React.FC<Props> = ({
@@ -15,6 +23,7 @@ const ButtonComponent: React.FC<Props> = ({
   onclick,
   label,
   style,
+  color,
 }) => {
   return (
     <Button
@@ -22,6 +31,7 @@ const ButtonComponent: React.FC<Props> = ({
       variant={variant}
       style={style}
       onClick={() => onclick()}
+      color={color}
     >
       {label}
     </Button>

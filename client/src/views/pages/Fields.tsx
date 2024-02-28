@@ -93,7 +93,7 @@ const Fields: React.FC = () => {
   const add = async () => {
     try {
       const res = await FieldService.add(
-        fields.Field_lab as unknown as Field,
+        fields.field_lab as unknown as Field,
         "add-fields"
       );
       if (res) {
@@ -164,7 +164,7 @@ const Fields: React.FC = () => {
                       Field Name :
                     </Typography>
                     <Textfield
-                      value={fields.Field_lab.field_name}
+                      value={fields.field_lab.field_name}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -179,7 +179,7 @@ const Fields: React.FC = () => {
                       Unit :
                     </Typography>
                     <Textfield
-                      value={fields.Field_lab.unit}
+                      value={fields.field_lab.unit}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -193,7 +193,7 @@ const Fields: React.FC = () => {
                       Male Reference Range :
                     </Typography>
                     <Textfield
-                      value={fields.Field_lab.maleRefRange}
+                      value={fields.field_lab.maleRefRange}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -208,7 +208,7 @@ const Fields: React.FC = () => {
                       Female Reference Range :
                     </Typography>
                     <Textfield
-                      value={fields.Field_lab.femaleRefRange}
+                      value={fields.field_lab.femaleRefRange}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -223,7 +223,7 @@ const Fields: React.FC = () => {
                       Reference Range :
                     </Typography>
                     <Textfield
-                      value={fields.Field_lab.RefRange}
+                      value={fields.field_lab.RefRange}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -239,7 +239,7 @@ const Fields: React.FC = () => {
                       Desirable Reference Range :
                     </Typography>
                     <Textfield
-                      value={fields.Field_lab.DesirableRefRange}
+                      value={fields.field_lab.DesirableRefRange}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -255,7 +255,7 @@ const Fields: React.FC = () => {
                       Borderline Reference Range :
                     </Typography>
                     <Textfield
-                      value={fields.Field_lab.borderlineRefRange}
+                      value={fields.field_lab.borderlineRefRange}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -271,7 +271,7 @@ const Fields: React.FC = () => {
                       High Risk Reference Range :
                     </Typography>
                     <Textfield
-                      value={fields.Field_lab.highRiskRefRange}
+                      value={fields.field_lab.highRiskRefRange}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -287,7 +287,7 @@ const Fields: React.FC = () => {
                       Other :
                     </Typography>
                     <Textfield
-                      value={fields.Field_lab.other}
+                      value={fields.field_lab.other}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -304,6 +304,7 @@ const Fields: React.FC = () => {
                 variant="contained"
                 label="Add"
                 onclick={() => add()}
+                color="primary"
               />
             </div>
           </div>
@@ -330,6 +331,7 @@ const Fields: React.FC = () => {
               label="Search"
               style={{ height: 40, width: "10%" }}
               onclick={() => searchHandle()}
+              color="secondary"
             />
             <ButtonComponent
               size="medium"
@@ -337,6 +339,7 @@ const Fields: React.FC = () => {
               label="Add Field"
               style={{ height: 40, width: "15%" }}
               onclick={() => handleOpen()}
+              color="primary"
             />
           </div>
         </div>

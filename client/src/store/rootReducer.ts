@@ -8,7 +8,7 @@ export const rootReducer = combineReducers({
   user: userReducer,
   field: fieldReduce,
   patient: patientsSlice,
-  test: testSlice
+  test: testSlice,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

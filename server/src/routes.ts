@@ -11,6 +11,8 @@ import { middleware } from "./middleware/middleware";
 import { checkAuthHandler } from "./handlers/checkAuthHandler";
 import { logoutHandler } from "./handlers/logouthandler";
 import { retrieveFieldHandler } from "./handlers/retrieveFieldHandler";
+import { RetrieveTestHandler } from "./handlers/retrieveTestHandler";
+import { RetrieveFieldTestHandler } from "./handlers/retrieveFieldTestHandler";
 
 export const routes = express.Router();
 
@@ -26,3 +28,7 @@ routes.post("/login-user", loginHandlers);
 
 routes.get("/get-auth", middleware, checkAuthHandler);
 routes.get("/retrieve-field", middleware, retrieveFieldHandler);
+routes.post("/retrieve-testfield", middleware, RetrieveFieldTestHandler);
+//Select Routes
+
+routes.get("/retrieve-test", middleware, RetrieveTestHandler);

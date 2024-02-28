@@ -7,6 +7,7 @@ export async function queryFields(query: string, data: object) {
       if (err) {
         reject(err);
       } else {
+        console.log("Result  : ", result);
         resolve(result);
       }
     });
