@@ -1,4 +1,4 @@
 export interface Test {
-  id?: string;
-  name: string;
+  test_id?: string;
+  test_name: string;
 }
