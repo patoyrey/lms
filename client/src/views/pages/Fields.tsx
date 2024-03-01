@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Textfield from "../components/textfield";
 import ButtonComponent from "../components/button";
 import ModalComponent from "../components/ModalComponent";
@@ -9,7 +9,8 @@ import { SnackbarOrigin } from "@mui/material/Snackbar";
 import AlertComponent from "../components/alert";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { clearField, setField } from "../../redux/fieldSlice";
+import { clearField, fetchAllField, setField } from "../../redux/fieldSlice";
+import { Field } from "../../interface/field";
 
 interface StateSnackbar extends SnackbarOrigin {
   open: boolean;
@@ -29,6 +30,16 @@ const Fields: React.FC = () => {
     horizontal: "center",
   });
   const { vertical, horizontal } = stateSnackbarAlert;
+
+  const getAllField = async () => {
+    try {
+      const res = await dispatch(fetchAllField());
+
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleCloseSnackbar = (
     event: React.SyntheticEvent | Event,
@@ -81,12 +92,15 @@ const Fields: React.FC = () => {
 
   const add = async () => {
     try {
-      const res = await FieldService.add(fields, "add-fields");
+      const res = await FieldService.add(
+        fields.field_lab as unknown as Field,
+        "add-fields"
+      );
       if (res) {
         setOpenSnackAlert(true);
-
         dispatch(clearField());
         console.log(fields);
+        getAllField();
       } else {
         setOpenFailSnackAlert(true);
       }
@@ -98,6 +112,9 @@ const Fields: React.FC = () => {
     console.log("Search button clicked");
   };
 
+  useEffect(() => {
+    getAllField();
+  }, []);
   return (
     <Box className="left-right-spacing">
       <AlertComponent
@@ -147,7 +164,7 @@ const Fields: React.FC = () => {
                       Field Name :
                     </Typography>
                     <Textfield
-                      value={fields.field_name}
+                      value={fields.field_lab.field_name}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -162,7 +179,7 @@ const Fields: React.FC = () => {
                       Unit :
                     </Typography>
                     <Textfield
-                      value={fields.unit}
+                      value={fields.field_lab.unit}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -173,14 +190,14 @@ const Fields: React.FC = () => {
                   </div>
                   <div>
                     <Typography variant="body2" display="block" gutterBottom>
-                      Main Reference Range :
+                      Male Reference Range :
                     </Typography>
                     <Textfield
-                      value={fields.mainRefRange}
+                      value={fields.field_lab.maleRefRange}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
-                      name="mainRefRange"
+                      name="maleRefRange"
                       size="small"
                       required={true}
                     />
@@ -191,7 +208,7 @@ const Fields: React.FC = () => {
                       Female Reference Range :
                     </Typography>
                     <Textfield
-                      value={fields.femaleRefRange}
+                      value={fields.field_lab.femaleRefRange}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -206,7 +223,7 @@ const Fields: React.FC = () => {
                       Reference Range :
                     </Typography>
                     <Textfield
-                      value={fields.RefRange}
+                      value={fields.field_lab.RefRange}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -222,7 +239,7 @@ const Fields: React.FC = () => {
                       Desirable Reference Range :
                     </Typography>
                     <Textfield
-                      value={fields.DesirableRefRange}
+                      value={fields.field_lab.DesirableRefRange}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -238,7 +255,7 @@ const Fields: React.FC = () => {
                       Borderline Reference Range :
                     </Typography>
                     <Textfield
-                      value={fields.borderlineRefRange}
+                      value={fields.field_lab.borderlineRefRange}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -254,7 +271,7 @@ const Fields: React.FC = () => {
                       High Risk Reference Range :
                     </Typography>
                     <Textfield
-                      value={fields.highRiskRefRange}
+                      value={fields.field_lab.highRiskRefRange}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -270,7 +287,7 @@ const Fields: React.FC = () => {
                       Other :
                     </Typography>
                     <Textfield
-                      value={fields.other}
+                      value={fields.field_lab.other}
                       onchange={(val) => handleOnChange(val)}
                       type="search"
                       variant="outlined"
@@ -287,6 +304,7 @@ const Fields: React.FC = () => {
                 variant="contained"
                 label="Add"
                 onclick={() => add()}
+                color="primary"
               />
             </div>
           </div>
@@ -313,6 +331,7 @@ const Fields: React.FC = () => {
               label="Search"
               style={{ height: 40, width: "10%" }}
               onclick={() => searchHandle()}
+              color="secondary"
             />
             <ButtonComponent
               size="medium"
@@ -320,6 +339,7 @@ const Fields: React.FC = () => {
               label="Add Field"
               style={{ height: 40, width: "15%" }}
               onclick={() => handleOpen()}
+              color="primary"
             />
           </div>
         </div>

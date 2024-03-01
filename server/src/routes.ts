@@ -13,6 +13,11 @@ import { logoutHandler } from "./handlers/logouthandler";
 import { resetPasswordRequestHandler } from "./handlers/resetPasswordRequestHandler";
 import { resetPasswordHandler } from "./handlers/resetPasswordHandler";
 import { validateTokenHandler } from "./handlers/validateTokenHandler";
+import { retrieveFieldHandler } from "./handlers/retrieveFieldHandler";
+import { RetrieveTestHandler } from "./handlers/retrieveTestHandler";
+import { RetrieveFieldTestHandler } from "./handlers/retrieveFieldTestHandler";
+import { UpdateTestHandlers } from "./handlers/updateTestHandler";
+import { DeleteTestHanders } from "./handlers/deleteTestHandler";
 
 export const routes = express.Router();
 
@@ -32,3 +37,12 @@ routes.post("/reset-password", resetPasswordHandler);
 routes.post("/validate-token", validateTokenHandler);
 
 
+routes.get("/retrieve-field", middleware, retrieveFieldHandler);
+routes.post("/retrieve-testfield", middleware, RetrieveFieldTestHandler);
+//Select Routes
+
+routes.get("/retrieve-test", middleware, RetrieveTestHandler);
+routes.delete(`/delete-test/:test_id`, middleware, DeleteTestHanders);
+
+//Update Routes
+routes.post("/update-test", middleware, UpdateTestHandlers);

@@ -128,7 +128,7 @@ const SignIn: React.FC = () => {
                     edge="end"
                     style={{ fontSize: "2px" }}
                   >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               ),
@@ -153,6 +153,7 @@ const SignIn: React.FC = () => {
               onclick={() => {
                 handleLogin();
               }}
+              color="primary"
             />
           </div>
         </div>
