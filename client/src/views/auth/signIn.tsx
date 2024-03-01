@@ -6,7 +6,7 @@ import TextInput from "../components/textfield";
 import ButtonComponent from "../components/button";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import userSlice, {
+import {
   setEmail,
   setPassword,
   setPatienInfo,
@@ -17,12 +17,8 @@ import { Login } from "../../interface/login";
 import { useNavigate } from "react-router-dom";
 import { CheckAuth } from "../../services/checkAuthServices";
 import {
-  FormControl,
   IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
+  InputAdornment
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
@@ -71,7 +67,6 @@ const SignIn: React.FC = () => {
           if (res.succeeded) {
             navigate("/");
           } else {
-            console.log(res);
             setError(res.msg);
             setStatus(true);
           }
@@ -90,7 +85,7 @@ const SignIn: React.FC = () => {
           navigate("/");
         }
       })
-      .catch((error) => {});
+      .catch((error) => { });
   }, []);
 
   return (
@@ -142,9 +137,12 @@ const SignIn: React.FC = () => {
           ></TextInput>
 
           <div className="forgotPass ">
-            <a href="/password-reset" className="forgotPassHyperLink">
+            <a href="/email-verify" className="forgotPassHyperLink">
               Forgot Password?
             </a>
+            {/* <a href="/password-reset" className="forgotPassHyperLink">
+              Forgot Password?
+            </a> */}
           </div>
 
           <div className="login_btn">
@@ -156,6 +154,7 @@ const SignIn: React.FC = () => {
               onclick={() => {
                 handleLogin();
               }}
+              color="primary"
             />
           </div>
         </div>

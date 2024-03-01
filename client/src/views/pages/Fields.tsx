@@ -304,6 +304,7 @@ const Fields: React.FC = () => {
                 variant="contained"
                 label="Add"
                 onclick={() => add()}
+                color="primary"
               />
             </div>
           </div>
@@ -330,6 +331,7 @@ const Fields: React.FC = () => {
               label="Search"
               style={{ height: 40, width: "10%" }}
               onclick={() => searchHandle()}
+              color="secondary"
             />
             <ButtonComponent
               size="medium"
@@ -337,6 +339,7 @@ const Fields: React.FC = () => {
               label="Add Field"
               style={{ height: 40, width: "15%" }}
               onclick={() => handleOpen()}
+              color="primary"
             />
           </div>
         </div>

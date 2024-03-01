@@ -31,7 +31,7 @@ export class Login {
           } else {
             return {
               succeeded: false,
-              msg: "Password not match",
+              msg: "Incorrect Password",
               token: undefined,
             };
           }

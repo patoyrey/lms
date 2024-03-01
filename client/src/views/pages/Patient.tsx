@@ -194,6 +194,8 @@ const Patient: React.FC = () => {
                 variant="contained"
                 label="Add Patients"
                 onclick={hanldeAddPatients}
+                type="contained"
+                color="primary"
               />
             </div>
           </div>
@@ -216,12 +218,16 @@ const Patient: React.FC = () => {
           variant="contained"
           label="Search"
           onclick={() => console.log("Clcik ")}
+          type="contained"
+          color="primary"
         />
         <ButtonComponent
           size="medium"
           variant="contained"
           label="Add Patients"
           onclick={handleOnClick}
+          type="contained"
+          color="primary"
         />
       </div>
     </div>

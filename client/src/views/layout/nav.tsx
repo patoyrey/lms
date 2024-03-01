@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 const logo = require("../../images/white_logo.png").default;
 import { useNavigate } from "react-router-dom";
+import Logout from "../pages/Logout";
 
 interface Props {
   window?: () => Window;
@@ -26,10 +27,18 @@ interface NavItems {
 const Nav: React.FC = (props: Props) => {
   //Function to navigate
   const [activeLink, setActiveLink] = React.useState<string | null>(null);
+  const [show, setShow] = React.useState(false)
   const handleButtonClick = (url: string) => {
-    setActiveLink(url);
-    navigate(`/${url}`);
+    if (url === "logout") {
+      ShowLogout()
+    } else {
+      setActiveLink(url);
+      navigate(`/${url}`);
+    }
   };
+  const ShowLogout = () => {
+    setShow(!show)
+  }
   const drawerWidth = 240;
 
   const navItems: NavItems[] = [
@@ -92,7 +101,9 @@ const Nav: React.FC = (props: Props) => {
   const container =
     window !== undefined ? () => window().document.body : undefined;
   return (
+
     <Box sx={{ display: "flex" }}>
+      {show ? <Logout ShowLogout={() => ShowLogout()} /> : ""}
       <CssBaseline />
       <AppBar component="nav">
         <Toolbar>
