@@ -10,6 +10,9 @@ import { loginHandlers } from "./handlers/loginHandlers";
 import { middleware } from "./middleware/middleware";
 import { checkAuthHandler } from "./handlers/checkAuthHandler";
 import { logoutHandler } from "./handlers/logouthandler";
+import { resetPasswordRequestHandler } from "./handlers/resetPasswordRequestHandler";
+import { resetPasswordHandler } from "./handlers/resetPasswordHandler";
+import { validateTokenHandler } from "./handlers/validateTokenHandler";
 import { retrieveFieldHandler } from "./handlers/retrieveFieldHandler";
 import { RetrieveTestHandler } from "./handlers/retrieveTestHandler";
 import { RetrieveFieldTestHandler } from "./handlers/retrieveFieldTestHandler";
@@ -29,6 +32,11 @@ routes.get("/user-logout", logoutHandler);
 routes.post("/login-user", loginHandlers);
 
 routes.get("/get-auth", middleware, checkAuthHandler);
+routes.post("/reset-password-request", resetPasswordRequestHandler);
+routes.post("/reset-password", resetPasswordHandler);
+routes.post("/validate-token", validateTokenHandler);
+
+
 routes.get("/retrieve-field", middleware, retrieveFieldHandler);
 routes.post("/retrieve-testfield", middleware, RetrieveFieldTestHandler);
 //Select Routes

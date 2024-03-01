@@ -14,11 +14,13 @@
     "express-session": "^1.18.0",
     "jsonwebtoken": "^9.0.2",
     "mysql": "^2.18.1",
+    "nodemailer": "^6.9.10",
     "ts-node": "^10.9.2",
     "uuid4": "^2.0.3",
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
+    "@types/aria-query": "^5.0.4",
     "@types/bcryptjs": "^2.4.6",
     "@types/cookie-session": "^2.0.48",
     "@types/express": "^4.17.21",

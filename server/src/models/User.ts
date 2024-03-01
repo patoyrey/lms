@@ -137,4 +137,26 @@ export class User {
     //   }
     // });
   }
+  public static resetPassword = async (password: string, email: string) => {
+
+    const newPassword = bcrypt.hashSync(password, 8);
+
+    let query = `update user SET password = '${newPassword}' WHERE email = ?`;
+    console.log("email: ", email);
+    return queryFields(query, [email])
+      .then(() => {
+        return {
+          succeeded: true,
+          message: "Password Reset Successfully",
+
+        };
+      })
+      .catch((error: any) => {
+
+        return {
+          succeeded: false,
+          message: error.sqlMessage,
+        };
+      })
+  }
 }

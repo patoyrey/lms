@@ -7,36 +7,48 @@ import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import TextInput from "./textfield";
+import { TextField } from "@mui/material";
 
 type Props = {
     id: string
     label: string
-}
+    value: string | number;
+    onchange: (val: any) => void;
+    style?: React.CSSProperties
+};
 
-const PasswordFormControl: React.FC<Props> = ({ id, label }) => {
-    const [showoldPassword, setShowPassword] = React.useState(false);
+const PasswordFormControl: React.FC<Props> = ({
+    id,
+    value,
+    onchange,
+    label,
+    style
+}) => {
+    const [showPassword, setShowPassword] = React.useState(false);
+
     return (
-        <FormControl sx={{ m: 1, backgroundColor: "white" }} variant="filled" >
-            <InputLabel >{label}</InputLabel>
-            <FilledInput
-                id={id}
-                type={showoldPassword ? 'text' : 'password'}
-                endAdornment={
+        <TextField
+            id={id}
+            type={showPassword ? 'text' : 'password'}
+            label={label}
+            value={value}
+            onChange={(e) => onchange(e)}
+            InputProps={{
+                endAdornment: (
                     <InputAdornment position="end">
                         <IconButton
                             aria-label="toggle password visibility"
                             onClick={() => setShowPassword((show) => !show)}
-
                             edge="end"
                         >
-                            {showoldPassword ? <Visibility /> : <VisibilityOff />}
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
                         </IconButton>
                     </InputAdornment>
-                }
-            />
-        </FormControl>
-    )
+                )
+            }}
+        />
+    );
+};
 
-}
-
-export default PasswordFormControl
+export default PasswordFormControl;

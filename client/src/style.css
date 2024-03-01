@@ -10,6 +10,8 @@ body {
   font-family: Poppins;
   /* background-color: ghostwhite; */
   /* background-image: linear-gradient(#ccfdd8, #95baff); */
+  background: linear-gradient(0deg, #1976D2 0%, #ffffff 100%);
+
 }
 
 .signContainer {
@@ -17,7 +19,6 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: linear-gradient(to bottom, #ccfdd8, #95baff);
   /* color: red; */
 }
 
@@ -35,7 +36,7 @@ body {
   flex-wrap: wrap;
 }
 
-.container > img {
+.container>img {
   width: 30rem;
   height: 30rem;
   animation: paraLaxRight 0.6s ease-in;
@@ -47,15 +48,15 @@ body {
   padding: 0rem 0rem 0rem 4rem;
 }
 
-.content > h2 {
+.content>h2 {
   font-size: 3rem;
 }
 
-.content > h1 {
+.content>h1 {
   font-size: 5rem;
 }
 
-.content > p {
+.content>p {
   width: auto;
 }
 
@@ -69,7 +70,8 @@ footer {
 }
 
 @media screen and (max-width: 600px) {
-  .container > img,
+
+  .container>img,
   .left-col,
   .img_right {
     display: none;
@@ -84,7 +86,7 @@ footer {
     padding: 0rem 0rem 0rem 4rem;
   }
 
-  .content > h1 {
+  .content>h1 {
     font-size: 5rem;
   }
 }
@@ -210,7 +212,7 @@ footer {
   width: 100%;
 }
 
-.right-col > p {
+.right-col>p {
   font-family: "Poppins";
   color: #2196f3;
   margin: 0;
@@ -218,7 +220,7 @@ footer {
   font-size: 30px;
 }
 
-.left-col > img {
+.left-col>img {
   width: 45rem;
 }
 
@@ -274,6 +276,7 @@ footer {
 }
 
 .fields {
+
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -304,6 +307,7 @@ footer {
   align-items: center;
   position: relative;
 }
+
 .fields-modal {
   height: 90vh;
   display: flex;
@@ -315,6 +319,7 @@ footer {
   position: absolute;
   top: 28rem;
 }
+
 .patient-info-container {
   width: 40rem;
 }
@@ -330,6 +335,7 @@ footer {
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .modal-patients-contianer {
   display: flex;
 
@@ -337,6 +343,7 @@ footer {
   justify-content: center;
   border: none;
 }
+
 .modal-patients-form {
   background-color: #ffffff;
   display: flex;
@@ -348,6 +355,7 @@ footer {
   border-radius: 1rem;
   border: none;
 }
+
 .patients-container {
   padding: 1rem;
   display: flex;
@@ -371,13 +379,245 @@ footer {
   text-align: center;
 }
 
-.login_btn {
+/* .login_btn {
   padding-top: 10%;
-}
+} */
 
 .errorMessage {
   color: red;
   font-size: 12px;
+}
+
+.homepage-container {
+  width: 100%;
+  height: auto;
+
+  padding: 30px;
+
+  h1 {
+    font-family: "Poppins";
+  }
+}
+
+.homepage-menu {
+  display: flex;
+  gap: 2rem;
+
+}
+
+.hpmenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: white;
+  font-family: "Poppins";
+
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.homepage-graphs {
+  padding-top: 20px;
+  display: flex;
+  gap: 2rem;
+}
+
+.hpgraphs {
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  width: 80rem;
+  height: 15rem;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  h3 {
+    font-family: "Poppins";
+  }
+
+  p {
+    font-family: "Poppins";
+    font-size: 25px;
+    font-weight: bold;
+    color: #1976D2;
+  }
+
+
+  .img-wrap {
+    width: 100%;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+
+    img {
+
+      /* margin-left: 60px; */
+      width: 8rem;
+      height: 8rem;
+    }
+  }
+}
+
+.homepage-fields {
+  padding-top: 20px;
+  display: flex;
+  gap: 2rem;
+}
+
+.hpfields {
+  width: 80rem;
+  height: 15rem;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 15px;
+  overflow: auto;
+
+  h3 {
+    font-family: "Poppins";
+  }
+
+  p {
+    padding-top: 20px;
+    font-family: "Poppins";
+
+  }
+}
+
+.email-container {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+
+}
+
+.with-icon {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+
+  /* h1 {
+    padding-left: 5px;
+  } */
+}
+
+.email-wrap {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 48px;
+  width: 500px;
+  height: auto;
+  background-color: white;
+
+  h3 {
+    padding-bottom: 5px;
+  }
+}
+
+.password-wrap {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 3rem;
+  width: 550px;
+  height: auto;
+  background-color: white;
+
+  h3 {
+
+    padding-bottom: 5px;
+  }
+}
+
+.email-header {
+  p {
+    color: grey;
+
+  }
+}
+
+.resetp-border {
+  width: 100%;
+
+  height: auto;
+
+  p {
+    text-align: center;
+  }
+}
+
+.p-border {
+  text-align: center;
+
+  width: 90%;
+  height: auto;
+
+
+}
+
+.p-row {
+  width: 100%;
+
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-content {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.password-content {
+  display: flex;
+  flex-direction: column;
+
+  h3 {
+    padding-top: 10px;
+  }
+}
+
+.loading {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.invalidTokendisplay {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.invalidTokenWrap {
+  font-weight: bolder;
+  display: flex;
+  color: red;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 10rem;
+  height: 70px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.user-container {
+  height: 100vh;
+  width: 100%;
 }
 
 .actions {
@@ -386,32 +626,40 @@ footer {
   justify-content: flex-end;
   gap: 1rem;
 }
+
 .test-container {
   width: 40rem;
 }
+
 .test-span {
   width: 100%;
   border: 0.1rem dashed rgb(112, 109, 109);
   margin: 1rem 0rem 1rem 0rem;
 }
-.test-container > p > span {
+
+.test-container>p>span {
   font-weight: bold;
 }
+
 .add-test-contianer {
+  background-color: whitesmoke;
   padding: 1rem 1rem 2rem 1rem;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
+
 .add-test-form {
   display: flex;
   align-items: flex-end;
   justify-content: center;
 }
+
 .add-test-inputs {
   display: flex;
   width: 100%;
   gap: 1rem;
 }
+
 .pen:hover {
   transform: rotateY(180deg);
   transition: transform 0.4s ease-in-out;

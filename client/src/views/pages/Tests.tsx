@@ -112,7 +112,6 @@ const Tests: React.FC = () => {
     //console.log(await TestService.add(testt, "add-test"));
   };
   const searchHandle = () => {
-    console.log(" search button clicked");
   };
   // DROPDOWN
 

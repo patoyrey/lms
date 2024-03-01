@@ -8,14 +8,15 @@ type Props = {
   type?: any;
   onclick: () => void;
   style?: React.CSSProperties;
+  disabled?: boolean
   color:
-    | "secondary"
-    | "success"
-    | "error"
-    | "inherit"
-    | "primary"
-    | "info"
-    | "warning";
+  | "secondary"
+  | "success"
+  | "error"
+  | "inherit"
+  | "primary"
+  | "info"
+  | "warning";
 };
 
 const ButtonComponent: React.FC<Props> = ({
@@ -24,6 +25,7 @@ const ButtonComponent: React.FC<Props> = ({
   onclick,
   label,
   style,
+  disabled,
   color,
   type,
 }) => {
@@ -33,6 +35,7 @@ const ButtonComponent: React.FC<Props> = ({
       variant={variant}
       style={style}
       onClick={() => onclick()}
+      disabled={disabled}
       color={color}
       type={type}
     >
