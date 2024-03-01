@@ -236,14 +236,8 @@ footer {
 }
 
 .tests {
-  background-color: #ffffff;
-  height: 85vh;
-  width: 90%;
-  padding: 2%;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 0px 3rem 3rem 3rem;
+  width: 100%;
 }
 
 .tests2 {
@@ -285,6 +279,7 @@ footer {
   justify-content: space-between;
   gap: 10px;
   flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 
 .modal {
@@ -308,6 +303,12 @@ footer {
   justify-content: top;
   align-items: center;
   position: relative;
+}
+.fields-modal {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .alert {
@@ -377,4 +378,41 @@ footer {
 .errorMessage {
   color: red;
   font-size: 12px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+.test-container {
+  width: 40rem;
+}
+.test-span {
+  width: 100%;
+  border: 0.1rem dashed rgb(112, 109, 109);
+  margin: 1rem 0rem 1rem 0rem;
+}
+.test-container > p > span {
+  font-weight: bold;
+}
+.add-test-contianer {
+  padding: 1rem 1rem 2rem 1rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.add-test-form {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.add-test-inputs {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+.pen:hover {
+  transform: rotateY(180deg);
+  transition: transform 0.4s ease-in-out;
 }

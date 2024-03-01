@@ -4,7 +4,7 @@ export const dummyField = new Field({
   field_id: "field_id",
   field_name: "field_name",
   unit: "field_name",
-  mainRefRange: "field_name",
+  maleRefRange: "field_name",
   femaleRefRange: "field_name",
   RefRange: "field_name",
   DesirableRefRange: "field_name",
