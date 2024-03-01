@@ -32,6 +32,32 @@ export class FieldService {
     });
   };
 
+  public static update = (pathName: string, field: Field_Entity) => {
+    return new Promise(async (res, rej) => {
+      await axios
+        .put(`${baseUrl}${pathName}`, field)
+        .then((response: any) => {
+          res(response.data);
+        })
+        .catch((error) => {
+          rej(error);
+        });
+    });
+  };
+
+  public static delete = (pathName: string) => {
+    return new Promise(async (res, rej) => {
+      await axios
+        .delete(`${baseUrl}${pathName}`)
+        .then((response: any) => {
+          res(response.data);
+        })
+        .catch((error) => {
+          rej(error);
+        });
+    });
+  };
+
   public static get = (pathName: string) => {
     return new Promise(async (res, rej) => {
       axios.defaults.withCredentials = true;

@@ -153,6 +153,11 @@ export async function connect() {
     });
 
     // creates field table
+    // dropIfExist = `DROP TABLE IF EXISTS field`;
+    // await conn.query(dropIfExist, function () {
+    //   console.log("Table field drop");
+    // });
+    // creates field table
     dropIfExist = `DROP TABLE IF EXISTS field`;
     await conn.query(dropIfExist, function () {
       console.log("Table field drop");

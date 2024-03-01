@@ -20,6 +20,20 @@ const initialState: Field = {
     test_id: "",
     fields_id: [],
   },
+  editField: {
+    field_id: "",
+    field_name: "",
+    unit: "",
+    maleRefRange: "",
+    femaleRefRange: "",
+    RefRange: "",
+    DesirableRefRange: "",
+    borderlineRefRange: "",
+    highRiskRefRange: "",
+    other: "",
+    createdAt: "",
+    updatedAt: "",
+  },
   field: [],
 };
 
@@ -27,6 +41,27 @@ export const fetchAllField: any = createAsyncThunk(
   "field/fetchAllField",
   async () => {
     const res = await FieldService.select("retrieve-field");
+    return res;
+  }
+);
+
+export const fetchFieldById: any = createAsyncThunk(
+  "field/fetchFieldById",
+  async (data: { fieldId: string; editField: Field_Entity }) => {
+    // const res = await FieldService.select(`field-id/${fieldId}`);
+    const res = await FieldService.update(
+      `update-fields/${data.fieldId}`,
+      data.editField
+    );
+    return res;
+  }
+);
+
+export const deleteFieldById: any = createAsyncThunk(
+  "field/deleteFieldById",
+  async (data: { fieldId: string }) => {
+    const res = await FieldService.delete(`delete-field/${data}`);
+    // console.log(data);
     return res;
   }
 );
@@ -40,6 +75,18 @@ const fieldSlice = createSlice({
         ...state.field_lab,
         [action.payload.name]: action.payload.value,
       };
+    },
+
+    setEditField: (state, action) => {
+      state.editField = {
+        ...state.editField,
+        [action.payload.name]: action.payload.value,
+      };
+    },
+
+    //gets the data from the backend
+    setFieldData: (state, action) => {
+      state.editField = action.payload;
     },
     clearField: (state) => {
       state.field_lab = {
@@ -68,6 +115,13 @@ const fieldSlice = createSlice({
       state.field = action.payload;
     });
     builder.addCase(fetchAllField.rejected, (state, action) => {});
+
+    builder.addCase(fetchFieldById.pending, (state, action) => {});
+    builder.addCase(fetchFieldById.fulfilled, (state, action) => {
+      console.log(action.payload);
+    });
+    builder.addCase(fetchFieldById.rejected, (state, action) => {});
+
     builder.addDefaultCase((state, action) => {
       // console.warn("Unhandled action type: ${action.type}");
       return state;
@@ -75,6 +129,12 @@ const fieldSlice = createSlice({
   },
 });
 
-export const { setField, clearField, setSelectedTestID, setSelectFieldsId } =
-  fieldSlice.actions;
+export const {
+  setField,
+  clearField,
+  setSelectedTestID,
+  setSelectFieldsId,
+  setEditField,
+  setFieldData,
+} = fieldSlice.actions;
 export default fieldSlice.reducer;
