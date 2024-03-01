@@ -76,9 +76,6 @@ const Tests: React.FC = () => {
     setOpenNetworkFailSnackAlert(false);
   };
 
-  const [selectedOption, setSelectedOption] = useState<string>("");
-  const options: string[] = ["Option 1", "Option 2", "Option 3"];
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -164,88 +161,109 @@ const Tests: React.FC = () => {
         onClose={handleNetworkFailCloseSnackbar}
       />
 
-      <ModalComponent open={open} close={() => handleClose()}>
+      {/* <ModalComponent open={open} close={() => handleClose()}>
         <Box>
           <div className="modal">
-            <div className="modalStyle">
-              <div>
-                <Typography variant="body2" display="block" gutterBottom>
-                  Test Name:
-                </Typography>
-                <Textfield
-                  value={test.test_lab.test_name}
-                  type="text"
-                  onchange={handleOnChange}
-                  name="test_name"
-                />
-              </div>
-              <div>
-                <Typography variant="body2" display="block" gutterBottom>
-                  Test Description:
-                </Typography>
-                <Textfield
-                  value={test.test_lab.test_desc}
-                  type="text"
-                  onchange={handleOnChange}
-                  name="test_desc"
-                />
-              </div>
-              <div>
-                <Typography variant="body2" display="block" gutterBottom>
-                  Test Price:
-                </Typography>
-                <Textfield
-                  value={test.test_lab.test_price}
-                  type="number"
-                  onchange={handleOnChange}
-                  name="test_price"
-                />
-              </div>
-              <ButtonComponent
-                size="medium"
-                variant="contained"
-                label="Add Test"
-                style={{ height: 40, width: "100%" }}
-                onclick={() => add()}
-                color="primary"
-              />
-            </div>
+            <div className="modalStyle"></div>
           </div>
         </Box>
-      </ModalComponent>
+      </ModalComponent> */}
 
       <div className="boxes">
         <div className="tests">
-          <div className="fields">
-            <Textfield
-              value={search}
-              onchange={(val) => setSearch(val.target.value)}
-              placeholder="Search"
-              type="search"
-              variant="outlined"
-              size="small"
-              style={{ width: "70%" }}
-              required={true}
-            />
-            <ButtonComponent
-              size="medium"
-              variant="contained"
-              label="Search"
-              style={{ height: 40, width: "10%" }}
-              onclick={() => searchHandle()}
-              color="secondary"
-            />
-            <ButtonComponent
-              size="medium"
-              variant="contained"
-              label="Add Test"
-              style={{ height: 40, width: "15%" }}
-              onclick={() => handleOpen()}
-              color="primary"
-            />
+          <div className="add-test-contianer">
+            <div className="fields">
+              <Typography variant="h5" display="block" gutterBottom>
+                Test Lab
+              </Typography>
+              <Textfield
+                value={search}
+                onchange={(val) => setSearch(val.target.value)}
+                placeholder="Search"
+                type="search"
+                variant="outlined"
+                size="small"
+                style={{ width: "70%" }}
+                required={true}
+              />
+              <ButtonComponent
+                size="medium"
+                variant="contained"
+                label="Search"
+                style={{ height: 40, width: "10%" }}
+                onclick={() => searchHandle()}
+                color="secondary"
+              />
+            </div>
+            <div className="add-test-form">
+              <div className="add-test-inputs">
+                <div>
+                  <Typography variant="body2" display="block" gutterBottom>
+                    Test Name:
+                  </Typography>
+                  <Textfield
+                    value={test.test_lab.test_name}
+                    type="text"
+                    onchange={handleOnChange}
+                    name="test_name"
+                    size="small"
+                    required={true}
+                  />
+                </div>
+                <div>
+                  <Typography variant="body2" display="block" gutterBottom>
+                    Test Description:
+                  </Typography>
+                  <Textfield
+                    value={test.test_lab.test_desc}
+                    type="text"
+                    onchange={handleOnChange}
+                    name="test_desc"
+                    size="small"
+                    required={true}
+                  />
+                </div>
+                <div>
+                  <Typography variant="body2" display="block" gutterBottom>
+                    Test Price:
+                  </Typography>
+                  <Textfield
+                    value={test.test_lab.test_price}
+                    type="number"
+                    onchange={handleOnChange}
+                    name="test_price"
+                    size="small"
+                    required={true}
+                  />
+                </div>
+                <div>
+                  <Typography variant="body2" display="block" gutterBottom>
+                    Test Sample:
+                  </Typography>
+                  <Textfield
+                    value={"Sample"}
+                    type="number"
+                    onchange={(e) => console.log(e.target.event)}
+                    name="test_price"
+                    size="small"
+                    required={true}
+                  />
+                </div>
+              </div>
+
+              <ButtonComponent
+                size="medium"
+                variant="outlined"
+                label="Submit "
+                style={{ height: 40, width: "10%" }}
+                onclick={() => add()}
+                color="primary"
+                type="submit"
+              />
+            </div>
           </div>
 
-          <TestLabTable testlab={test.tests} />
+          <TestLabTable testlab={test.tests} getAllLabTest={getAllLabTest} />
         </div>
       </div>
     </Box>

@@ -384,5 +384,35 @@ footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 2rem;
+  gap: 1rem;
+}
+.test-container {
+  width: 40rem;
+}
+.test-span {
+  width: 100%;
+  border: 0.1rem dashed rgb(112, 109, 109);
+  margin: 1rem 0rem 1rem 0rem;
+}
+.test-container > p > span {
+  font-weight: bold;
+}
+.add-test-contianer {
+  padding: 1rem 1rem 2rem 1rem;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.add-test-form {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.add-test-inputs {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+.pen:hover {
+  transform: rotateY(180deg);
+  transition: transform 0.4s ease-in-out;
 }

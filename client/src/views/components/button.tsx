@@ -5,6 +5,7 @@ type Props = {
   size: "small" | "medium" | "large";
   variant: "text" | "outlined" | "contained";
   label: string;
+  type?: any;
   onclick: () => void;
   style?: React.CSSProperties;
   color:
@@ -24,6 +25,7 @@ const ButtonComponent: React.FC<Props> = ({
   label,
   style,
   color,
+  type,
 }) => {
   return (
     <Button
@@ -32,6 +34,7 @@ const ButtonComponent: React.FC<Props> = ({
       style={style}
       onClick={() => onclick()}
       color={color}
+      type={type}
     >
       {label}
     </Button>

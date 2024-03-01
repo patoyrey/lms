@@ -31,4 +31,30 @@ export class TestService {
         });
     });
   };
+
+  public static update = (props: any, pathname: string) => {
+    return new Promise<Test_Entity>(async (res, rej) => {
+      await axios
+        .post(`${baseUrl}${pathname}`, props)
+        .then((response: any) => {
+          res(response.data);
+        })
+        .catch((error) => {
+          rej(error);
+        });
+    });
+  };
+
+  public static delete = (props: any, pathName: string) => {
+    return new Promise(async (resolve, reject) => {
+      await axios
+        .delete(`${baseUrl}${pathName}/${props}`)
+        .then((res: any) => {
+          resolve(res.data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
 }

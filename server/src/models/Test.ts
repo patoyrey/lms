@@ -1,6 +1,8 @@
 import uuid4 from "uuid4";
 import { conn } from "../config/dbconfig/db_connection";
 import { UserResponse } from "../response/userResponse";
+import { DeleteQuery, queryFields, updateQuery } from "../utils/QueryFields";
+import { TestResponse } from "../response/testresponse";
 
 export class Test {
   test_id: string;
@@ -35,5 +37,40 @@ export class Test {
       succeeded: true,
       msg: "",
     };
+  }
+
+  public async update(): Promise<TestResponse> {
+    this.test_updated_at = new Date().toString();
+    const query = "update test set ? where test_id = ?";
+
+    return updateQuery(query, [this, this.test_id])
+      .then((response: any) => {
+        return {
+          succeeded: true,
+          msg: "Success",
+        };
+      })
+      .catch((error) => {
+        return {
+          succeeded: false,
+          msg: error,
+        };
+      });
+  }
+
+  public async delete(test_id: any, query: any): Promise<TestResponse> {
+    return DeleteQuery(query, test_id)
+      .then((res: any) => {
+        return {
+          succeeded: true,
+          msg: "Test deleted successfully",
+        };
+      })
+      .catch((error) => {
+        return {
+          succeeded: false,
+          msg: error,
+        };
+      });
   }
 }

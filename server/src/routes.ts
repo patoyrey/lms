@@ -13,6 +13,8 @@ import { logoutHandler } from "./handlers/logouthandler";
 import { retrieveFieldHandler } from "./handlers/retrieveFieldHandler";
 import { RetrieveTestHandler } from "./handlers/retrieveTestHandler";
 import { RetrieveFieldTestHandler } from "./handlers/retrieveFieldTestHandler";
+import { UpdateTestHandlers } from "./handlers/updateTestHandler";
+import { DeleteTestHanders } from "./handlers/deleteTestHandler";
 
 export const routes = express.Router();
 
@@ -32,3 +34,7 @@ routes.post("/retrieve-testfield", middleware, RetrieveFieldTestHandler);
 //Select Routes
 
 routes.get("/retrieve-test", middleware, RetrieveTestHandler);
+routes.delete(`/delete-test/:test_id`, middleware, DeleteTestHanders);
+
+//Update Routes
+routes.post("/update-test", middleware, UpdateTestHandlers);

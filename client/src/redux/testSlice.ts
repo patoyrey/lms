@@ -2,8 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { Test } from "../interface/test";
 import { TestService } from "../services/testService";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
+
 import { TestFields } from "../services/testfields";
 
 const initialState: Test = {
@@ -16,6 +15,14 @@ const initialState: Test = {
     test_updated_at: "",
   },
   tests: [],
+  test_update: {
+    test_id: "",
+    test_name: "",
+    test_price: 0,
+    test_desc: "",
+    test_created_at: "",
+    test_updated_at: "",
+  },
 };
 
 export const fetchAllLabTest: any = createAsyncThunk(
@@ -36,10 +43,19 @@ export const AddTestFields: any = createAsyncThunk(
   }
 );
 
-export const fetchAllTestFiedls: any = createAsyncThunk(
-  "testfield/fetchAllTestFiedls",
+export const UpdateTest: any = createAsyncThunk(
+  "update/Test",
+  async (props) => {
+    const res = await TestService.update(props, "update-test");
+
+    return res;
+  }
+);
+
+export const DeleteTest: any = createAsyncThunk(
+  "delete/Test",
   async (test_id) => {
-    const res = await TestFields.select(test_id, "retrieve-testfield");
+    const res = await TestService.delete(test_id, "delete-test");
 
     return res;
   }
@@ -54,6 +70,15 @@ const testSlice = createSlice({
         ...state.test_lab,
         [action.payload.name]: action.payload.value,
       };
+    },
+    setTestUpdate: (state, action) => {
+      state.test_update = {
+        ...state.test_update,
+        [action.payload.name]: action.payload.value,
+      };
+    },
+    getTestToUpdate: (state, action) => {
+      state.test_update = action.payload;
     },
     clearTest: (state) => {
       state.test_lab = {
@@ -72,15 +97,21 @@ const testSlice = createSlice({
     builder.addCase(AddTestFields.fulfilled, (state, action) => {
       console.log(action.payload);
     });
-    builder.addCase(fetchAllTestFiedls.pending, (state, action) => {});
-    builder.addCase(fetchAllTestFiedls.fulfilled, (state, action) => {
+    builder.addCase(UpdateTest.pending, (state, action) => {});
+    builder.addCase(UpdateTest.fulfilled, (state, action) => {
       console.log(action.payload);
     });
+    builder.addCase(DeleteTest.pending, (state, action) => {});
+    builder.addCase(DeleteTest.fulfilled, (state, action) => {
+      console.log(action.payload);
+    });
+
     builder.addDefaultCase((state, action) => {
       console.warn(`Unhandled action type: ${action.type}`);
       return state;
     });
   },
 });
-export const { setTest, clearTest } = testSlice.actions;
+export const { setTest, clearTest, setTestUpdate, getTestToUpdate } =
+  testSlice.actions;
 export default testSlice.reducer;
