@@ -4,8 +4,8 @@ import { User } from "../User";
 
 export const dummyUser = new User({
   user_id: "userId",
-  email: "angelkishaarcenal10@gmail.com",
-  password: "password",
+  email: process.env.EMAIL_USER,
+  password: process.env.PASSWORD_USER,
   created_at: "createdAt",
   status: LoginStatus.Login,
   userType: UserType.Admin,
