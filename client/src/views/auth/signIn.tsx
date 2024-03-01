@@ -6,7 +6,7 @@ import TextInput from "../components/textfield";
 import ButtonComponent from "../components/button";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import userSlice, {
+import {
   setEmail,
   setPassword,
   setPatienInfo,
@@ -17,12 +17,8 @@ import { Login } from "../../interface/login";
 import { useNavigate } from "react-router-dom";
 import { CheckAuth } from "../../services/checkAuthServices";
 import {
-  FormControl,
   IconButton,
-  InputAdornment,
-  InputLabel,
-  OutlinedInput,
-  TextField,
+  InputAdornment
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
@@ -36,11 +32,11 @@ const SignIn: React.FC = () => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  // const handleMouseDownPassword = (
-  //   event: React.MouseEvent<HTMLButtonElement>
-  // ) => {
-  //   event.preventDefault();
-  // };
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
 
   const dispatch = useDispatch();
 
@@ -71,7 +67,6 @@ const SignIn: React.FC = () => {
           if (res.succeeded) {
             navigate("/");
           } else {
-            console.log(res);
             setError(res.msg);
             setStatus(true);
           }
@@ -129,7 +124,7 @@ const SignIn: React.FC = () => {
                   <IconButton
                     aria-label="toggle password visibility"
                     onClick={handleClickShowPassword}
-                    // onMouseDown={handleMouseDownPassword}
+                    onMouseDown={handleMouseDownPassword}
                     edge="end"
                     style={{ fontSize: "2px" }}
                   >

@@ -9,7 +9,7 @@ const Users: React.FC = () => {
     console.log(user)
 
     return (
-        <div>
+        <div className="user-container">
             <div className="homepage-content">
 
                 <h1> WELCOME User</h1>

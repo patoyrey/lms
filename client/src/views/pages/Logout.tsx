@@ -1,26 +1,51 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet, Navigate, useNavigate } from "react-router-dom";
 import { LogoutService } from "../../services/logoutservice";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+interface LogoutInterface {
+  ShowLogout: () => void
+}
+const Logout: React.FC<LogoutInterface> = ({ ShowLogout }) => {
+  const [open, setOpen] = React.useState<boolean>(true);
 
-const Logout = () => {
-  const [logout, setLogout] = React.useState<boolean>(true);
-  useEffect(() => {
+  const handleLogout = () => {
     LogoutService.get("user-logout")
       .then((res: any) => {
         if (res) {
           console.log("Private Routes", res);
-          setLogout(true);
+          console.log("Logged out successfully")
+          navigate("/signIn")
         }
-        // else {
-        //   setLogout(false);
-        // }
       })
       .catch((error: any) => {
-        // setLogout(false);
+        console.error("Error logging out:", error)
       });
-  }, []);
+  }
+  const navigate = useNavigate()
+  const HandleShowLogout = () => {
+    ShowLogout()
+  }
+  return (
+    <>
 
-  return logout ? <Navigate to="/signIn" replace /> : "";
+      <Dialog open={open} onClose={() => HandleShowLogout()} >
+        <DialogTitle>Logout Confirmation</DialogTitle>
+        <DialogContent >
+          <DialogContentText>
+            Are you sure you want to log out?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleLogout} color="primary">
+            Confirm
+          </Button>
+          <Button onClick={() => HandleShowLogout()} color="primary">
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog >
+    </>
+  );
 };
 
 export default Logout;

@@ -6,7 +6,7 @@ import ButtonComponent from "../components/button";
 import ModalComponent from "../components/ModalComponent";
 import { Test } from "../../interface/test";
 import { TestService } from "../../services/testService";
-import Snackbar, { SnackbarOrigin } from "@mui/material/Snackbar";
+import { SnackbarOrigin } from "@mui/material/Snackbar";
 import AlertComponent from "../components/alert";
 import { useDispatch, useSelector } from "react-redux";
 import { clearTest, setTest } from "../../redux/testSlice";
@@ -79,7 +79,6 @@ const Tests: React.FC = () => {
 
   const add = async () => {
     try {
-      console.log(" add test button clicked", testName);
       const props = {
         test_name: testName,
       } as unknown as Test;
@@ -96,8 +95,6 @@ const Tests: React.FC = () => {
       setOpenNetworkFailSnackAlert(true);
       setTestName("");
     }
-    console.log(" add test button clicked", testName);
-    console.log(testt)
     dispatch(clearTest())
     // const props = {
     //   test_name: selectedOption,
@@ -107,7 +104,6 @@ const Tests: React.FC = () => {
 
   };
   const searchHandle = () => {
-    console.log(" search button clicked");
   };
   // DROPDOWN
 
@@ -119,7 +115,6 @@ const Tests: React.FC = () => {
       name, value
     }
     dispatch(setTest(payload))
-    console.log(payload)
   };
 
   return (

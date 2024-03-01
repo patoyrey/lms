@@ -20,6 +20,7 @@
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
+    "@types/aria-query": "^5.0.4",
     "@types/bcryptjs": "^2.4.6",
     "@types/cookie-session": "^2.0.48",
     "@types/express": "^4.17.21",

@@ -29,7 +29,6 @@ const EmailVerify: React.FC = (props) => {
     };
     const handleValidateEmail = () => {
         if (email === "") return
-
         setIsButtonDisabled(true)
         EmailService.validateEmail(email).then((result: any) => {
             console.log(result)
@@ -41,6 +40,7 @@ const EmailVerify: React.FC = (props) => {
             const message = error?.response?.data?.message
             setDisplayMessage(message)
             setDisplayMessageColor("red")
+            setStatus(true)
         }
 
         ).finally(() => setIsButtonDisabled(false))

@@ -1,5 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
-import Nav from "../layout/nav";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 const patient = require("../../images/patient-gif.gif").default;
 const earning = require("../../images/earning-gif.gif").default;
@@ -10,9 +9,6 @@ const operation = require("../../images/user-gif.gif").default;
 const HomePage: React.FC = () => {
 
     const user = useSelector((state: RootState) => state.user);
-
-    console.log(user)
-
     return (
         <div className="homepage-container">
             <h1>DASHBOARD</h1>

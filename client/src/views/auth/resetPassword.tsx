@@ -8,7 +8,6 @@ import PasswordFormControl from "../components/passwordformcontrol";
 import { setPassword } from "../../redux/userSlice";
 import { PasswordResetService } from "../../services/passwordResetService";
 
-
 const ResetPassword: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [newPassword, setNewPassword] = React.useState("");
@@ -75,7 +74,10 @@ const ResetPassword: React.FC = () => {
   if (!isTokenValid) {
     return (
       <div className="invalidTokendisplay">
-        <p>Invalid Token</p>
+        <div className="invalidTokenWrap">
+
+          <p>Invalid Token</p>
+        </div>
       </div>
     )
 
