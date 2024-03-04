@@ -181,6 +181,7 @@ const EditFieldModal: React.FC<ModalProps> = ({
                 variant="contained"
                 label="Update"
                 onclick={() => update()}
+                color="primary"
               />
             </div>
           </div>

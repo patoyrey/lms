@@ -4,10 +4,11 @@ import { TestFields } from "../models/TestFields";
 export const addTestFieldsHandler = async (req: Request, res: Response) => {
   const { test_id, fields_id } = req.body;
 
-  const promises = fields_id.map(async (id: any) => {
+  const promises = fields_id.map(async (result: any) => {
     const props = {
       test_id,
-      fields_id: id,
+      fields_id: result.field_id,
+      testfields_row: result.testfields_row,
     } as unknown as TestFields;
     const testfields = new TestFields(props);
     const response = await testfields.add();

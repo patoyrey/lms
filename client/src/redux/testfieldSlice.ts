@@ -19,11 +19,32 @@ export const fetchAllTestFiedls: any = createAsyncThunk(
     return res;
   }
 );
+export const sortTestFields: any = createAsyncThunk(
+  "testfield/sortTestFields",
+  async (props) => {
+    const res = await TestFields.update(props, "update-testfields");
+
+    return res;
+  }
+);
 
 const testfield = createSlice({
   name: "testfield",
   initialState,
-  reducers: {},
+  reducers: {
+    setRowsInput: (state, action) => {
+      const { testfields_id, value } = action.payload;
+      console.log("Current state before update:", state);
+      return {
+        ...state,
+        field: state.field.map((item) => {
+          return item.testfields_id === testfields_id
+            ? { ...item, testfields_row: value }
+            : item;
+        }),
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchAllTestFiedls.pending, (state, action) => {});
     builder.addCase(fetchAllTestFiedls.fulfilled, (state, action) => {
@@ -35,11 +56,15 @@ const testfield = createSlice({
         ...action.payload,
       };
     });
+    builder.addCase(sortTestFields.pending, (state, action) => {});
+    builder.addCase(sortTestFields.fulfilled, (state, action) => {
+      console.log(action.payload);
+    });
     builder.addDefaultCase((state, action) => {
       console.warn(`Unhandled action type: ${action.type}`);
       return state;
     });
   },
 });
-export const {} = testfield.actions;
+export const { setRowsInput } = testfield.actions;
 export default testfield.reducer;

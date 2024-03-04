@@ -15,6 +15,8 @@ type Props = {
   helperText?: string;
   error?: boolean;
   color?: any;
+  onkeydown?: () => void;
+  ref?: any;
 };
 
 const TextInput: React.FC<Props> = ({
@@ -32,6 +34,8 @@ const TextInput: React.FC<Props> = ({
   helperText,
   color,
   error,
+  ref,
+  onkeydown,
 }) => {
   return (
     <TextField
@@ -49,6 +53,8 @@ const TextInput: React.FC<Props> = ({
       name={name}
       InputProps={InputProps}
       helperText={helperText}
+      onKeyDown={onkeydown}
+      ref={ref}
     />
   );
 };

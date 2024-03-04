@@ -23,6 +23,7 @@ import {
   DeleteTest,
   UpdateTest,
   getTestToUpdate,
+  setTestId,
   setTestUpdate,
 } from "../redux/testSlice";
 import { TestFields } from "../services/testfields";
@@ -92,8 +93,10 @@ const TestLabTable: React.FC<TestLabTableProps> = ({
   };
 
   const handleViewTestFields = async (test_id: string) => {
-    await dispatch(fetchAllTestFiedls(test_id));
+    dispatch(setTestId(test_id));
+    const res = await dispatch(fetchAllTestFiedls(test_id));
 
+    console.log("Lab Tes", res);
     handleTestFields();
   };
 

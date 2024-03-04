@@ -14,7 +14,7 @@ import { Test } from "../models/Test";
 export const RetrieveFieldTestHandler = async (req: Request, res: Response) => {
   const test = "select * from test  where test_id= ?";
   const fielquery =
-    "select field.* from testfields inner join field on testfields.fields_id = field.field_id where testfields.test_id = ?";
+    "select field.*,testfields.testfields_row,testfields.testfields_id from testfields inner join field on testfields.fields_id = field.field_id where testfields.test_id = ? order by testfields_row ";
 
   const { props } = req.body;
   const testresponse = (await queryFields(test, props)) as Test[];
