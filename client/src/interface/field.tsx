@@ -17,5 +17,6 @@ export interface Field {
     test_id: string;
     fields_id: [] | any;
   };
+  editField: Field_Entity;
   field: Field_Entity[];
 }

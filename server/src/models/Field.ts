@@ -45,4 +45,28 @@ export class Field {
       msg: "",
     };
   }
+
+  public async update(fieldId: any): Promise<FieldResponse> {
+    this.updatedAt = new Date().toString();
+    const query = "update field SET ? where field_id = ?";
+
+    queryFields(`update field SET ? where field_id = "${fieldId}"`, this);
+    return {
+      succeeded: true,
+      msg: "",
+    };
+  }
+
+  public async delete(fieldId: any): Promise<FieldResponse> {
+    await queryFields(`DELETE FROM field WHERE field_id = "${fieldId}"`, this);
+    await queryFields(
+      `DELETE FROM testfields WHERE fields_id = "${fieldId}"`,
+      this
+    );
+
+    return {
+      succeeded: true,
+      msg: "",
+    };
+  }
 }
