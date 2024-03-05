@@ -29,11 +29,11 @@ export class TestFields {
       msg: "testfield data inserted",
     };
   }
-  public async update(row: string, id: string): Promise<TestField> {
+  public async update(): Promise<TestField> {
     const query =
-      "update testfields set testfields_row = ? where testfields_id =?";
+      "update testfields set testfields_row = ? where testfields_id = ?";
 
-    return updateQuery(query, [row, id])
+    return updateQuery(query, [this.testfields_row, this.testfields_id])
       .then((response) => {
         return {
           succeeded: true,

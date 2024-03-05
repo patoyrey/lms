@@ -50,6 +50,7 @@ const TestLabTable: React.FC<TestLabTableProps> = ({
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState<any>("");
+  const [focusRows, setFocusRows] = useState<{ [key: string]: boolean }>({});
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: "#2196f3",
@@ -95,8 +96,12 @@ const TestLabTable: React.FC<TestLabTableProps> = ({
   const handleViewTestFields = async (test_id: string) => {
     dispatch(setTestId(test_id));
     const res = await dispatch(fetchAllTestFiedls(test_id));
-
+    let tempFocusRow = {} as { [key: string]: boolean };
     console.log("Lab Tes", res);
+    res.payload.field.forEach((field: any) => {
+      tempFocusRow = { ...tempFocusRow, [field.testfields_id]: false };
+    });
+    setFocusRows(tempFocusRow);
     handleTestFields();
   };
 
@@ -204,7 +209,7 @@ const TestLabTable: React.FC<TestLabTableProps> = ({
         <Box>
           <div className="modal ">
             <div className="modalStyle fields-modal">
-              <TestFieldsForm />
+              <TestFieldsForm row={focusRows} />
             </div>
           </div>
         </Box>

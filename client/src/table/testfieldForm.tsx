@@ -16,13 +16,17 @@ import {
   sortTestFields,
 } from "../redux/testfieldSlice";
 import TextInput from "../views/components/textfield";
-import { ChangeEvent, useRef, useState } from "react";
-import e from "express";
-const TestFieldsForm: React.FC = () => {
+import { ChangeEvent, useEffect, useState } from "react";
+
+type Props = {
+  row: { [key: string]: boolean };
+};
+const TestFieldsForm: React.FC<Props> = ({ row }) => {
   const testfields = useSelector((state: RootState) => state.testfield);
   const test = useSelector((state: RootState) => state.test);
   const [value, setValue] = useState<any>({ value: "", index: "" });
   const dispatch = useDispatch();
+  const [focusRows, setFocusRows] = useState<{ [key: string]: boolean }>(row);
   const refs: any = {};
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -47,52 +51,66 @@ const TestFieldsForm: React.FC = () => {
     },
   }));
 
-  const handleDown = async (index: number) => {
-    const currentData = testfields.field[index];
-    const nextData = testfields.field[index + 1];
+  const handleDown = async (testfields_id: string, testfields_row: string) => {
+    const props = testfields.field.map((item: any) => {
+      if (testfields_id === item.testfields_id) {
+        return {
+          ...item,
+          testfields_row: String(Number(testfields_row) + 1),
+        };
+      } else {
+        return item;
+      }
+    });
 
-    const props = {
-      currentData,
-      nextData,
-    };
     await dispatch(sortTestFields(props));
 
     await dispatch(fetchAllTestFiedls(test.test_id));
   };
-  const handleUp = async (index: number) => {
-    const currentData = testfields.field[index];
-    const nextData = testfields.field[index - 1];
+  const handleUp = async (testfields_id: string, testfields_row: string) => {
+    const props = testfields.field.map((item: any) => {
+      if (testfields_id === item.testfields_id) {
+        return {
+          ...item,
+          testfields_row: String(Number(testfields_row) - 1),
+        };
+      } else {
+        return item;
+      }
+    });
 
-    const props = {
-      currentData,
-      nextData,
-    };
     await dispatch(sortTestFields(props));
 
     await dispatch(fetchAllTestFiedls(test.test_id));
   };
-  const handleKeyDown = () => {
-    // const currentData = testfields.field[value.index];
-    // const nextData = testfields.field[value.value];
-    // console.log("currentData", currentData);
-    // console.log("nextData", nextData);
+  const handleSave = async (event: any) => {
+    if (event.key === "Enter") {
+      console.log(testfields.field);
+      await dispatch(sortTestFields(testfields.field));
+
+      await dispatch(fetchAllTestFiedls(test.test_id));
+    }
   };
   const handleOnChange = (
     event: ChangeEvent<HTMLInputElement>,
-    testfields_id: string
+    testfields_id: string,
+    index: number
   ) => {
     const payload = {
       testfields_id,
       value: event.target.value,
     };
     dispatch(setRowsInput(payload));
-    refs[testfields_id]?.current?.focus();
-    // const props = {
-    //   value: event.target.value,
-    //   index,
-    // };
-    // setValue(props);
+    let typeObject = {} as { [key: string]: boolean };
+    Object.keys(focusRows).forEach((each) => {
+      typeObject = { ...typeObject, [each]: false };
+    });
+    setFocusRows({ ...typeObject, [testfields_id]: true });
   };
+
+  useEffect(() => {
+    console.log("Focus Rows :", focusRows);
+  }, [focusRows]);
   return (
     <Box>
       <Typography variant="h5" component="h5" style={{ textAlign: "center" }}>
@@ -139,57 +157,89 @@ const TestFieldsForm: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {testfields.field.map((item: any, index: number) => {
-                refs[item.testfields_id] = useRef(null);
-                return (
-                  <StyledTableRow key={index}>
-                    <StyledTableCell component="th" scope="row">
-                      <TextInput
-                        ref={refs[item.testfields_id]}
-                        value={item.testfields_row}
-                        onchange={(e) => handleOnChange(e, item.testfields_id)}
-                        type="text"
-                      />
-                    </StyledTableCell>
-
-                    <StyledTableCell component="th" scope="row">
-                      {item.field_name}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">{`${item.unit}`}</StyledTableCell>
-                    <StyledTableCell align="right">{`${item.maleRefRange}`}</StyledTableCell>
-                    <StyledTableCell align="right">{`${item.femaleRefRange}`}</StyledTableCell>
-                    <StyledTableCell align="right">{`${item.RefRange}`}</StyledTableCell>
-                    <StyledTableCell align="right">
-                      {item.DesirableRefRange}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {item.borderlineRefRange}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {item.highRiskRefRange}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {item.other}
-                    </StyledTableCell>
-                    <StyledTableCell align="right">
-                      {index === 0 ? (
-                        <ArrowCircleDownIcon
-                          onClick={() => handleDown(index)}
-                        />
-                      ) : index === testfields.field.length - 1 ? (
-                        <ArrowCircleUpIcon onClick={() => handleUp(index)} />
-                      ) : (
-                        <>
-                          <ArrowCircleUpIcon onClick={() => handleUp(index)} />
-                          <ArrowCircleDownIcon
-                            onClick={() => handleDown(index)}
+              {testfields.field.length > 0 ? (
+                <>
+                  {testfields.field.map((item: any, index: number) => {
+                    return (
+                      <StyledTableRow key={index}>
+                        <StyledTableCell component="th" scope="row">
+                          <TextInput
+                            value={item.testfields_row}
+                            onchange={(e) =>
+                              handleOnChange(e, item.testfields_id, index)
+                            }
+                            type="text"
+                            isFocus={focusRows[item.testfields_id]}
+                            onkeydown={handleSave}
                           />
-                        </>
-                      )}
-                    </StyledTableCell>
-                  </StyledTableRow>
-                );
-              })}
+                        </StyledTableCell>
+
+                        <StyledTableCell component="th" scope="row">
+                          {item.field_name}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">{`${item.unit}`}</StyledTableCell>
+                        <StyledTableCell align="right">{`${item.maleRefRange}`}</StyledTableCell>
+                        <StyledTableCell align="right">{`${item.femaleRefRange}`}</StyledTableCell>
+                        <StyledTableCell align="right">{`${item.RefRange}`}</StyledTableCell>
+                        <StyledTableCell align="right">
+                          {item.DesirableRefRange}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {item.borderlineRefRange}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {item.highRiskRefRange}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {item.other}
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          {index === 0 ? (
+                            <ArrowCircleDownIcon
+                              onClick={() =>
+                                handleDown(
+                                  item.testfields_id,
+                                  item.testfields_row
+                                )
+                              }
+                            />
+                          ) : index === testfields.field.length - 1 ? (
+                            <ArrowCircleUpIcon
+                              onClick={() =>
+                                handleUp(
+                                  item.testfields_id,
+                                  item.testfields_row
+                                )
+                              }
+                            />
+                          ) : (
+                            <>
+                              <ArrowCircleUpIcon
+                                onClick={() =>
+                                  handleUp(
+                                    item.testfields_id,
+                                    item.testfields_row
+                                  )
+                                }
+                              />
+                              <ArrowCircleDownIcon
+                                onClick={() =>
+                                  handleDown(
+                                    item.testfields_id,
+                                    item.testfields_row
+                                  )
+                                }
+                              />
+                            </>
+                          )}
+                        </StyledTableCell>
+                      </StyledTableRow>
+                    );
+                  })}
+                </>
+              ) : (
+                ""
+              )}
             </TableBody>
           </Table>
         </TableContainer>

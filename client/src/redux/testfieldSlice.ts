@@ -35,6 +35,7 @@ const testfield = createSlice({
     setRowsInput: (state, action) => {
       const { testfields_id, value } = action.payload;
       console.log("Current state before update:", state);
+
       return {
         ...state,
         field: state.field.map((item) => {
@@ -42,6 +43,12 @@ const testfield = createSlice({
             ? { ...item, testfields_row: value }
             : item;
         }),
+      };
+    },
+
+    clearTestFields: (state) => {
+      state.field = {
+        ...initialState.field,
       };
     },
   },
@@ -66,5 +73,5 @@ const testfield = createSlice({
     });
   },
 });
-export const { setRowsInput } = testfield.actions;
+export const { setRowsInput, clearTestFields } = testfield.actions;
 export default testfield.reducer;
