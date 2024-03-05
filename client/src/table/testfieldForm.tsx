@@ -168,7 +168,7 @@ const TestFieldsForm: React.FC<Props> = ({ row }) => {
                             onchange={(e) =>
                               handleOnChange(e, item.testfields_id, index)
                             }
-                            type="text"
+                            type="number"
                             isFocus={focusRows[item.testfields_id]}
                             onkeydown={handleSave}
                           />
