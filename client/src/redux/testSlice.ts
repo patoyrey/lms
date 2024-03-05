@@ -87,27 +87,27 @@ const testSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAllLabTest.pending, (state, action) => {});
+    builder.addCase(fetchAllLabTest.pending, (state, action) => { });
     builder.addCase(fetchAllLabTest.fulfilled, (state, action) => {
       state.tests = action.payload;
     });
-    builder.addCase(fetchAllLabTest.rejected, (state, action) => {});
+    builder.addCase(fetchAllLabTest.rejected, (state, action) => { });
 
-    builder.addCase(AddTestFields.pending, (state, action) => {});
+    builder.addCase(AddTestFields.pending, (state, action) => { });
     builder.addCase(AddTestFields.fulfilled, (state, action) => {
       console.log(action.payload);
     });
-    builder.addCase(UpdateTest.pending, (state, action) => {});
+    builder.addCase(UpdateTest.pending, (state, action) => { });
     builder.addCase(UpdateTest.fulfilled, (state, action) => {
       console.log(action.payload);
     });
-    builder.addCase(DeleteTest.pending, (state, action) => {});
+    builder.addCase(DeleteTest.pending, (state, action) => { });
     builder.addCase(DeleteTest.fulfilled, (state, action) => {
       console.log(action.payload);
     });
 
     builder.addDefaultCase((state, action) => {
-      console.warn(`Unhandled action type: ${action.type}`);
+      // console.warn(`Unhandled action type: ${action.type}`);
       return state;
     });
   },

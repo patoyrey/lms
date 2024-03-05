@@ -33,6 +33,20 @@ export async function retrieveData(query: any) {
         reject(err);
       } else {
         resolve(result);
+
+      }
+    });
+  });
+}
+
+export async function retrieveQuery(query: string) {
+  return new Promise(async (resolve, reject) => {
+    await conn.query(query, (err: any, result: any) => {
+      if (err) {
+        reject(err);
+      } else {
+
+        resolve(result.data);
       }
     });
   });

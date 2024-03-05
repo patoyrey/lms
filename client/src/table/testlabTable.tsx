@@ -149,45 +149,49 @@ const TestLabTable: React.FC<TestLabTableProps> = ({
       />
       <ModalComponent open={updateTest} close={() => handleCloseUpdateTest()}>
         <Box>
-          <div className="modal ">
-            <div className="modalStyle fields-modal">
-              <div>
-                <Typography variant="body2" display="block" gutterBottom>
-                  Test Name:
-                </Typography>
-                <Textfield
-                  value={test.test_update.test_name}
-                  type="text"
-                  onchange={handleOnChange}
-                  name="test_name"
-                />
+          <div className="modal">
+            <div className="modalStyle labtest-modal">
+              <div className="testlab-wrapper">
+                <div className="testname-price">
+                  <Typography variant="body2" display="block" gutterBottom>
+                    Test Name:
+                  </Typography>
+                  <Textfield
+                    value={test.test_update.test_name}
+                    type="text"
+                    onchange={handleOnChange}
+                    name="test_name"
+                    style={{ width: "20rem" }}
+                  />
+                  <Typography variant="body2" display="block" gutterBottom>
+                    Price:
+                  </Typography>
+                  <Textfield
+                    value={test.test_update.test_price}
+                    type="number"
+                    onchange={handleOnChange}
+                    name="test_price"
+                    style={{ width: "20rem" }}
+
+                  />
+                  <Typography variant="body2" display="block" gutterBottom>
+                    Description:
+                  </Typography>
+                  <Textfield
+                    value={test.test_update.test_desc}
+                    type="text"
+                    onchange={handleOnChange}
+                    style={{ width: "20rem" }}
+                    name="test_desc"
+                  />
+                </div>
               </div>
-              <div>
-                <Typography variant="body2" display="block" gutterBottom>
-                  Description:
-                </Typography>
-                <Textfield
-                  value={test.test_update.test_desc}
-                  type="text"
-                  onchange={handleOnChange}
-                  name="test_desc"
-                />
-              </div>
-              <div>
-                <Typography variant="body2" display="block" gutterBottom>
-                  Price:
-                </Typography>
-                <Textfield
-                  value={test.test_update.test_price}
-                  type="number"
-                  onchange={handleOnChange}
-                  name="test_price"
-                />
-              </div>
+
+
 
               <ButtonComponent
                 size="medium"
-                variant="outlined"
+                variant="contained"
                 label="Submit"
                 style={{ height: 40, width: "50%" }}
                 onclick={() => handleUpdateTestData()}

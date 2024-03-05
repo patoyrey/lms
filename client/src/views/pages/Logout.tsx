@@ -12,8 +12,6 @@ const Logout: React.FC<LogoutInterface> = ({ ShowLogout }) => {
     LogoutService.get("user-logout")
       .then((res: any) => {
         if (res) {
-          console.log("Private Routes", res);
-          console.log("Logged out successfully")
           navigate("/signIn")
         }
       })

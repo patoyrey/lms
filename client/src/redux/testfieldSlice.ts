@@ -25,7 +25,7 @@ const testfield = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchAllTestFiedls.pending, (state, action) => {});
+    builder.addCase(fetchAllTestFiedls.pending, (state, action) => { });
     builder.addCase(fetchAllTestFiedls.fulfilled, (state, action) => {
       //console.log(action.payload);
       //   return action.payload;
@@ -36,10 +36,10 @@ const testfield = createSlice({
       };
     });
     builder.addDefaultCase((state, action) => {
-      console.warn(`Unhandled action type: ${action.type}`);
+      // console.warn(`Unhandled action type: ${action.type}`);
       return state;
     });
   },
 });
-export const {} = testfield.actions;
+export const { } = testfield.actions;
 export default testfield.reducer;
