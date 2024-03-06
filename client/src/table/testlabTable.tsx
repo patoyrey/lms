@@ -235,8 +235,13 @@ const TestLabTable: React.FC<TestLabTableProps> = ({
         </Box>
       </ModalComponent>
       <Paper>
-        <TableContainer sx={{ maxHeight: 440 }}>
-          <Table sx={{ minWidth: 700 }} stickyHeader aria-label="sticky table">
+        <TableContainer sx={{ maxHeight: 420 }}>
+          <Table
+            sx={{ minWidth: 700 }}
+            stickyHeader
+            aria-label="sticky table"
+            size="small"
+          >
             <TableHead>
               <TableRow>
                 <StyledTableCell>Test Name</StyledTableCell>
