@@ -91,6 +91,9 @@ const TestLabTable: React.FC<TestLabTableProps> = ({
   };
   const handleSubmitTestFields = async () => {
     await dispatch(AddTestFields(field.test_fields));
+    //await dispatch(fetchAllTestFiedls(field.test_fields.test_id));
+
+    console.log(testfield);
   };
 
   const handleViewTestFields = async (test_id: string) => {
