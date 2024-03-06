@@ -194,43 +194,49 @@ const TestFieldsForm: React.FC<Props> = ({ row }) => {
                           {item.other}
                         </StyledTableCell>
                         <StyledTableCell align="right">
-                          {index === 0 ? (
-                            <ArrowCircleDownIcon
-                              onClick={() =>
-                                handleDown(
-                                  item.testfields_id,
-                                  item.testfields_row
-                                )
-                              }
-                            />
-                          ) : index === testfields.field.length - 1 ? (
-                            <ArrowCircleUpIcon
-                              onClick={() =>
-                                handleUp(
-                                  item.testfields_id,
-                                  item.testfields_row
-                                )
-                              }
-                            />
-                          ) : (
+                          {testfields.field.length !== 1 ? (
                             <>
-                              <ArrowCircleUpIcon
-                                onClick={() =>
-                                  handleUp(
-                                    item.testfields_id,
-                                    item.testfields_row
-                                  )
-                                }
-                              />
-                              <ArrowCircleDownIcon
-                                onClick={() =>
-                                  handleDown(
-                                    item.testfields_id,
-                                    item.testfields_row
-                                  )
-                                }
-                              />
+                              {index === 0 ? (
+                                <ArrowCircleDownIcon
+                                  onClick={() =>
+                                    handleDown(
+                                      item.testfields_id,
+                                      item.testfields_row
+                                    )
+                                  }
+                                />
+                              ) : index === testfields.field.length - 1 ? (
+                                <ArrowCircleUpIcon
+                                  onClick={() =>
+                                    handleUp(
+                                      item.testfields_id,
+                                      item.testfields_row
+                                    )
+                                  }
+                                />
+                              ) : (
+                                <>
+                                  <ArrowCircleUpIcon
+                                    onClick={() =>
+                                      handleUp(
+                                        item.testfields_id,
+                                        item.testfields_row
+                                      )
+                                    }
+                                  />
+                                  <ArrowCircleDownIcon
+                                    onClick={() =>
+                                      handleDown(
+                                        item.testfields_id,
+                                        item.testfields_row
+                                      )
+                                    }
+                                  />
+                                </>
+                              )}
                             </>
+                          ) : (
+                            ""
                           )}
                         </StyledTableCell>
                       </StyledTableRow>
