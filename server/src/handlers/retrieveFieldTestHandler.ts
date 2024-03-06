@@ -9,10 +9,16 @@ export const RetrieveFieldTestHandler = async (req: Request, res: Response) => {
 
   const { props } = req.body;
   const testresponse = (await queryFields(test, props)) as Test[];
-  const field = await queryFields(fielquery, props);
+  const field: any = await queryFields(fielquery, props);
+  const fiedlSort = field.map((data: any, index: number) => {
+    return {
+      ...data,
+      testfields_row: String(index + 1),
+    };
+  });
   const response = {
     ...testresponse[0],
-    field,
+    field: fiedlSort,
   };
 
   console.log("Response of test Fields", response);
