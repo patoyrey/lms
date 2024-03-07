@@ -203,7 +203,6 @@ export async function connect() {
       console.log("Table nurse created");
     });
 
-    //* Field for Doctor Table
     fields = Object.keys(new Doctor({} as Doctor));
 
     //*Drop table if it exists
