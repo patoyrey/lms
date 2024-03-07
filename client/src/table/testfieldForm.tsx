@@ -51,9 +51,9 @@ const TestFieldsForm: React.FC<Props> = ({ row }) => {
     },
   }));
 
-  const handleDown = async (testfields_id: string, testfields_row: string) => {
+  const handleDown = async (labtest_id: string, testfields_row: string) => {
     const props = testfields.field.map((item: any) => {
-      if (testfields_id === item.testfields_id) {
+      if (labtest_id === item.labtest_id) {
         return {
           ...item,
           testfields_row: String(Number(testfields_row) + 1),
@@ -67,9 +67,9 @@ const TestFieldsForm: React.FC<Props> = ({ row }) => {
 
     await dispatch(fetchAllTestFiedls(test.test_id));
   };
-  const handleUp = async (testfields_id: string, testfields_row: string) => {
+  const handleUp = async (labtest_id: string, testfields_row: string) => {
     const props = testfields.field.map((item: any) => {
-      if (testfields_id === item.testfields_id) {
+      if (labtest_id === item.labtest_id) {
         return {
           ...item,
           testfields_row: String(Number(testfields_row) - 1),
@@ -93,11 +93,11 @@ const TestFieldsForm: React.FC<Props> = ({ row }) => {
   };
   const handleOnChange = (
     event: ChangeEvent<HTMLInputElement>,
-    testfields_id: string,
+    labtest_id: string,
     index: number
   ) => {
     const payload = {
-      testfields_id,
+      labtest_id,
       value: event.target.value,
     };
     dispatch(setRowsInput(payload));
@@ -105,7 +105,7 @@ const TestFieldsForm: React.FC<Props> = ({ row }) => {
     Object.keys(focusRows).forEach((each) => {
       typeObject = { ...typeObject, [each]: false };
     });
-    setFocusRows({ ...typeObject, [testfields_id]: true });
+    setFocusRows({ ...typeObject, [labtest_id]: true });
   };
 
   useEffect(() => {
@@ -166,10 +166,10 @@ const TestFieldsForm: React.FC<Props> = ({ row }) => {
                           <TextInput
                             value={item.testfields_row}
                             onchange={(e) =>
-                              handleOnChange(e, item.testfields_id, index)
+                              handleOnChange(e, item.labtest_id, index)
                             }
                             type="number"
-                            isFocus={focusRows[item.testfields_id]}
+                            isFocus={focusRows[item.labtest_id]}
                             onkeydown={handleSave}
                           />
                         </StyledTableCell>
@@ -200,7 +200,7 @@ const TestFieldsForm: React.FC<Props> = ({ row }) => {
                                 <ArrowCircleDownIcon
                                   onClick={() =>
                                     handleDown(
-                                      item.testfields_id,
+                                      item.labtest_id,
                                       item.testfields_row
                                     )
                                   }
@@ -209,7 +209,7 @@ const TestFieldsForm: React.FC<Props> = ({ row }) => {
                                 <ArrowCircleUpIcon
                                   onClick={() =>
                                     handleUp(
-                                      item.testfields_id,
+                                      item.labtest_id,
                                       item.testfields_row
                                     )
                                   }
@@ -219,7 +219,7 @@ const TestFieldsForm: React.FC<Props> = ({ row }) => {
                                   <ArrowCircleUpIcon
                                     onClick={() =>
                                       handleUp(
-                                        item.testfields_id,
+                                        item.labtest_id,
                                         item.testfields_row
                                       )
                                     }
@@ -227,7 +227,7 @@ const TestFieldsForm: React.FC<Props> = ({ row }) => {
                                   <ArrowCircleDownIcon
                                     onClick={() =>
                                       handleDown(
-                                        item.testfields_id,
+                                        item.labtest_id,
                                         item.testfields_row
                                       )
                                     }

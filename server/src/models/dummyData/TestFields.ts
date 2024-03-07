@@ -1,7 +1,7 @@
 import { TestFields } from "../TestFields";
 
 export const dummyTestFields = new TestFields({
-  testfields_id: "testfieldsId",
+  labtest_id: "labtest_id",
   fields_id: "fieldsId",
   test_id: "testId",
   testfields_row: "string",

@@ -6,7 +6,7 @@ export const addTestFieldsHandler = async (req: Request, res: Response) => {
   const { test_id, fields_id } = req.body;
 
   let incrementSize = 1;
-  const test = `select count(test_id) as size from testfields  where test_id = "${test_id}"`;
+  const test = `select count(test_id) as size from labtest  where test_id = "${test_id}"`;
   const countSize: any = await retrieveData(test);
   incrementSize += Number(countSize[0].size);
   const promises = fields_id.map(async (result: any) => {

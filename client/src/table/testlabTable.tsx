@@ -102,7 +102,7 @@ const TestLabTable: React.FC<TestLabTableProps> = ({
     let tempFocusRow = {} as { [key: string]: boolean };
     console.log("Lab Tes", res);
     res.payload.field.forEach((field: any) => {
-      tempFocusRow = { ...tempFocusRow, [field.testfields_id]: false };
+      tempFocusRow = { ...tempFocusRow, [field.labtest_id]: false };
     });
     setFocusRows(tempFocusRow);
     handleTestFields();

@@ -33,13 +33,13 @@ const testfield = createSlice({
   initialState,
   reducers: {
     setRowsInput: (state, action) => {
-      const { testfields_id, value } = action.payload;
+      const { labtest_id, value } = action.payload;
       console.log("Current state before update:", state);
 
       return {
         ...state,
         field: state.field.map((item) => {
-          return item.testfields_id === testfields_id
+          return item.labtest_id === labtest_id
             ? { ...item, testfields_row: value }
             : item;
         }),
