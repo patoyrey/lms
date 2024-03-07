@@ -60,7 +60,7 @@ export class Field {
   public async delete(fieldId: any): Promise<FieldResponse> {
     await queryFields(`DELETE FROM field WHERE field_id = "${fieldId}"`, this);
     await queryFields(
-      `DELETE FROM testfields WHERE fields_id = "${fieldId}"`,
+      `DELETE FROM labtest WHERE fields_id = "${fieldId}"`,
       this
     );
 

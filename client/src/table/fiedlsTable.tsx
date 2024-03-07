@@ -46,8 +46,12 @@ const FieldsTable: React.FC = () => {
     dispatch(fetchAllField());
   }, []);
 
-  const handleCheckFields = (field_id: string) => {
-    dispatch(setSelectFieldsId(field_id));
+  const handleCheckFields = (field_id: string, index: number) => {
+    const payload = {
+      field_id,
+      index,
+    };
+    dispatch(setSelectFieldsId(payload));
     // console.log("Fields Id", field.test_fields.fields_id);
   };
   useEffect(() => {
@@ -92,12 +96,10 @@ const FieldsTable: React.FC = () => {
                 <StyledTableCell align="right">{item.other}</StyledTableCell>
                 <StyledTableCell align="right">
                   <Checkbox
-                    onClick={() => handleCheckFields(item.field_id)}
-                    checked={
-                      field.test_fields.fields_id.includes(item.field_id)
-                        ? true
-                        : false
-                    }
+                    onClick={() => handleCheckFields(item.field_id, index)}
+                    checked={field.test_fields.fields_id.some(
+                      (obj: any) => obj.field_id === item.field_id
+                    )}
                   />
                 </StyledTableCell>
               </StyledTableRow>

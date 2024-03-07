@@ -28,4 +28,17 @@ export class TestFields {
         });
     });
   };
+
+  public static update = (props: any, pathName: string) => {
+    return new Promise(async (res: any, rej: any) => {
+      await axios
+        .put(`${baseUrl}${pathName}`, { props })
+        .then((response: any) => {
+          res(response);
+        })
+        .catch((error) => {
+          rej(error);
+        });
+    });
+  };
 }

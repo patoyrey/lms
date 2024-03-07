@@ -15,6 +15,9 @@ type Props = {
   helperText?: string;
   error?: boolean;
   color?: any;
+  onkeydown?: (e: any) => void;
+  ref?: any;
+  isFocus?: boolean;
 };
 
 const TextInput: React.FC<Props> = ({
@@ -32,6 +35,9 @@ const TextInput: React.FC<Props> = ({
   helperText,
   color,
   error,
+  ref,
+  onkeydown,
+  isFocus,
 }) => {
   return (
     <TextField
@@ -49,6 +55,9 @@ const TextInput: React.FC<Props> = ({
       name={name}
       InputProps={InputProps}
       helperText={helperText}
+      onKeyDown={onkeydown}
+      ref={ref}
+      autoFocus={isFocus}
     />
   );
 };

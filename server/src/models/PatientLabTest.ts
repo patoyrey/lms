@@ -3,24 +3,19 @@ import { queryFields } from "../utils/QueryFields";
 import { PatientTestResponse } from "../response/patientsTestResponse";
 
 export class PatientsTest {
-  patients_test_id: string;
-  patient_id: string;
-  field_id: string;
-  result: string;
-  created_at: string;
-  updated_at: string;
+  patient_labtest_id: string;
+  labtest_: string;
+  createdAt: string;
 
   constructor(init: PatientsTest) {
-    this.patients_test_id = init.patients_test_id;
-    this.patient_id = init.patient_id;
-    this.field_id = init.field_id;
-    this.result = init.result;
-    this.created_at = init.created_at;
-    this.updated_at = init.updated_at;
+    this.patient_labtest_id = init.patient_labtest_id;
+    this.labtest_ = init.labtest_;
+
+    this.createdAt = init.createdAt;
   }
 
   public async add(): Promise<PatientTestResponse> {
-    this.patients_test_id = uuid4();
+    this.patient_labtest_id = uuid4();
     let query = "insert into patientstest set ?";
     return queryFields(query, this)
       .then((res: any) => {

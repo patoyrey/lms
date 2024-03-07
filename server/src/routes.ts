@@ -23,6 +23,7 @@ import { deleteFieldHandler } from "./handlers/deleteFieldHandler";
 import { retrievePatientHandler } from "./handlers/retrievePatientHandler";
 import { deletePatientHandler } from "./handlers/deletePatientHandler";
 import { updatePatientHandler } from "./handlers/updatePatientHandler";
+import { UpdateTestFieldsHandlers } from "./handlers/updateTestFieldsHandlers";
 
 export const routes = express.Router();
 
@@ -61,3 +62,4 @@ routes.post("/update-test", middleware, UpdateTestHandlers);
 
 routes.put("/update-fields/:fieldId", middleware, updateFieldHandler);
 routes.delete("/delete-field/:fieldId", middleware, deleteFieldHandler);
+routes.put("/update-testfields", middleware, UpdateTestFieldsHandlers);
