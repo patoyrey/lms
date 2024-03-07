@@ -23,6 +23,7 @@ import {
   DeleteTest,
   UpdateTest,
   getTestToUpdate,
+  setTestId,
   setTestUpdate,
 } from "../redux/testSlice";
 import { TestFields } from "../services/testfields";
@@ -49,6 +50,7 @@ const TestLabTable: React.FC<TestLabTableProps> = ({
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState<any>("");
+  const [focusRows, setFocusRows] = useState<{ [key: string]: boolean }>({});
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: "#2196f3",
@@ -89,11 +91,20 @@ const TestLabTable: React.FC<TestLabTableProps> = ({
   };
   const handleSubmitTestFields = async () => {
     await dispatch(AddTestFields(field.test_fields));
+    //await dispatch(fetchAllTestFiedls(field.test_fields.test_id));
+
+    console.log(testfield);
   };
 
   const handleViewTestFields = async (test_id: string) => {
-    await dispatch(fetchAllTestFiedls(test_id));
-
+    dispatch(setTestId(test_id));
+    const res = await dispatch(fetchAllTestFiedls(test_id));
+    let tempFocusRow = {} as { [key: string]: boolean };
+    console.log("Lab Tes", res);
+    res.payload.field.forEach((field: any) => {
+      tempFocusRow = { ...tempFocusRow, [field.labtest_id]: false };
+    });
+    setFocusRows(tempFocusRow);
     handleTestFields();
   };
 
@@ -201,7 +212,7 @@ const TestLabTable: React.FC<TestLabTableProps> = ({
         <Box>
           <div className="modal ">
             <div className="modalStyle fields-modal">
-              <TestFieldsForm />
+              <TestFieldsForm row={focusRows} />
             </div>
           </div>
         </Box>
@@ -224,8 +235,13 @@ const TestLabTable: React.FC<TestLabTableProps> = ({
         </Box>
       </ModalComponent>
       <Paper>
-        <TableContainer sx={{ maxHeight: 440 }}>
-          <Table sx={{ minWidth: 700 }} stickyHeader aria-label="sticky table">
+        <TableContainer sx={{ maxHeight: 420 }}>
+          <Table
+            sx={{ minWidth: 700 }}
+            stickyHeader
+            aria-label="sticky table"
+            size="small"
+          >
             <TableHead>
               <TableRow>
                 <StyledTableCell>Test Name</StyledTableCell>

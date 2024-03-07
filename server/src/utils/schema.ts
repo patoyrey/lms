@@ -15,9 +15,11 @@ import { dummyNurse } from "../models/dummyData/Nurse";
 import { dummyField } from "../models/dummyData/Field";
 import { Doctor } from "../models/Doctor";
 import { dummuyDoctor } from "../models/dummyData/Doctor";
-import { PatientsTest } from "../models/PatientsTest";
-import { dummyPatientsTest } from "../models/dummyData/PatientsTest";
+import { PatientsTest } from "../models/PatientLabTest";
+import { dummyPatientsTest } from "../models/dummyData/PatientLabTest";
 import { insertDefaultUser } from "./insertDefaultUser";
+import { PatientLabTestFields } from "../models/PatientLabTestFields";
+import { dummyPatientLabTestField } from "../models/dummyData/PatientLabTestFields";
 
 type FieldType = {
   string: string;
@@ -52,12 +54,13 @@ export async function connect() {
       const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const hasComma = index < fields.length - 1 ? "," : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
-      user += `${field} ${fieldType[
-        typeof dummyUser[
-        field as unknown as keyof User
-        ] as unknown as keyof FieldType
-      ]
-        } ${primarykey} ${hasComma} ${closingParenthesis}`;
+      user += `${field} ${
+        fieldType[
+          typeof dummyUser[
+            field as unknown as keyof User
+          ] as unknown as keyof FieldType
+        ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
     });
 
     await conn.query(user, function () {
@@ -76,8 +79,9 @@ export async function connect() {
       const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const hasComma = index < fields.length - 1 ? "," : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
-      test += `${field} ${fieldType[typeof dummyTest[field as keyof Test] as keyof FieldType]
-        } ${primarykey} ${hasComma} ${closingParenthesis}`;
+      test += `${field} ${
+        fieldType[typeof dummyTest[field as keyof Test] as keyof FieldType]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
     });
 
     await conn.query(test, function () {
@@ -86,19 +90,20 @@ export async function connect() {
 
     // Create TestFields table
     fields = Object.keys(new TestFields({} as TestFields));
-    dropIfExist = `DROP TABLE IF EXISTS testfields`;
+    dropIfExist = `DROP TABLE IF EXISTS labtest`;
     await conn.query(dropIfExist, function () {
       console.log("Table testfields dropped");
     });
-    let testfields = `CREATE TABLE testfields (`;
+    let testfields = `CREATE TABLE labtest (`;
     fields.forEach((field: string, index: number) => {
       const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const hasComma = index < fields.length - 1 ? "," : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
-      testfields += `${field} ${fieldType[
-        typeof dummyTestFields[field as keyof TestFields] as keyof FieldType
-      ]
-        } ${primarykey} ${hasComma} ${closingParenthesis}`;
+      testfields += `${field} ${
+        fieldType[
+          typeof dummyTestFields[field as keyof TestFields] as keyof FieldType
+        ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
     });
 
     await conn.query(testfields, function () {
@@ -117,10 +122,11 @@ export async function connect() {
       const hasComma = index < fields.length - 1 ? "," : "";
 
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
-      patient += `${field} ${fieldType[
-        typeof dummyPatient[field as keyof Patient] as keyof FieldType
-      ]
-        } ${primarykey} ${hasComma} ${closingParenthesis}`;
+      patient += `${field} ${
+        fieldType[
+          typeof dummyPatient[field as keyof Patient] as keyof FieldType
+        ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
     });
 
     await conn.query(patient, function () {
@@ -141,22 +147,23 @@ export async function connect() {
       const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const hasComma = index < fields.length - 1 ? "," : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
-      query += `${field} ${fieldType[
-        typeof dummyAdmin[
-        field as unknown as keyof Admin
-        ] as unknown as keyof FieldType
-      ]
-        } ${primarykey} ${hasComma} ${closingParenthesis}`;
+      query += `${field} ${
+        fieldType[
+          typeof dummyAdmin[
+            field as unknown as keyof Admin
+          ] as unknown as keyof FieldType
+        ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
       console.log("Table admin created");
     });
 
     // creates field table
-    // dropIfExist = `DROP TABLE IF EXISTS field`;
-    // await conn.query(dropIfExist, function () {
-    //   console.log("Table field drop");
-    // });
+    dropIfExist = `DROP TABLE IF EXISTS field`;
+    await conn.query(dropIfExist, function () {
+      console.log("Table field drop");
+    });
     // creates field table
     dropIfExist = `DROP TABLE IF EXISTS field`;
     await conn.query(dropIfExist, function () {
@@ -169,12 +176,13 @@ export async function connect() {
       const hasComma = index < fields.length - 1 ? "," : "";
       const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
-      query += `${field} ${fieldType[
-        typeof dummyField[
-        field as unknown as keyof Field
-        ] as unknown as keyof FieldType
+      query += `${field} ${
+        fieldType[
+          typeof dummyField[
+            field as unknown as keyof Field
+          ] as unknown as keyof FieldType
         ]
-        } ${primarykey} ${hasComma} ${closingParenthesis}`;
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
       console.log("Table field created");
@@ -192,12 +200,13 @@ export async function connect() {
       const hasComma = index < fields.length - 1 ? "," : "";
       const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
-      query += `${field} ${fieldType[
-        typeof dummyNurse[
-        field as unknown as keyof Nurse
-        ] as unknown as keyof FieldType
-      ]
-        } ${primarykey} ${hasComma} ${closingParenthesis}`;
+      query += `${field} ${
+        fieldType[
+          typeof dummyNurse[
+            field as unknown as keyof Nurse
+          ] as unknown as keyof FieldType
+        ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
       console.log("Table nurse created");
@@ -218,12 +227,13 @@ export async function connect() {
       const hasComma = index < fields.length - 1 ? "," : "";
       const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
-      query += `${field} ${fieldType[
-        typeof dummuyDoctor[
-        field as unknown as keyof Doctor
-        ] as unknown as keyof FieldType
-      ]
-        } ${primarykey} ${hasComma} ${closingParenthesis}`;
+      query += `${field} ${
+        fieldType[
+          typeof dummuyDoctor[
+            field as unknown as keyof Doctor
+          ] as unknown as keyof FieldType
+        ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
       console.log("Table doctor created");
@@ -234,26 +244,55 @@ export async function connect() {
     fields = Object.keys(new PatientsTest({} as PatientsTest));
 
     //* Drop table if the Patients test Exists
-    dropIfExist = "DROP TABLE IF EXISTS patientsTest";
+    dropIfExist = "DROP TABLE IF EXISTS patient_labtest";
     await conn.query(dropIfExist, function () {
-      console.log("Table patientsTest drop");
+      console.log("Table patient_labtest drop");
     });
 
-    query = `CREATE TABLE patientstest(`;
+    query = `CREATE TABLE patient_labtest(`;
 
     fields.forEach((field: string, index: number) => {
       const hasComma = index < fields.length - 1 ? "," : "";
       const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
-      query += `${field} ${fieldType[
-        typeof dummyPatientsTest[
-        field as unknown as keyof PatientsTest
-        ] as unknown as keyof FieldType
-      ]
-        } ${primarykey} ${hasComma} ${closingParenthesis}`;
+      query += `${field} ${
+        fieldType[
+          typeof dummyPatientsTest[
+            field as unknown as keyof PatientsTest
+          ] as unknown as keyof FieldType
+        ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
     });
     await conn.query(query, function () {
-      console.log("Table patientstest created");
+      console.log("Table patient_labtest created");
+    });
+
+    //* Field for Patients Lab  Test
+
+    fields = Object.keys(new PatientLabTestFields({} as PatientLabTestFields));
+
+    //* Drop table if the Patients test Exists
+    dropIfExist = "DROP TABLE IF EXISTS patient_labtest_fields";
+    await conn.query(dropIfExist, function () {
+      console.log("Table patient_labtest_fields drop");
+    });
+
+    query = `CREATE TABLE patient_labtest_fields(`;
+
+    fields.forEach((field: string, index: number) => {
+      const hasComma = index < fields.length - 1 ? "," : "";
+      const primarykey = index === 0 ? "PRIMARY KEY" : "";
+      const closingParenthesis = index === fields.length - 1 ? ")" : "";
+      query += `${field} ${
+        fieldType[
+          typeof dummyPatientLabTestField[
+            field as unknown as keyof PatientLabTestFields
+          ] as unknown as keyof FieldType
+        ]
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
+    });
+    await conn.query(query, function () {
+      console.log("Table patient_labtest_fields created");
     });
   });
 }

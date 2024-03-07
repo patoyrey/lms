@@ -20,6 +20,7 @@ import { UpdateTestHandlers } from "./handlers/updateTestHandler";
 import { DeleteTestHanders } from "./handlers/deleteTestHandler";
 import { updateFieldHandler } from "./handlers/updateFieldHandler";
 import { deleteFieldHandler } from "./handlers/deleteFieldHandler";
+import { UpdateTestFieldsHandlers } from "./handlers/updateTestFieldsHandlers";
 
 export const routes = express.Router();
 
@@ -51,3 +52,4 @@ routes.post("/update-test", middleware, UpdateTestHandlers);
 
 routes.put("/update-fields/:fieldId", middleware, updateFieldHandler);
 routes.delete("/delete-field/:fieldId", middleware, deleteFieldHandler);
+routes.put("/update-testfields", middleware, UpdateTestFieldsHandlers);

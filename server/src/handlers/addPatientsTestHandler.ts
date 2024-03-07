@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import { PatientsTest } from "../models/PatientsTest";
+import { PatientsTest } from "../models/PatientLabTest";
 
 export const addPatientsTestHandler = async (req: Request, res: Response) => {
   const field = new PatientsTest(req.body);

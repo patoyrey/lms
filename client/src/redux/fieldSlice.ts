@@ -97,13 +97,19 @@ const fieldSlice = createSlice({
       state.test_fields.test_id = action.payload;
     },
     setSelectFieldsId: (state, action) => {
-      const field_id = action.payload;
+      const field_id = action.payload.field_id;
+      const arrayIndex = action.payload.index;
 
-      const index = state.test_fields.fields_id.indexOf(field_id);
+      const index = state.test_fields.fields_id.findIndex(
+        (item: any) => item.field_id === field_id
+      );
 
       console.log("Index", index);
       if (index === -1) {
-        state.test_fields.fields_id.push(field_id);
+        state.test_fields.fields_id.push({
+          field_id,
+          testfields_row: arrayIndex + 1,
+        });
       } else {
         state.test_fields.fields_id.splice(index, 1);
       }

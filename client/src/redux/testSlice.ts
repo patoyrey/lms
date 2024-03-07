@@ -23,6 +23,7 @@ const initialState: Test = {
     test_created_at: "",
     test_updated_at: "",
   },
+  test_id: "",
 };
 
 export const fetchAllLabTest: any = createAsyncThunk(
@@ -71,6 +72,9 @@ const testSlice = createSlice({
         [action.payload.name]: action.payload.value,
       };
     },
+    setTestId: (state, action) => {
+      state.test_id = action.payload;
+    },
     setTestUpdate: (state, action) => {
       state.test_update = {
         ...state.test_update,
@@ -112,6 +116,6 @@ const testSlice = createSlice({
     });
   },
 });
-export const { setTest, clearTest, setTestUpdate, getTestToUpdate } =
+export const { setTest, clearTest, setTestUpdate, getTestToUpdate, setTestId } =
   testSlice.actions;
 export default testSlice.reducer;
