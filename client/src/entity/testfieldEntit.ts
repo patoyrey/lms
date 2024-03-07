@@ -1,4 +1,6 @@
 export class TestFieldsEntity {
+  labtest_id: string;
+  testfields_row: string;
   test_id: string;
   test_name: string;
   test_price: number;
@@ -6,6 +8,8 @@ export class TestFieldsEntity {
   test_created_at: string;
   test_updated_at: string;
   constructor(init: TestFieldsEntity) {
+    this.labtest_id = init.labtest_id;
+    this.testfields_row = init.testfields_row;
     this.test_id = init.test_id;
     this.test_name = init.test_name;
     this.test_price = init.test_price;
