@@ -93,7 +93,6 @@ const Tests: React.FC = () => {
       );
       if (res) {
         setOpenSnackAlert(true);
-
         dispatch(clearTest());
         getAllLabTest();
       } else {
@@ -105,11 +104,6 @@ const Tests: React.FC = () => {
 
     // console.log(testt);
     dispatch(clearTest());
-    // const props = {
-    //   test_name: selectedOption,
-    // } as unknown as Test;
-
-    //console.log(await TestService.add(testt, "add-test"));
   };
   const searchHandle = () => {
   };

@@ -53,7 +53,7 @@ const testfield = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAllTestFiedls.pending, (state, action) => {});
+    builder.addCase(fetchAllTestFiedls.pending, (state, action) => { });
     builder.addCase(fetchAllTestFiedls.fulfilled, (state, action) => {
       //console.log(action.payload);
       //   return action.payload;
@@ -63,12 +63,12 @@ const testfield = createSlice({
         ...action.payload,
       };
     });
-    builder.addCase(sortTestFields.pending, (state, action) => {});
+    builder.addCase(sortTestFields.pending, (state, action) => { });
     builder.addCase(sortTestFields.fulfilled, (state, action) => {
       console.log(action.payload);
     });
     builder.addDefaultCase((state, action) => {
-      console.warn(`Unhandled action type: ${action.type}`);
+      // console.warn(`Unhandled action type: ${action.type}`);
       return state;
     });
   },

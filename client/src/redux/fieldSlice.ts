@@ -48,7 +48,6 @@ export const fetchAllField: any = createAsyncThunk(
 export const fetchFieldById: any = createAsyncThunk(
   "field/fetchFieldById",
   async (data: { fieldId: string; editField: Field_Entity }) => {
-    // const res = await FieldService.select(`field-id/${fieldId}`);
     const res = await FieldService.update(
       `update-fields/${data.fieldId}`,
       data.editField
@@ -116,17 +115,17 @@ const fieldSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAllField.pending, (state, action) => {});
+    builder.addCase(fetchAllField.pending, (state, action) => { });
     builder.addCase(fetchAllField.fulfilled, (state, action) => {
       state.field = action.payload;
     });
-    builder.addCase(fetchAllField.rejected, (state, action) => {});
+    builder.addCase(fetchAllField.rejected, (state, action) => { });
 
-    builder.addCase(fetchFieldById.pending, (state, action) => {});
+    builder.addCase(fetchFieldById.pending, (state, action) => { });
     builder.addCase(fetchFieldById.fulfilled, (state, action) => {
       console.log(action.payload);
     });
-    builder.addCase(fetchFieldById.rejected, (state, action) => {});
+    builder.addCase(fetchFieldById.rejected, (state, action) => { });
 
     builder.addDefaultCase((state, action) => {
       // console.warn("Unhandled action type: ${action.type}");

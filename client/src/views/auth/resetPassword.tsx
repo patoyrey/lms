@@ -119,6 +119,7 @@ const ResetPassword: React.FC = () => {
             variant="contained"
             label="Change Password"
             onclick={handleChangePassword}
+            color="primary"
           />
         </div>
       </div>
