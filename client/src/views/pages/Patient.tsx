@@ -7,17 +7,35 @@ import { Box, Typography } from "@mui/material";
 
 import ButtonComponent from "../components/button";
 import Textfield from "../components/textfield";
-import { addPatients, clearPatient, fetchAllPatients, fetchPatientById, getPatientToUpdate, setEditPatient, setPatients } from "../../redux/patientsSlice";
+import {
+  clearPatient,
+  fetchAllPatients,
+  setPatients,
+} from "../../redux/patientsSlice";
 import { PatientService } from "../../services/pateintsService";
-import { clearField } from "../../redux/fieldSlice";
 import { Patients } from "../../interface/patients";
 import React from "react";
-import { clearTest } from "../../redux/testSlice";
 import AlertComponent from "../components/alert";
 import { SnackbarOrigin } from "@mui/material/Snackbar";
 import PatientTable from "../../table/patientTable";
 
 const Patient: React.FC = () => {
+  const calculateAge = (dobValue: string) => {
+    const dobDate = new Date(dobValue);
+    const today = new Date();
+    let ageDiff = today.getFullYear() - dobDate.getFullYear();
+    const monthDiff = today.getMonth() - dobDate.getMonth();
+
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < dobDate.getDate())
+    ) {
+      ageDiff--;
+    }
+
+    return ageDiff.toString();
+  };
+
   interface StateSnackbar extends SnackbarOrigin {
     open: boolean;
   }
@@ -26,7 +44,9 @@ const Patient: React.FC = () => {
   const [openSnackNetworkFailAlert, setOpenNetworkFailSnackAlert] =
     React.useState(false);
   const [open, setOpen] = useState(false);
-  const patientLab = useSelector((state: RootState) => state.patient.editPatient); //update
+  const patientLab = useSelector(
+    (state: RootState) => state.patient.editPatient
+  ); //update
   const patient = useSelector((state: RootState) => state.patient);
   const dispatch = useDispatch();
   const handleCloseSnackbar = (
@@ -34,10 +54,10 @@ const Patient: React.FC = () => {
     reason?: string
   ) => {
     if (reason === "clickaway") {
-      return
+      return;
     }
-    setOpenSnackAlert(false)
-  }
+    setOpenSnackAlert(false);
+  };
   const [stateSnackbarAlert, setStateSnackbar] = React.useState<StateSnackbar>({
     open: false,
     vertical: "top",
@@ -46,14 +66,24 @@ const Patient: React.FC = () => {
   const { vertical, horizontal } = stateSnackbarAlert;
 
   useEffect(() => {
-    getAllPatient()
-  }, [])
+    getAllPatient();
+  }, []);
   const handleOnChange = (e: any) => {
     const { name, value } = e.target;
     const payload = {
       name,
       value,
     };
+
+    //this part calculates and inserts the age if the textfield being changed is Date of Birth
+    if (name === "patient_dob") {
+      const payload = {
+        name: "patient_age",
+        value: calculateAge(value),
+      };
+      dispatch(setPatients(payload));
+    }
+
     dispatch(setPatients(payload));
   };
 
@@ -63,29 +93,32 @@ const Patient: React.FC = () => {
 
   const add = async () => {
     try {
-      const res = await PatientService.add(patient.patient_lab as unknown as Patients, "add-patient")
+      const res = await PatientService.add(
+        patient.patient_lab as unknown as Patients,
+        "add-patient"
+      );
       if (res) {
-        setOpenSnackAlert(true)
-        dispatch(clearPatient())
-        getAllPatient()
+        setOpenSnackAlert(true);
+        dispatch(clearPatient());
+        getAllPatient();
       } else {
-        setOpenFailSnackAlert(true)
+        setOpenFailSnackAlert(true);
       }
     } catch (error) {
-      setOpenNetworkFailSnackAlert(true)
+      setOpenNetworkFailSnackAlert(true);
     }
 
-    dispatch(clearPatient())
-  }
+    dispatch(clearPatient());
+  };
 
   const getAllPatient = async () => {
     try {
-      const res = await dispatch(fetchAllPatients())
-      console.log("patient:", res)
+      const res = await dispatch(fetchAllPatients());
+      console.log("patient:", res);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
   const handleFailCloseSnackbar = (
     event: React.SyntheticEvent | Event,
     reason?: string
@@ -106,7 +139,6 @@ const Patient: React.FC = () => {
     setOpenNetworkFailSnackAlert(false);
   };
 
-
   return (
     <div>
       <ModalComponent
@@ -116,7 +148,6 @@ const Patient: React.FC = () => {
         }}
       >
         <Box>
-
           <AlertComponent
             className="alert"
             severity="success"
@@ -141,10 +172,7 @@ const Patient: React.FC = () => {
             autoHideDuration={2000}
             anchorOrigin={{ vertical, horizontal }}
             onClose={handleNetworkFailCloseSnackbar}
-          />
-
-          {" "}
-
+          />{" "}
           <div className="modal">
             <div className="modalStyle">
               <div className="patient-ref-container">
@@ -156,7 +184,15 @@ const Patient: React.FC = () => {
                   gutterBottom
                 >
                   <div className="patient-p">
-                    <p style={{ fontSize: "px", fontWeight: "bold", fontStyle: "Poppins" }}>Add Patient Info</p>
+                    <p
+                      style={{
+                        fontSize: "px",
+                        fontWeight: "bold",
+                        fontStyle: "Poppins",
+                      }}
+                    >
+                      Add Patient Info
+                    </p>
                   </div>
                 </Typography>
                 <div className="patient-ref">
@@ -299,7 +335,12 @@ const Patient: React.FC = () => {
 
       <div className="patients-container">
         <div className="patient-content">
-          <Typography variant="h5" display="block" gutterBottom sx={{ fontFamily: 'Poppins' }}>
+          <Typography
+            variant="h5"
+            display="block"
+            gutterBottom
+            sx={{ fontFamily: "Poppins" }}
+          >
             Patients Information
           </Typography>
           <Textfield
@@ -327,9 +368,9 @@ const Patient: React.FC = () => {
             onclick={handleOnClick}
           />
         </div>
-        <PatientTable patientList={patient.patients} getAllPatient={getAllPatient}
-
-
+        <PatientTable
+          patientList={patient.patients}
+          getAllPatient={getAllPatient}
         />
       </div>
     </div>
