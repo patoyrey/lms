@@ -68,7 +68,7 @@ const testfield = createSlice({
       console.log(action.payload);
     });
     builder.addDefaultCase((state, action) => {
-      console.warn(`Unhandled action type: ${action.type}`);
+      // console.warn(`Unhandled action type: ${action.type}`);
       return state;
     });
   },

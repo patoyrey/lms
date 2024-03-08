@@ -2,6 +2,9 @@ import uuid4 from "uuid4"
 import { Gender } from "../enums/Gender"
 import { UserResponse } from "../response/userResponse"
 import { conn } from "../config/dbconfig/db_connection"
+import { PatientTestResponse } from "../response/patientsTestResponse"
+import { PatientResponse } from "../response/patientResponse"
+import { DeleteQuery, queryFields, updateQuery } from "../utils/QueryFields"
 
 
 export class Patient {
@@ -36,8 +39,7 @@ export class Patient {
         this.updated_at = init.updated_at
     }
     public async add(): Promise<UserResponse> {
-        // this.patient_id = uuid4();
-
+        this.patient_id = uuid4();
         const query = `insert into patient SET ?`;
         console.log("query: ", query);
         await conn.query(query, [this], (err: any) => {
@@ -54,5 +56,50 @@ export class Patient {
             msg: "",
         };
     }
+    public async update(patientId: any): Promise<PatientResponse> {
+        this.updated_at = new Date().toString();
+        const query = "update patient set ? where patient_id = ?";
 
+        queryFields(`update patient SET? where patient_id =  "${patientId}"`, this);
+
+        return {
+            succeeded: true,
+            msg: "Success",
+        }
+    }
+
+    public async delete(patient_id: any): Promise<PatientResponse> {
+
+
+        await queryFields(`DELETE FROM patient WHERE patient_id = "${patient_id}"`, this)
+
+        return {
+            succeeded: true,
+            msg: "",
+        };
+    };
 }
+
+
+
+
+// public async select(): Promise<UserResponse> {
+//     this.patient_id = uuid4();
+//     const query = `select * from patient`;
+//     return await conn.query(query, (err: any, result: any) => {
+//         console.log(result)
+//         if (err) {
+//             return {
+//                 succeeded: false,
+//                 msg: err,
+//             };
+//         } else {
+//             return {
+//                 succeeded: false,
+//                 msg: result,
+
+//             };
+//         }
+//     });
+// }
+

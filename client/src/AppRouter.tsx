@@ -47,7 +47,7 @@ export const AppRouter: React.FC = () => {
         <Route path="signin" element={<SignIn />} />
         <Route path="email-verify" element={<EmailVerify />} />
         <Route path="reset-password" element={<ResetPassword />} />
-        <Route path="logout" element={<Logout />} />
+
         <Route element={<PrivateRoutes />}>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />

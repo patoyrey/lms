@@ -20,6 +20,9 @@ import { UpdateTestHandlers } from "./handlers/updateTestHandler";
 import { DeleteTestHanders } from "./handlers/deleteTestHandler";
 import { updateFieldHandler } from "./handlers/updateFieldHandler";
 import { deleteFieldHandler } from "./handlers/deleteFieldHandler";
+import { retrievePatientHandler } from "./handlers/retrievePatientHandler";
+import { deletePatientHandler } from "./handlers/deletePatientHandler";
+import { updatePatientHandler } from "./handlers/updatePatientHandler";
 import { UpdateTestFieldsHandlers } from "./handlers/updateTestFieldsHandlers";
 
 export const routes = express.Router();
@@ -39,6 +42,11 @@ routes.get("/retrieve-field", middleware, retrieveFieldHandler);
 routes.post("/reset-password-request", resetPasswordRequestHandler);
 routes.post("/reset-password", resetPasswordHandler);
 routes.post("/validate-token", validateTokenHandler);
+
+//patients
+routes.get("/retrieve-patient", middleware, retrievePatientHandler);
+routes.delete("/delete-patient/:patientId", middleware, deletePatientHandler);
+routes.put("/update-patient/:patientId", middleware, updatePatientHandler);
 
 routes.get("/retrieve-field", middleware, retrieveFieldHandler);
 routes.post("/retrieve-testfield", middleware, RetrieveFieldTestHandler);
