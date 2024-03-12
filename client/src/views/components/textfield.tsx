@@ -18,6 +18,9 @@ type Props = {
   onkeydown?: (e: any) => void;
   ref?: any;
   isFocus?: boolean;
+  disabled?: boolean;
+  minDate?: string;
+  maxDate?: string;
 };
 
 const TextInput: React.FC<Props> = ({
@@ -38,6 +41,9 @@ const TextInput: React.FC<Props> = ({
   ref,
   onkeydown,
   isFocus,
+  disabled,
+  minDate,
+  maxDate,
 }) => {
   return (
     <TextField
@@ -58,6 +64,8 @@ const TextInput: React.FC<Props> = ({
       onKeyDown={onkeydown}
       ref={ref}
       autoFocus={isFocus}
+      disabled={disabled}
+      inputProps={{ min: minDate, max: maxDate }}
     />
   );
 };

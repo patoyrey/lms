@@ -75,6 +75,14 @@ const testSlice = createSlice({
     setTestId: (state, action) => {
       state.test_id = action.payload;
     },
+//     setSelectTestsId:(state, action)=>{
+//       const test_id = action.payload.test_id
+//       const arrayIndex = action.payload.index
+//       const index = state.test.findIndex(
+//         (item: any) => item.field_id === field_id
+//       );
+// console.log ("Index", index)
+//     },
     setTestUpdate: (state, action) => {
       state.test_update = {
         ...state.test_update,

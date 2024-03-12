@@ -2,7 +2,6 @@ import express from "express";
 import { addUserHandler } from "./handlers/addUserHandler";
 import { addFieldsHandler } from "./handlers/addFieldsHandler";
 import { addTestHandler } from "./handlers/addTestHandler";
-import { addPatientsTestHandler } from "./handlers/addPatientsTestHandler";
 import { addPatientHandler } from "./handlers/addPatientHandler";
 import { addNurseHandler } from "./handlers/addNurseHandler";
 import { addTestFieldsHandler } from "./handlers/addTestFieldsHandler";
@@ -24,13 +23,14 @@ import { retrievePatientHandler } from "./handlers/retrievePatientHandler";
 import { deletePatientHandler } from "./handlers/deletePatientHandler";
 import { updatePatientHandler } from "./handlers/updatePatientHandler";
 import { UpdateTestFieldsHandlers } from "./handlers/updateTestFieldsHandlers";
+import { addPatientLabtestHandler } from "./handlers/addPatientLabTestHandler";
 
 export const routes = express.Router();
 
 routes.post("/add-user", middleware, addUserHandler);
 routes.post("/add-fields", middleware, addFieldsHandler);
 routes.post("/add-test", middleware, addTestHandler);
-routes.post("/add-patientstest", middleware, addPatientsTestHandler);
+routes.post("/add-patientlabtest", middleware, addPatientLabtestHandler);
 routes.post("/add-patient", middleware, addPatientHandler);
 routes.post("/add-nurse", middleware, addNurseHandler);
 routes.post("/add-testfields", middleware, addTestFieldsHandler);
@@ -46,9 +46,7 @@ routes.post("/validate-token", validateTokenHandler);
 //patients
 routes.get("/retrieve-patient", middleware, retrievePatientHandler);
 routes.delete("/delete-patient/:patientId", middleware, deletePatientHandler);
-routes.put("/update-patient/:patientId", middleware, updatePatientHandler)
-
-
+routes.put("/update-patient/:patientId", middleware, updatePatientHandler);
 
 routes.get("/retrieve-field", middleware, retrieveFieldHandler);
 routes.post("/retrieve-testfield", middleware, RetrieveFieldTestHandler);
