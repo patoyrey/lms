@@ -14,7 +14,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 const logo = require("../../images/white_logo.png").default;
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Logout from "../pages/Logout";
 
 interface Props {
@@ -26,19 +26,20 @@ interface NavItems {
 }
 const Nav: React.FC = (props: Props) => {
   //Function to navigate
+  const location = useLocation();
+
   const [activeLink, setActiveLink] = React.useState<string | null>(null);
-  const [show, setShow] = React.useState(false)
+  const [show, setShow] = React.useState(false);
   const handleButtonClick = (url: string) => {
     if (url === "logout") {
-      ShowLogout()
+      ShowLogout();
     } else {
-      setActiveLink(url);
       navigate(`/${url}`);
     }
   };
   const ShowLogout = () => {
-    setShow(!show)
-  }
+    setShow(!show);
+  };
   const drawerWidth = 240;
 
   const navItems: NavItems[] = [
@@ -59,12 +60,8 @@ const Nav: React.FC = (props: Props) => {
       url: "fields",
     },
     {
-      menu: "Testfields",
-      url: "testfields",
-    },
-    {
-      menu: "Patient Test",
-      url: "patienttest",
+      menu: "HMO",
+      url: "hmo",
     },
     {
       menu: "Logout",
@@ -77,7 +74,9 @@ const Nav: React.FC = (props: Props) => {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
-
+  React.useEffect(() => {
+    setActiveLink(location.pathname);
+  }, [location]);
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <img src={logo} alt="white_logo" className="nav-logo" />
@@ -87,8 +86,11 @@ const Nav: React.FC = (props: Props) => {
       <Divider />
       <List>
         {navItems.map((item: NavItems, index: number) => (
-
-          <ListItem key={index} disablePadding onClick={() => handleButtonClick(item.url)}>
+          <ListItem
+            key={index}
+            disablePadding
+            onClick={() => handleButtonClick(item.url)}
+          >
             <ListItemButton sx={{ textAlign: "center" }}>
               <ListItemText primary={item.menu} />
             </ListItemButton>
@@ -101,7 +103,6 @@ const Nav: React.FC = (props: Props) => {
   const container =
     window !== undefined ? () => window().document.body : undefined;
   return (
-
     <Box sx={{ display: "flex" }}>
       {show ? <Logout ShowLogout={() => ShowLogout()} /> : ""}
       <CssBaseline />
@@ -116,7 +117,13 @@ const Nav: React.FC = (props: Props) => {
           >
             <MenuIcon />
           </IconButton>
-          <img src={logo} alt="logo" className="nav-logo" onClick={() => navigate("/")} style={{ cursor: "pointer" }} />
+          <img
+            src={logo}
+            alt="logo"
+            className="nav-logo"
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          />
 
           <Typography
             variant="h6"
@@ -139,7 +146,7 @@ const Nav: React.FC = (props: Props) => {
                     textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
                   },
                   backgroundColor:
-                    activeLink === item.url ? "#00BFBA" : "inherit",
+                    activeLink === `/${item.url}` ? "#00BFBA" : "inherit",
                 }}
               >
                 {item.menu}

@@ -1,7 +1,8 @@
-import { PatientsTest } from "../PatientLabTest";
+import { PatientLabTest } from "../PatientLabTest";
 
-export const dummyPatientsTest = new PatientsTest({
+export const dummyPatientLabTest = new PatientLabTest({
   patient_labtest_id: "patient_labtest_id",
-  labtest_: "patient_labtest_id",
+  labtest_id: "labtest_id",
+  patient_id: "patient_id",
   createdAt: "createdAt",
-} as PatientsTest);
+} as PatientLabTest);

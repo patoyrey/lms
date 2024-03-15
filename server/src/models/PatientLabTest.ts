@@ -2,21 +2,22 @@ import uuid4 from "uuid4";
 import { queryFields } from "../utils/QueryFields";
 import { PatientTestResponse } from "../response/patientsTestResponse";
 
-export class PatientsTest {
+export class PatientLabTest {
   patient_labtest_id: string;
-  labtest_: string;
+  labtest_id: string;
+  patient_id: string;
   createdAt: string;
 
-  constructor(init: PatientsTest) {
+  constructor(init: PatientLabTest) {
     this.patient_labtest_id = init.patient_labtest_id;
-    this.labtest_ = init.labtest_;
-
+    this.labtest_id = init.labtest_id;
+    this.patient_id = init.patient_id;
     this.createdAt = init.createdAt;
   }
 
   public async add(): Promise<PatientTestResponse> {
     this.patient_labtest_id = uuid4();
-    let query = "insert into patientstest set ?";
+    let query = "insert into patient_labtest set ?";
     return queryFields(query, this)
       .then((res: any) => {
         return {
