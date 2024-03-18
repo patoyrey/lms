@@ -19,7 +19,7 @@ export class Test {
     this.test_created_at = init.test_created_at;
     this.test_updated_at = init.test_updated_at;
   }
-  public async add(): Promise<UserResponse> {
+  public async add(): Promise<TestResponse> {
     this.test_id = uuid4();
     this.test_created_at = new Date().toString();
     const query = `insert into test SET ?`;

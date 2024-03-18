@@ -7,7 +7,7 @@ export async function queryFields(query: string, data: object) {
       if (err) {
         reject(err);
       } else {
-        console.log("Result  : ", result);
+        // console.log("Result  : ", result);
         resolve(result);
       }
     });
@@ -33,7 +33,6 @@ export async function retrieveData(query: any) {
         reject(err);
       } else {
         resolve(result);
-
       }
     });
   });
@@ -45,7 +44,6 @@ export async function retrieveQuery(query: string) {
       if (err) {
         reject(err);
       } else {
-
         resolve(result.data);
       }
     });

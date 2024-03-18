@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 
 import AlertComponent from "../views/components/alert";
@@ -22,12 +22,13 @@ import {
   fetchPatientById,
   getPatientToUpdate,
   setEditPatient,
+  setSelectPatientId,
 } from "../redux/patientsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectFieldsId } from "../redux/fieldSlice";
 import React from "react";
 import { RootState } from "../store";
 import EditPatientModal from "../views/pages/component/EditPatientModal";
+import { CheckBox } from "@mui/icons-material";
 interface PatientTableProps {
   patientList: any[];
   getAllPatient: () => void;
@@ -118,6 +119,7 @@ const PatientTable: React.FC<PatientTableProps> = ({
   const handleCloseAlert = () => {
     setOpen(false);
   };
+
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: "#2196f3",
@@ -151,10 +153,17 @@ const PatientTable: React.FC<PatientTableProps> = ({
       setSeverity("error");
     }
   };
-  const handleSelectPatientId = (patient_id: string) => {
-    dispatch(setSelectFieldsId(patient_id));
-    handleCloseFields();
+  const handleCheckPatient = (patient_id: string, index:number) => {
+ const payload ={
+  patient_id,
+  index,
+ }
+ dispatch(setSelectPatientId(payload))
   };
+  useEffect(() => {
+    console.log(patient.patient_labTest.patient_id);
+    console.log("Patient Id", patient.patient_labTest);
+  }, [patient]);
   return (
     <>
       <AlertComponent
@@ -170,7 +179,6 @@ const PatientTable: React.FC<PatientTableProps> = ({
           <Table sx={{ minWidth: 1080 }} size="small" aria-label="table">
             <TableHead>
               <TableRow>
-                <StyledTableCell align="left"></StyledTableCell>
                 <StyledTableCell align="left">First Name</StyledTableCell>
                 <StyledTableCell align="left">Middle Name</StyledTableCell>
                 <StyledTableCell align="left">Last Name</StyledTableCell>
@@ -187,14 +195,7 @@ const PatientTable: React.FC<PatientTableProps> = ({
             <TableBody>
               {patient.patients.map((item: any, index: number) => (
                 <StyledTableRow key={index}>
-                  <StyledTableCell>
-                    <RadioGroup
-                      aria-labelledby="demo-controlled-radio-buttons-group"
-                      name="controlled-radio-buttons-group"
-                      value={""}
-                      // onChange={ }}
-                    ></RadioGroup>
-                  </StyledTableCell>
+                
                   <StyledTableCell component="th" scope="row">
                     {item.patient_fname}
                   </StyledTableCell>

@@ -18,6 +18,10 @@ import React from "react";
 import AlertComponent from "../components/alert";
 import { SnackbarOrigin } from "@mui/material/Snackbar";
 import PatientTable from "../../table/patientTable";
+import PatientTestTable from "../../table/patientTestTable";
+import { fetchAllLabTest } from "../../redux/testSlice";
+import AddPatientStepper from "../../stepper/addPatientStepper";
+import { GetAllPatients } from "../../utils/fetchData";
 
 const Patient: React.FC = () => {
   const calculateAge = (dobValue: string) => {
@@ -39,6 +43,7 @@ const Patient: React.FC = () => {
   interface StateSnackbar extends SnackbarOrigin {
     open: boolean;
   }
+  const test = useSelector((state: RootState) => state.test);
   const [openSnackAlert, setOpenSnackAlert] = React.useState(false);
   const [openSnackFailAlert, setOpenFailSnackAlert] = React.useState(false);
   const [openSnackNetworkFailAlert, setOpenNetworkFailSnackAlert] =
@@ -65,9 +70,6 @@ const Patient: React.FC = () => {
   });
   const { vertical, horizontal } = stateSnackbarAlert;
 
-  useEffect(() => {
-    getAllPatient();
-  }, []);
   const handleOnChange = (e: any) => {
     const { name, value } = e.target;
     const payload = {
@@ -90,6 +92,15 @@ const Patient: React.FC = () => {
   const handleOnClick = () => {
     setOpen(!open);
   };
+  const getAllLabTest = async () => {
+    try {
+      const res = await dispatch(fetchAllLabTest());
+
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const add = async () => {
     try {
@@ -100,7 +111,7 @@ const Patient: React.FC = () => {
       if (res) {
         setOpenSnackAlert(true);
         dispatch(clearPatient());
-        getAllPatient();
+        GetAllPatients(dispatch);
       } else {
         setOpenFailSnackAlert(true);
       }
@@ -111,14 +122,14 @@ const Patient: React.FC = () => {
     dispatch(clearPatient());
   };
 
-  const getAllPatient = async () => {
-    try {
-      const res = await dispatch(fetchAllPatients());
-      console.log("patient:", res);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const getAllPatient = async () => {
+  //   try {
+  //     const res = await dispatch(fetchAllPatients());
+  //     console.log("patient:", res);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   const handleFailCloseSnackbar = (
     event: React.SyntheticEvent | Event,
     reason?: string
@@ -138,7 +149,10 @@ const Patient: React.FC = () => {
     }
     setOpenNetworkFailSnackAlert(false);
   };
-
+  useEffect(() => {
+    GetAllPatients(dispatch);
+    getAllLabTest();
+  }, []);
   return (
     <div>
       <ModalComponent
@@ -176,158 +190,8 @@ const Patient: React.FC = () => {
           <div className="modal">
             <div className="modalStyle">
               <div className="patient-ref-container">
-                {" "}
-                <Typography
-                  variant="h6"
-                  display="block"
-                  sx={{ mb: 2 }}
-                  gutterBottom
-                >
-                  <div className="patient-p">
-                    <p
-                      style={{
-                        fontSize: "px",
-                        fontWeight: "bold",
-                        fontStyle: "Poppins",
-                      }}
-                    >
-                      Add Patient Info
-                    </p>
-                  </div>
-                </Typography>
-                <div className="patient-ref">
-                  <div>
-                    <Typography variant="body2" display="block" gutterBottom>
-                      Firstname :
-                    </Typography>
-                    <Textfield
-                      value={patient.patient_lab.patient_fname}
-                      name="patient_fname"
-                      type="text"
-                      required={true}
-                      onchange={handleOnChange}
-                    />
-                  </div>
-                  <div>
-                    <Typography variant="body2" display="block" gutterBottom>
-                      Middlename :
-                    </Typography>
-                    <Textfield
-                      value={patient.patient_lab.patient_mname}
-                      name="patient_mname"
-                      type="text"
-                      required={true}
-                      onchange={handleOnChange}
-                    />
-                  </div>{" "}
-                  <div>
-                    <Typography variant="body2" display="block" gutterBottom>
-                      Lastname :
-                    </Typography>
-                    <Textfield
-                      value={patient.patient_lab.patient_lname}
-                      name="patient_lname"
-                      type="text"
-                      required={true}
-                      onchange={handleOnChange}
-                    />
-                  </div>{" "}
-                  <div>
-                    <Typography variant="body2" display="block" gutterBottom>
-                      Gender :
-                    </Typography>
-                    <Textfield
-                      value={patient.patient_lab.patient_gender}
-                      name="patient_gender"
-                      type="text"
-                      required={true}
-                      onchange={handleOnChange}
-                    />
-                  </div>{" "}
-                  <div>
-                    <Typography variant="body2" display="block" gutterBottom>
-                      Address :
-                    </Typography>
-                    <Textfield
-                      value={patient.patient_lab.patient_address}
-                      name="patient_address"
-                      type="text"
-                      required={true}
-                      onchange={handleOnChange}
-                    />
-                  </div>{" "}
-                  <div>
-                    <Typography variant="body2" display="block" gutterBottom>
-                      Company :
-                    </Typography>
-                    <Textfield
-                      value={patient.patient_lab.company}
-                      name="company"
-                      type="text"
-                      required={true}
-                      onchange={handleOnChange}
-                    />
-                  </div>{" "}
-                  <div>
-                    <Typography variant="body2" display="block" gutterBottom>
-                      Date of Visit :
-                    </Typography>
-                    <Textfield
-                      value={patient.patient_lab.date_of_visit}
-                      name="date_of_visit"
-                      type="date"
-                      required={true}
-                      onchange={handleOnChange}
-                      style={{ width: "14rem" }}
-                    />
-                  </div>{" "}
-                  <div>
-                    <Typography variant="body2" display="block" gutterBottom>
-                      Birthdate :
-                    </Typography>
-                    <Textfield
-                      value={patient.patient_lab.patient_dob}
-                      name="patient_dob"
-                      type="date"
-                      required={true}
-                      onchange={handleOnChange}
-                      style={{ width: "14rem" }}
-                    />
-                  </div>{" "}
-                  <div>
-                    <Typography variant="body2" display="block" gutterBottom>
-                      Age :
-                    </Typography>
-                    <Textfield
-                      value={patient.patient_lab.patient_age}
-                      name="patient_age"
-                      type="number"
-                      required={true}
-                      onchange={handleOnChange}
-                    />
-                  </div>
-                  <div>
-                    <Typography variant="body2" display="block" gutterBottom>
-                      Referred Name :
-                    </Typography>
-                    <Textfield
-                      value={patient.patient_lab.referred_name}
-                      name="referred_name"
-                      type="text"
-                      required={true}
-                      onchange={(val) => handleOnChange(val)}
-                    />
-                  </div>{" "}
-                </div>
+                <AddPatientStepper handleOnClick={handleOnClick} />
               </div>
-              <ButtonComponent
-                size="medium"
-                variant="contained"
-                label="Add Patients"
-                onclick={() => add()}
-                type="contained"
-                color="primary"
-              />
             </div>
           </div>
         </Box>
@@ -370,7 +234,7 @@ const Patient: React.FC = () => {
         </div>
         <PatientTable
           patientList={patient.patients}
-          getAllPatient={getAllPatient}
+          getAllPatient={() => GetAllPatients(dispatch)}
         />
       </div>
     </div>

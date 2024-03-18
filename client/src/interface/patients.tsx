@@ -16,6 +16,10 @@ export interface Patients {
     patient_age: number;
     created_at: string;
     updated_at: string;
+  };
+  patient_labTest:{
+    patient_id: [] | any;
+    test_id: [] | any
   }
   patients: Patient_Entity[];
   editPatient: Patient_Entity

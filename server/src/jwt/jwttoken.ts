@@ -9,6 +9,6 @@ export const jwtToken = (id: string, email: string) => {
     process.env.ACCESS_TOKEN
   );
 
-  console.log("Token ", token);
+  //console.log("Token ", token);
   return token;
 };

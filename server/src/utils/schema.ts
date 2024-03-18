@@ -15,11 +15,11 @@ import { dummyNurse } from "../models/dummyData/Nurse";
 import { dummyField } from "../models/dummyData/Field";
 import { Doctor } from "../models/Doctor";
 import { dummuyDoctor } from "../models/dummyData/Doctor";
-import { PatientsTest } from "../models/PatientLabTest";
-import { dummyPatientsTest } from "../models/dummyData/PatientLabTest";
 import { insertDefaultUser } from "./insertDefaultUser";
 import { PatientLabTestFields } from "../models/PatientLabTestFields";
 import { dummyPatientLabTestField } from "../models/dummyData/PatientLabTestFields";
+import { PatientLabTest } from "../models/PatientLabTest";
+import { dummyPatientLabTest } from "../models/dummyData/PatientLabTest";
 
 type FieldType = {
   string: string;
@@ -111,13 +111,14 @@ export async function connect() {
     });
 
     // Create Patient table
-    // fields = Object.keys(new Patient({} as Patient));
-    // dropIfExist = `DROP TABLE IF EXISTS patient`;
-    // await conn.query(dropIfExist, function () {
-    //   console.log("Table patient dropped");
-    // });
+    fields = Object.keys(new Patient({} as Patient));
+    dropIfExist = `DROP TABLE IF EXISTS patient`;
+    await conn.query(dropIfExist, function () {
+      console.log("Table patient dropped");
+    });
     let patient = `CREATE TABLE patient (`;
     fields.forEach((field: string, index: number) => {
+      const defualtGenderValue = index === 5 ? "default null" : "";
       const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const hasComma = index < fields.length - 1 ? "," : "";
 
@@ -126,7 +127,7 @@ export async function connect() {
         fieldType[
           typeof dummyPatient[field as keyof Patient] as keyof FieldType
         ]
-      } ${primarykey} ${hasComma} ${closingParenthesis}`;
+      } ${defualtGenderValue} ${primarykey} ${hasComma} ${closingParenthesis}`;
     });
 
     await conn.query(patient, function () {
@@ -240,7 +241,7 @@ export async function connect() {
 
     //* Field for Patients Test
 
-    fields = Object.keys(new PatientsTest({} as PatientsTest));
+    fields = Object.keys(new PatientLabTest({} as PatientLabTest));
 
     //* Drop table if the Patients test Exists
     dropIfExist = "DROP TABLE IF EXISTS patient_labtest";
@@ -256,8 +257,8 @@ export async function connect() {
       const closingParenthesis = index === fields.length - 1 ? ")" : "";
       query += `${field} ${
         fieldType[
-          typeof dummyPatientsTest[
-            field as unknown as keyof PatientsTest
+          typeof dummyPatientLabTest[
+            field as unknown as keyof PatientLabTest
           ] as unknown as keyof FieldType
         ]
       } ${primarykey} ${hasComma} ${closingParenthesis}`;
