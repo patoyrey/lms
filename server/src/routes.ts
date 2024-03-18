@@ -24,6 +24,8 @@ import { deletePatientHandler } from "./handlers/deletePatientHandler";
 import { updatePatientHandler } from "./handlers/updatePatientHandler";
 import { UpdateTestFieldsHandlers } from "./handlers/updateTestFieldsHandlers";
 import { addPatientLabtestHandler } from "./handlers/addPatientLabTestHandler";
+import { RetrievePatientLabTestHandler } from "./handlers/retrievePatientLabTestHandler";
+import { addPatientLabTestFieldsHandlers } from "./handlers/addPatientLabTestFieldsHandlers";
 import { addHmoHandler } from "./handlers/addHmoHandler";
 import { RetrieveHmoHandler } from "./handlers/retrieveHmoHandler";
 import { updateHmoHandler } from "./handlers/updateHmohandler";
@@ -40,7 +42,11 @@ routes.post("/add-nurse", middleware, addNurseHandler);
 routes.post("/add-hmo", middleware, addHmoHandler);
 routes.post("/add-testfields", middleware, addTestFieldsHandler);
 routes.post("/login-user", loginHandlers);
-
+routes.post(
+  "/add-patientlabtestfields",
+  middleware,
+  addPatientLabTestFieldsHandlers
+);
 routes.get("/user-logout", logoutHandler);
 routes.get("/get-auth", middleware, checkAuthHandler);
 routes.get("/retrieve-field", middleware, retrieveFieldHandler);
@@ -55,6 +61,11 @@ routes.put("/update-patient/:patientId", middleware, updatePatientHandler);
 
 routes.get("/retrieve-field", middleware, retrieveFieldHandler);
 routes.post("/retrieve-testfield", middleware, RetrieveFieldTestHandler);
+routes.get(
+  "/select-patient-labtest",
+  middleware,
+  RetrievePatientLabTestHandler
+);
 //Select Routes
 
 routes.get("/retrieve-test", middleware, RetrieveTestHandler);

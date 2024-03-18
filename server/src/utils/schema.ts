@@ -113,13 +113,14 @@ export async function connect() {
     });
 
     // Create Patient table
-    // fields = Object.keys(new Patient({} as Patient));
-    // dropIfExist = `DROP TABLE IF EXISTS patient`;
-    // await conn.query(dropIfExist, function () {
-    //   console.log("Table patient dropped");
-    // });
+    fields = Object.keys(new Patient({} as Patient));
+    dropIfExist = `DROP TABLE IF EXISTS patient`;
+    await conn.query(dropIfExist, function () {
+      console.log("Table patient dropped");
+    });
     let patient = `CREATE TABLE patient (`;
     fields.forEach((field: string, index: number) => {
+      const defualtGenderValue = index === 5 ? "default null" : "";
       const primarykey = index === 0 ? "PRIMARY KEY" : "";
       const hasComma = index < fields.length - 1 ? "," : "";
 

@@ -39,21 +39,37 @@ export class Patient {
   }
   public async add(): Promise<UserResponse> {
     this.patient_id = uuid4();
+
     const query = `insert into patient SET ?`;
-    console.log("query: ", query);
-    await conn.query(query, [this], (err: any) => {
-      if (err) {
+
+    return queryFields(query, this)
+      .then((res: any) => {
+        return {
+          succeeded: true,
+          msg: "Succedded",
+          patient_id: this.patient_id,
+        };
+      })
+      .catch((error: any) => {
         return {
           succeeded: false,
-          msg: err,
+          msg: error,
         };
-      }
-    });
-
-    return {
-      succeeded: true,
-      msg: "",
-    };
+      });
+    // return await conn.query(query, [this], (err: any, result: any) => {
+    //   if (err) {
+    //     return {
+    //       succeeded: false,
+    //       msg: err,
+    //     };
+    //   } else {
+    //     return {
+    //       succeeded: true,
+    //       msg: "Succedded",
+    //       patient_id: this.patient_id,
+    //     };
+    //   }
+    // });
   }
   public async update(patientId: any): Promise<PatientResponse> {
     this.updated_at = new Date().toString();

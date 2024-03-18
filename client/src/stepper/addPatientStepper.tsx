@@ -17,6 +17,8 @@ import { Patients } from "../interface/patients";
 import { clearPatient, fetchAllPatients } from "../redux/patientsSlice";
 import { PatientService } from "../services/pateintsService";
 import { GetAllPatients } from "../utils/fetchData";
+import { fetchAllPatientLabTest } from "../redux/patientLabTestSlice";
+import { addPatientLabtestFields } from "../redux/patientLabTestFields";
 
 interface AddPatientStepperProps {
   formValid: boolean;
@@ -66,17 +68,35 @@ const AddPatientStepper: React.FC<PatientStepper> = ({ handleOnClick }) => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
   const add = async () => {
+    const data = {
+      patient_lab: patient.patient_lab as unknown as Patients,
+      test: patient.patient_labTest.test_id,
+    };
+
+    console.log(data);
     try {
-      const res = await PatientService.add(
-        patient.patient_lab as unknown as Patients,
-        "add-patient"
-      );
-      if (res) {
-        GetAllPatients(dispatch);
-        dispatch(clearPatient());
-        handleNext();
-      } else {
-      }
+      await PatientService.add(data, "add-patient").then(async (res: any) => {
+        if (res) {
+          GetAllPatients(dispatch);
+          dispatch(clearPatient());
+          console.log("PAtient Id", res.patient_id);
+          if (res.patient_id) {
+            const response = await dispatch(
+              fetchAllPatientLabTest(res.patient_id)
+            );
+
+            console.log("Response Data :", response.payload.data);
+
+            const data = response.payload.data;
+            const patientlabtestfieldsres = await dispatch(
+              addPatientLabtestFields(data)
+            );
+            console.log("patientlabtestfieldsres", patientlabtestfieldsres);
+          }
+          handleNext();
+        } else {
+        }
+      });
     } catch (error) {}
 
     dispatch(clearPatient());
