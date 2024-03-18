@@ -62,7 +62,7 @@ const AddPatientForm: React.FC<AddPatientFormProps> = ({ onFormChange }) => {
     <div>
       {" "}
       <Typography variant="h6" display="block" sx={{ mb: 2 }} gutterBottom>
-        <div className="patient-p">
+        <div className="header-text">
           <p
             style={{
               fontSize: "px",

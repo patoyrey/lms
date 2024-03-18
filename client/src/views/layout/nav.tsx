@@ -64,6 +64,10 @@ const Nav: React.FC = (props: Props) => {
       url: "hmo",
     },
     {
+      menu: "Doctor",
+      url: "doctor",
+    },
+    {
       menu: "Logout",
       url: "logout",
     },

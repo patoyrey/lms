@@ -48,7 +48,7 @@ export class Field {
 
   public async update(fieldId: any): Promise<FieldResponse> {
     this.updatedAt = new Date().toString();
-    const query = "update field SET ? where field_id = ?";
+    // const query = "update field SET ? where field_id = ?";
 
     queryFields(`update field SET ? where field_id = "${fieldId}"`, this);
     return {

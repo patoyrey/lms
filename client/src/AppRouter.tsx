@@ -17,6 +17,7 @@ import PatientTests from "./views/pages/PatientTest";
 import ResetPassword from "./views/auth/resetPassword";
 import EmailVerify from "./views/auth/emailValidation";
 import Hmo from "./views/pages/Hmo";
+import Doctor from "./views/pages/doctor";
 
 // const NoAuth = () => {
 //     return(
@@ -57,6 +58,7 @@ export const AppRouter: React.FC = () => {
             <Route path="hmo" element={<Hmo />} />
             <Route path="patient" element={<Patient />} />
             <Route path="patienttest" element={<PatientTests />} />
+            <Route path="doctor" element={<Doctor />} />
           </Route>
         </Route>
       </Routes>
