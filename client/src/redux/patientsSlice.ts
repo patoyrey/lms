@@ -62,7 +62,7 @@ export const fetchPatientById: any = createAsyncThunk(
 );
 export const addPatients: any = createAsyncThunk(
   "patient/addPatients",
-  async (props) => {
+  async (props: Patients) => {
     const res = await PatientService.add(props, "add-patient");
     return res;
   }

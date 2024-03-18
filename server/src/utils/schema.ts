@@ -20,6 +20,8 @@ import { PatientLabTestFields } from "../models/PatientLabTestFields";
 import { dummyPatientLabTestField } from "../models/dummyData/PatientLabTestFields";
 import { PatientLabTest } from "../models/PatientLabTest";
 import { dummyPatientLabTest } from "../models/dummyData/PatientLabTest";
+import { Hmo } from "../models/Hmo";
+import { dummyHmo } from "../models/dummyData/Hmo";
 
 type FieldType = {
   string: string;
@@ -127,7 +129,7 @@ export async function connect() {
         fieldType[
           typeof dummyPatient[field as keyof Patient] as keyof FieldType
         ]
-      } ${defualtGenderValue} ${primarykey} ${hasComma} ${closingParenthesis}`;
+      } ${primarykey} ${hasComma} ${closingParenthesis}`;
     });
 
     await conn.query(patient, function () {
@@ -160,11 +162,31 @@ export async function connect() {
       console.log("Table admin created");
     });
 
-    // creates field table
-    dropIfExist = `DROP TABLE IF EXISTS field`;
+    //CREATE HMO TABLE
+    fields = Object.keys(new Hmo({} as Hmo));
+
+    //*DROP TABLE IF THE HMO EXISTS
+    dropIfExist = "DROP TABLE IF EXISTS hmo";
     await conn.query(dropIfExist, function () {
-      console.log("Table field drop");
+      console.log("Table hmo drop");
     });
+    query = `CREATE TABLE hmo (`;
+    fields.forEach((field: string, index: number) => {
+      const hasComma = index < fields.length - 1 ? "," : "";
+      const primarykey = index === 0 ? "PRIMARY KEY" : "";
+      const closingParenthesis = index === fields.length - 1 ? ")" : "";
+      query += `${field} ${
+        fieldType[
+          typeof dummyHmo[
+            field as unknown as keyof Hmo
+          ] as unknown as keyof FieldType
+        ]
+      }${primarykey} ${hasComma} ${closingParenthesis}`;
+    });
+    await conn.query(query, function () {
+      console.log("Table hmo created");
+    });
+
     // creates field table
     dropIfExist = `DROP TABLE IF EXISTS field`;
     await conn.query(dropIfExist, function () {

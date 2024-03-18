@@ -60,12 +60,8 @@ const Nav: React.FC = (props: Props) => {
       url: "fields",
     },
     {
-      menu: "Testfields",
-      url: "testfields",
-    },
-    {
-      menu: "Patient Test",
-      url: "patienttest",
+      menu: "HMO",
+      url: "hmo",
     },
     {
       menu: "Logout",

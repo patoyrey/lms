@@ -12,11 +12,11 @@ import HomePage from "./views/pages/HomePage";
 import LandingNav from "./views/layout/landingNavBar";
 import LandingLayout from "./views/layout/LandingLayout";
 import Users from "./views/pages/Users";
-import TestFields from "./views/pages/TestField";
 import Patient from "./views/pages/Patient";
 import PatientTests from "./views/pages/PatientTest";
 import ResetPassword from "./views/auth/resetPassword";
 import EmailVerify from "./views/auth/emailValidation";
+import Hmo from "./views/pages/Hmo";
 
 // const NoAuth = () => {
 //     return(
@@ -54,7 +54,7 @@ export const AppRouter: React.FC = () => {
             <Route path="tests" element={<Tests />} />
             <Route path="fields" element={<Fields />} />
             <Route path="users" element={<Users />} />
-            <Route path="testfields" element={<TestFields />} />
+            <Route path="hmo" element={<Hmo />} />
             <Route path="patient" element={<Patient />} />
             <Route path="patienttest" element={<PatientTests />} />
           </Route>
