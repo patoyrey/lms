@@ -1,14 +1,9 @@
-import uuid4 from "uuid4";
-import { Gender } from "../enums/Genders";
-import { DoctorResponse } from "../response/doctorResponse";
-import { queryFields } from "../utils/QueryFields";
-
-export class Doctor {
+export class Doctor_Entity {
   doc_id: string;
   doc_fname: string;
   doc_lname: string;
   doc_mname: string;
-  doc_gender: Gender;
+  doc_gender: number;
   doc_specialization: string;
   doc_prc_no: string;
   doc_philhealth_no: string;
@@ -23,7 +18,7 @@ export class Doctor {
   doc_udpated_at: string;
   user_id: string;
 
-  constructor(init: Doctor) {
+  constructor(init: Doctor_Entity) {
     this.doc_id = init.doc_id;
     this.doc_fname = init.doc_fname;
     this.doc_lname = init.doc_lname;
@@ -42,35 +37,5 @@ export class Doctor {
     this.doc_created_at = init.doc_created_at;
     this.doc_udpated_at = init.doc_udpated_at;
     this.user_id = init.user_id;
-  }
-
-  public async add(): Promise<DoctorResponse> {
-    this.doc_id = uuid4();
-    this.doc_created_at = new Date().toString();
-    const query = "insert into doctor SET ?";
-    queryFields(query, this);
-    return {
-      succeeded: true,
-      msg: "",
-    };
-  }
-
-  public async delete(doctorId: any): Promise<DoctorResponse> {
-    await queryFields(`DELETE FROM doctor WHERE doc_id = "${doctorId}"`, this);
-
-    return {
-      succeeded: true,
-      msg: "",
-    };
-  }
-
-  public async update(doctorId: any): Promise<DoctorResponse> {
-    this.doc_udpated_at = new Date().toString();
-
-    queryFields(`UPDATE doctor SET ? where doc_id = "${doctorId}"`, this);
-    return {
-      succeeded: true,
-      msg: "",
-    };
   }
 }

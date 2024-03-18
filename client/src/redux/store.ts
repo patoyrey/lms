@@ -7,6 +7,7 @@ import PatientReducer from "./patientsSlice";
 import testfieldSlice from "./testfieldSlice";
 import patientLabTestFieldsSlice from "./patientLabTestSlice";
 import hmoSlice from "./hmoSlice";
+import doctorSlice from "./doctorSlice";
 export default configureStore({
   reducer: {
     user: userReducer,
@@ -16,5 +17,6 @@ export default configureStore({
     testfield: testfieldSlice,
     patientlabtest: patientLabTestFieldsSlice,
     hmo: hmoSlice,
+    doctor: doctorSlice,
   },
 });

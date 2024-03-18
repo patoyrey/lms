@@ -15,6 +15,8 @@ export const dummuyDoctor = new Doctor({
   doc_schedule: "doc_schedule",
   doc_phone: "doc_phone",
   doc_price: 10.2,
+  doc_email: "doc_email",
+  doc_status: "doc_status",
   doc_created_at: "doc_created_at",
   doc_udpated_at: "doc_updated_at",
   user_id: "user_id",
